@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      JS数组去重的两种方法 | 晓婷成长记录
+      前端兼容性问题 | 晓婷成长记录
     
   </title>
   <meta name="author" content="xiaoting">
@@ -160,7 +160,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《JS数组去重的两种方法》
+			当前文章&nbsp;:&nbsp;《前端兼容性问题》
 		
 	</p>
 
@@ -277,8 +277,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/10/23/hello-world/" itemprop="url">
-		JS数组去重的两种方法
+	<a href="/2019/10/24/%E5%89%8D%E7%AB%AF%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98/" itemprop="url">
+		前端兼容性问题
 	</a>
 
 	</div>
@@ -291,9 +291,9 @@
 
 	发布于
 
-	<a href="/2019/10/23/hello-world/" itemprop="url">
-		<time datetime="2019-10-23T07:45:51.253Z" itemprop="datePublished">
-	  		2019-10-23
+	<a href="/2019/10/24/%E5%89%8D%E7%AB%AF%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98/" itemprop="url">
+		<time datetime="2019-10-24T09:03:28.775Z" itemprop="datePublished">
+	  		2019-10-24
 	  </time>
 	</a>
 	&nbsp;
@@ -309,8 +309,8 @@
 
 	更新于
 
-	<a href="/2019/10/23/hello-world/" itemprop="url">
-		<time datetime="2019-10-23T07:45:51.253Z" itemprop="dateUpdated">
+	<a href="/2019/10/24/%E5%89%8D%E7%AB%AF%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98/" itemprop="url">
+		<time datetime="2019-10-24T09:03:28.775Z" itemprop="dateUpdated">
 	  		2019-10-24
 	  </time>
 	</a> 
@@ -330,13 +330,61 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<h5 id="一、循环遍历法（传统思路）"><a href="#一、循环遍历法（传统思路）" class="headerlink" title="一、循环遍历法（传统思路）"></a><strong>一、循环遍历法（传统思路）</strong></h5><p>最简单粗暴的算法，新建一个空数组，然后遍历原数组，将不在新数组中的项添加到新数组，最后返回新数组</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> compare(arr) &#123;</span><br><span class="line">    var newarr = [];//新建空数组</span><br><span class="line">    <span class="keyword">for</span> (var i = 0; i &lt; arr.length; i++) &#123;//遍历原数组</span><br><span class="line">        var isadd = <span class="literal">true</span>;//设置标记</span><br><span class="line">        <span class="keyword">for</span> (var j = 0; j &lt; newarr.length; j++) &#123;//遍历新数组</span><br><span class="line">            <span class="keyword">if</span> (arr[i] === newarr[j]) &#123;</span><br><span class="line">                isadd = <span class="literal">false</span>;</span><br><span class="line">                <span class="built_in">break</span>;</span><br><span class="line">            &#125;//如果当前原数组中的项，在新数组中存在，则标记为‘不添加’，并跳出新数组遍历</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (isadd) &#123;</span><br><span class="line">            newarr.push(arr[i]);</span><br><span class="line">        &#125;//若标记为‘添加’（即遍历新数组后，没有发现相同项），则添加进新数组</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> newarr;//返回新数组</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var arr = [1, 4, 5, 3, 2, 4, 5, 6, 5]</span><br><span class="line">console.log(compare(arr))</span><br></pre></td></tr></table></figure>
+		<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: 前端兼容性问题</span><br><span class="line">date: 2019-10-24 15:00:47</span><br><span class="line">tags:</span><br></pre></td></tr></table></figure>
 
-<p><strong>二、排序比较法（巧妙转换）</strong></p>
-<p>相对第一种方法，需要每次遍历新旧两个数组，效率不高的情况。此方法先对原数组进行排序，这样每次只要与新数组的最后一项比较即可，大大提高效率</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> sortarr(arr) &#123;</span><br><span class="line">    var arrsort = arr.sort();//对原数组进行排序</span><br><span class="line">    var newarr = [];//新建空数组</span><br><span class="line">    newarr.push(arrsort[0]);//将排序后数值的第一项给添加到新数组</span><br><span class="line">    <span class="keyword">for</span> (var i = 1; i &lt; arrsort.length; i++) &#123;//遍历排序后的数组</span><br><span class="line">        <span class="keyword">if</span> (arrsort[i] !== newarr[newarr.length - 1]) &#123;</span><br><span class="line">            newarr.push(arrsort[i])</span><br><span class="line">        &#125;//若当前项与新数组最后一项不同，这添加到新数组</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> newarr;//返回新数组</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var arr = [1, 4, 5, 3, 2, 4, 5, 6, 5]</span><br><span class="line">console.log(sortarr(arr))</span><br></pre></td></tr></table></figure>
-
+<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端:"></a>移动端:</h3><p>1.圆角bug</p>
+<p>某些Android手机圆角失效</p>
+<p>background-clip: padding-box;</p>
+<p>\2. IOS移动端click事件300ms的延迟响应</p>
+<p>移动设备上的web网页是有300ms延迟的，玩玩会造成按钮点击延迟甚至是点击失效。这是由于区分单击事件和双击屏幕缩放的历史原因造成的,</p>
+<p>在IOS safari下，大概为300毫秒。这就是延迟的由来。造成的后果用户纯粹单击页面，页面需要过一段时间才响应，给用户慢体验感觉，对于web开发者来说是，页面js捕获click事件的回调函数处理，需要300ms后才生效，也就间接导致影响其他业务逻辑的处理。</p>
+<p>解决方案：</p>
+<p>fastclick可以解决在手机上点击事件的300ms延迟</p>
+<p>zepto的touch模块，tap事件也是为了解决在click的延迟问题</p>
+<p>触摸事件的响应顺序为 touchstart –&gt; touchmove –&gt; touchend –&gt; click,也可以通过绑定ontouchstart事件，加快对事件的响应，解决300ms延迟问题</p>
+<p>3.一些情况下对非可点击元素如(label,span)监听click事件，ios下不会触发，css增加cursor:pointer就搞定了。</p>
+<p>4.fixed定位缺陷</p>
+<p>ios下fixed元素容易定位出错，软键盘弹出时，影响fixed元素定位</p>
+<p>android下fixed表现要比iOS更好，软键盘弹出时，不会影响fixed元素定位</p>
+<p>ios4下不支持position:fixed</p>
+<p>解决方案： 可用iScroll插件解决这个问题</p>
+<p>5.Input 的placeholder会出现文本位置偏上的情况</p>
+<p>input 的placeholder会出现文本位置偏上的情况：PC端设置line-height等于height能够对齐，而移动端仍然是偏上，解决是设置line-height：normal</p>
+<p>6.在移动端修改难看的点击的高亮效果，iOS和安卓下都有效：</p>
+<p>* {-webkit-tap-highlight-color:rgba(0,0,0,0);}</p>
+<p>7.消除 transition 闪屏</p>
+<p>-webkit-transform-style: preserve-3d;     /<em>设置内嵌的元素在 3D 空间如何呈现：保留 3D</em>/</p>
+<p>-webkit-backface-visibility: hidden;      /<em>(设置进行转换的元素的背面在面对用户时是否可见：隐藏)</em>/</p>
+<p>8.安卓浏览器看背景图片，有些设备会模糊，原因是手机的分辨率太小</p>
+<p>解决方案： 用2X图片来代替img标签，然后background-size: contain</p>
+<p>\9. 防止手机中页面放大或缩小：</p>
+<p>在meta中设置viewport user-scalable = no</p>
+<p>10.上下拉滚动条卡顿：</p>
+<p>overflow-scrolling: touch;</p>
+<p>\11. 禁止复制选中文本：</p>
+<p>user-select: none;</p>
+<p>\12. 长时间按住页面出现闪退：</p>
+<p>-webkit-touch-callout: none;</p>
+<p>\13. 动画定义3D硬件加速：</p>
+<p>transform: translate 3d(0,0,0);</p>
+<p>14.formate-detection 启动或禁止自动识别页面中的电话号码，</p>
+<p>content = “yes/no”</p>
+<p>15.a标签添加tel是拨号功能</p>
+<p>16.横平时字体加粗不一致：</p>
+<p>text-size-adjust: 100%;</p>
+<h3 id="PC端："><a href="#PC端：" class="headerlink" title="PC端："></a><strong>PC端：</strong></h3><p>1.rgba不支持IE8 用opacity属性代替rgba设置透明度</p>
+<p>\2. 图片加a标签在IE9中出现边框 解决方案： img{border: none;}</p>
+<p>\3. IE6不支持display: inline-block       设置为： display: inline</p>
+<p>\4. position : fixed 不支持IE5/IE6 </p>
+<p>\5. IE6，Firfox中，width = width + padding + border</p>
+<p>\6. min-height比兼容IE6/IE7</p>
+<p>\7. display:inline-block ie6/7不支持</p>
+<p>display:inline-block;</p>
+<p>*display:inline;</p>
+<p>8.height不能小于16px,设置较小高度标签（一般小于10px），在IE6，IE7，遨游中高度超出自己设置高度</p>
+<p>解决方案:overflow设置为hidden</p>
+<p>9.img浮动  img标签打回车会造成每个图片之间有缝隙</p>
+<p>解决方案:可以删除之间的回车键也可以让这些图片浮动</p>
 	
 	</div>
 	
@@ -355,10 +403,10 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/10/24/10%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84Win%E9%94%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%20%E7%9B%B8%E5%BD%93%E5%AE%9E%E7%94%A8%EF%BC%81/" title="10个常用的Win键快捷键 相当实用！" rel="prev">
-				&laquo;上一篇
-			</a>
 		
+			<a href="/2019/10/24/%E7%90%86%E8%A7%A3cookie%E3%80%81session%E3%80%81token/" title="理解cookie、session、token" rel="next">
+				下一篇&raquo;
+			</a>
 			
 	</span>
 
@@ -374,6 +422,53 @@
 <div class="relate-post">
 	
 		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/10/24/%E7%90%86%E8%A7%A3cookie%E3%80%81session%E3%80%81token/" title="理解cookie、session、token">
+								理解cookie、session、token			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 24日, 2019				
+							</p>
+							<p class="relate-post-content">
+								1、很久很久以前，Web 基本上就是文档的浏览而已， 既然是浏览，作为服务器， 不需要记录谁在某一段时间里都浏览了什么文档，每次请求都是一个新的HTTP协议， 就是请求加响应， 尤其是我不用记住是谁刚刚发了HTTP请求， 每个请求对我...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/10/24/%E7%90%86%E8%A7%A3cookie%E3%80%81session%E3%80%81token/" title="理解cookie、session、token">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="理解cookie、session、token"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/10/24/JS%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" title="JS数组去重的两种方法">
+								JS数组去重的两种方法			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 24日, 2019				
+							</p>
+							<p class="relate-post-content">
+								一、循环遍历法（传统思路）最简单粗暴的算法，新建一个空数组，然后遍历原数组，将不在新数组中的项添加到新数组，最后返回新数组
+12345678910111213141516171819function compare(arr) &#12...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/10/24/JS%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" title="JS数组去重的两种方法">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="JS数组去重的两种方法"/>
+							</a>
+						</div>
+					</li>											
+			
 			
 					<li>
 						<div class="relate-post-text">
