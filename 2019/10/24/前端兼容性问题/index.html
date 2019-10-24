@@ -330,12 +330,10 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: 前端兼容性问题</span><br><span class="line">date: 2019-10-24 15:00:47</span><br><span class="line">tags:</span><br></pre></td></tr></table></figure>
-
-<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端:"></a>移动端:</h3><p>1.圆角bug</p>
+		<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端:"></a>移动端:</h3><p>1.圆角bug</p>
 <p>某些Android手机圆角失效</p>
 <p>background-clip: padding-box;</p>
-<p>\2. IOS移动端click事件300ms的延迟响应</p>
+<p>2.IOS移动端click事件300ms的延迟响应</p>
 <p>移动设备上的web网页是有300ms延迟的，玩玩会造成按钮点击延迟甚至是点击失效。这是由于区分单击事件和双击屏幕缩放的历史原因造成的,</p>
 <p>在IOS safari下，大概为300毫秒。这就是延迟的由来。造成的后果用户纯粹单击页面，页面需要过一段时间才响应，给用户慢体验感觉，对于web开发者来说是，页面js捕获click事件的回调函数处理，需要300ms后才生效，也就间接导致影响其他业务逻辑的处理。</p>
 <p>解决方案：</p>
@@ -357,15 +355,15 @@
 <p>-webkit-backface-visibility: hidden;      /<em>(设置进行转换的元素的背面在面对用户时是否可见：隐藏)</em>/</p>
 <p>8.安卓浏览器看背景图片，有些设备会模糊，原因是手机的分辨率太小</p>
 <p>解决方案： 用2X图片来代替img标签，然后background-size: contain</p>
-<p>\9. 防止手机中页面放大或缩小：</p>
+<p>9.防止手机中页面放大或缩小：</p>
 <p>在meta中设置viewport user-scalable = no</p>
 <p>10.上下拉滚动条卡顿：</p>
 <p>overflow-scrolling: touch;</p>
-<p>\11. 禁止复制选中文本：</p>
+<p>11.禁止复制选中文本：</p>
 <p>user-select: none;</p>
-<p>\12. 长时间按住页面出现闪退：</p>
+<p>12.长时间按住页面出现闪退：</p>
 <p>-webkit-touch-callout: none;</p>
-<p>\13. 动画定义3D硬件加速：</p>
+<p>13.动画定义3D硬件加速：</p>
 <p>transform: translate 3d(0,0,0);</p>
 <p>14.formate-detection 启动或禁止自动识别页面中的电话号码，</p>
 <p>content = “yes/no”</p>
@@ -373,12 +371,12 @@
 <p>16.横平时字体加粗不一致：</p>
 <p>text-size-adjust: 100%;</p>
 <h3 id="PC端："><a href="#PC端：" class="headerlink" title="PC端："></a><strong>PC端：</strong></h3><p>1.rgba不支持IE8 用opacity属性代替rgba设置透明度</p>
-<p>\2. 图片加a标签在IE9中出现边框 解决方案： img{border: none;}</p>
-<p>\3. IE6不支持display: inline-block       设置为： display: inline</p>
-<p>\4. position : fixed 不支持IE5/IE6 </p>
-<p>\5. IE6，Firfox中，width = width + padding + border</p>
-<p>\6. min-height比兼容IE6/IE7</p>
-<p>\7. display:inline-block ie6/7不支持</p>
+<p>2.图片加a标签在IE9中出现边框 解决方案： img{border: none;}</p>
+<p>3.IE6不支持display: inline-block       设置为： display: inline</p>
+<p>4.position : fixed 不支持IE5/IE6 </p>
+<p>5.IE6，Firfox中，width = width + padding + border</p>
+<p>6.min-height比兼容IE6/IE7</p>
+<p>7.display:inline-block ie6/7不支持</p>
 <p>display:inline-block;</p>
 <p>*display:inline;</p>
 <p>8.height不能小于16px,设置较小高度标签（一般小于10px），在IE6，IE7，遨游中高度超出自己设置高度</p>
@@ -403,6 +401,10 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
+			<a href="/2019/10/24/Vue%E4%B8%ADnextTick%E7%9A%84%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" title="Vue中nextTick的正确使用" rel="prev">
+				&laquo;上一篇
+			</a>
+		
 		
 			<a href="/2019/10/24/%E7%90%86%E8%A7%A3cookie%E3%80%81session%E3%80%81token/" title="理解cookie、session、token" rel="next">
 				下一篇&raquo;
@@ -422,6 +424,77 @@
 <div class="relate-post">
 	
 		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/10/24/vue.js+element%E5%AE%9E%E7%8E%B0%E5%85%A8%E9%80%89%E5%8F%8D%E9%80%89/" title="vue.js+element实现全选反选">
+								vue.js+element实现全选反选			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 24日, 2019				
+							</p>
+							<p class="relate-post-content">
+								123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/10/24/vue.js+element%E5%AE%9E%E7%8E%B0%E5%85%A8%E9%80%89%E5%8F%8D%E9%80%89/" title="vue.js+element实现全选反选">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue.js+element实现全选反选"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/10/24/%E6%96%B0%E5%BB%BA%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3/" title="新建文本文档">
+								新建文本文档			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 24日, 2019				
+							</p>
+							<p class="relate-post-content">
+								
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/10/24/%E6%96%B0%E5%BB%BA%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3/" title="新建文本文档">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="新建文本文档"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/10/24/Vue%E4%B8%ADnextTick%E7%9A%84%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" title="Vue中nextTick的正确使用">
+								Vue中nextTick的正确使用			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 24日, 2019				
+							</p>
+							<p class="relate-post-content">
+								什么是Vue.nextTick()官方文档解释如下：
+在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+获取更新后的DOM言外之意就是什么操作需要用到了更新后的DOM而不能使用之前的...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/10/24/Vue%E4%B8%ADnextTick%E7%9A%84%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" title="Vue中nextTick的正确使用">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="Vue中nextTick的正确使用"/>
+							</a>
+						</div>
+					</li>											
+			
 			
 					<li>
 						<div class="relate-post-text">

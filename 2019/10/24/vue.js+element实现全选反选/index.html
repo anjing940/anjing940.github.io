@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      JS数组去重的两种方法 | 晓婷成长记录
+      vue.js+element实现全选反选 | 晓婷成长记录
     
   </title>
   <meta name="author" content="xiaoting">
@@ -160,7 +160,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《JS数组去重的两种方法》
+			当前文章&nbsp;:&nbsp;《vue.js+element实现全选反选》
 		
 	</p>
 
@@ -258,18 +258,6 @@
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
-
-	
-		<div class="layout-toc">
-			<div id="layout-toc">
-				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
-			</div>
-		</div>
-
-		
-		<script src="/plugin/toc/katelog.min.js"></script>
-
-		
 	 
 
 <div class="layout-post">
@@ -277,8 +265,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/10/24/JS%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" itemprop="url">
-		JS数组去重的两种方法
+	<a href="/2019/10/24/vue.js+element%E5%AE%9E%E7%8E%B0%E5%85%A8%E9%80%89%E5%8F%8D%E9%80%89/" itemprop="url">
+		vue.js+element实现全选反选
 	</a>
 
 	</div>
@@ -291,8 +279,8 @@
 
 	发布于
 
-	<a href="/2019/10/24/JS%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" itemprop="url">
-		<time datetime="2019-10-24T08:21:00.012Z" itemprop="datePublished">
+	<a href="/2019/10/24/vue.js+element%E5%AE%9E%E7%8E%B0%E5%85%A8%E9%80%89%E5%8F%8D%E9%80%89/" itemprop="url">
+		<time datetime="2019-10-24T09:15:56.257Z" itemprop="datePublished">
 	  		2019-10-24
 	  </time>
 	</a>
@@ -309,8 +297,8 @@
 
 	更新于
 
-	<a href="/2019/10/24/JS%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" itemprop="url">
-		<time datetime="2019-10-24T08:21:00.012Z" itemprop="dateUpdated">
+	<a href="/2019/10/24/vue.js+element%E5%AE%9E%E7%8E%B0%E5%85%A8%E9%80%89%E5%8F%8D%E9%80%89/" itemprop="url">
+		<time datetime="2019-10-24T09:15:56.257Z" itemprop="dateUpdated">
 	  		2019-10-24
 	  </time>
 	</a> 
@@ -330,12 +318,8 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<h5 id="一、循环遍历法（传统思路）"><a href="#一、循环遍历法（传统思路）" class="headerlink" title="一、循环遍历法（传统思路）"></a><strong>一、循环遍历法（传统思路）</strong></h5><p>最简单粗暴的算法，新建一个空数组，然后遍历原数组，将不在新数组中的项添加到新数组，最后返回新数组</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> compare(arr) &#123;</span><br><span class="line">    var newarr = [];//新建空数组</span><br><span class="line">    <span class="keyword">for</span> (var i = 0; i &lt; arr.length; i++) &#123;//遍历原数组</span><br><span class="line">        var isadd = <span class="literal">true</span>;//设置标记</span><br><span class="line">        <span class="keyword">for</span> (var j = 0; j &lt; newarr.length; j++) &#123;//遍历新数组</span><br><span class="line">            <span class="keyword">if</span> (arr[i] === newarr[j]) &#123;</span><br><span class="line">                isadd = <span class="literal">false</span>;</span><br><span class="line">                <span class="built_in">break</span>;</span><br><span class="line">            &#125;//如果当前原数组中的项，在新数组中存在，则标记为‘不添加’，并跳出新数组遍历</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (isadd) &#123;</span><br><span class="line">            newarr.push(arr[i]);</span><br><span class="line">        &#125;//若标记为‘添加’（即遍历新数组后，没有发现相同项），则添加进新数组</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> newarr;//返回新数组</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var arr = [1, 4, 5, 3, 2, 4, 5, 6, 5]</span><br><span class="line">console.log(compare(arr))</span><br></pre></td></tr></table></figure>
+		<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;div v-for=&quot;(item,index) in List&quot; :key=&quot;index&quot;&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;el-checkbox  v-model=&apos;checkArr&apos; :label=item.id  @change=&quot;changevalue&quot;&gt;&lt;/el-checkbox&gt;</span><br><span class="line">        &lt;span&gt;&#123;&#123;item.name&#125;&#125;&lt;/span&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;table&gt;</span><br><span class="line">      &lt;/table&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;el-checkbox v-model=&apos;cheackAllChecked&apos; @change=&apos;checkAllFun&apos;&gt;全选&lt;/el-checkbox&gt;</span><br><span class="line">    &lt;span @click=&quot;reverseChecked&quot;&gt;反选&lt;/span&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      List: [</span><br><span class="line">        &#123;</span><br><span class="line">          id: &quot;1&quot;,</span><br><span class="line">          name:&apos;香蕉&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          id: &quot;2&quot;,</span><br><span class="line">          name:&apos;苹果&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          id: &quot;3&quot;,</span><br><span class="line">          name:&apos;橙子&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          id: &quot;4&quot;,</span><br><span class="line">          name:&apos;鸭梨&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          id: &quot;5&quot;,</span><br><span class="line">          name:&apos;葡萄&apos;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      cheackAllChecked: false,</span><br><span class="line">      checkArr: [],</span><br><span class="line">      checkCompleteArr: []</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    //实现全选</span><br><span class="line">    checkAllFun() &#123;</span><br><span class="line">      var _this = this;</span><br><span class="line">      this.checkArr = [];</span><br><span class="line">      if (this.cheackAllChecked) &#123;</span><br><span class="line">        this.List.forEach(function(item, index) &#123;</span><br><span class="line">          if (index &gt;= 0) &#123;</span><br><span class="line">            _this.checkArr.push(item.id);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    //实现反选</span><br><span class="line">    reverseChecked() &#123;</span><br><span class="line">      var changeArr = [];</span><br><span class="line">      this.List.forEach(function(item, index) &#123;</span><br><span class="line">        if (index &gt;= 0) &#123;</span><br><span class="line">          changeArr.push(item.id);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      this.removeByValue(changeArr, this.checkArr);</span><br><span class="line">    &#125;,</span><br><span class="line">    //反选过滤函数</span><br><span class="line">    removeByValue(changearr, checkarr) &#123;</span><br><span class="line">      var _this = this;</span><br><span class="line">      for (var j = 0; j &lt; checkarr.length; j++) &#123;</span><br><span class="line">        for (var i = 0; i &lt; changearr.length; i++) &#123;</span><br><span class="line">          if (changearr[i] === checkarr[j]) &#123;</span><br><span class="line">            changearr.splice(i, 1);</span><br><span class="line">            break;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      this.checkArr = changearr;</span><br><span class="line">      if (changearr.length &lt;= _this.checkCompleteArr.length) &#123;</span><br><span class="line">        this.cheackAllChecked = false;</span><br><span class="line">      &#125;</span><br><span class="line">      if (changearr.length === _this.checkCompleteArr.length) &#123;</span><br><span class="line">        this.cheackAllChecked = true;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    //选项的change事件</span><br><span class="line">    changevalue() &#123;</span><br><span class="line">      var _this = this;</span><br><span class="line">      if (this.checkArr.length &lt;= _this.checkCompleteArr.length) &#123;</span><br><span class="line">        this.cheackAllChecked = false;</span><br><span class="line">      &#125;</span><br><span class="line">      if (this.checkArr.length === _this.checkCompleteArr.length) &#123;</span><br><span class="line">        this.cheackAllChecked = true;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  //全选或反选用到的完整数组值</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    var _this = this;</span><br><span class="line">    this.List.forEach(function(item, index) &#123;</span><br><span class="line">      if (index &gt;= 0) &#123;</span><br><span class="line">        _this.checkCompleteArr.push(item.id);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-<p><strong>二、排序比较法（巧妙转换）</strong></p>
-<p>相对第一种方法，需要每次遍历新旧两个数组，效率不高的情况。此方法先对原数组进行排序，这样每次只要与新数组的最后一项比较即可，大大提高效率</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> sortarr(arr) &#123;</span><br><span class="line">    var arrsort = arr.sort();//对原数组进行排序</span><br><span class="line">    var newarr = [];//新建空数组</span><br><span class="line">    newarr.push(arrsort[0]);//将排序后数值的第一项给添加到新数组</span><br><span class="line">    <span class="keyword">for</span> (var i = 1; i &lt; arrsort.length; i++) &#123;//遍历排序后的数组</span><br><span class="line">        <span class="keyword">if</span> (arrsort[i] !== newarr[newarr.length - 1]) &#123;</span><br><span class="line">            newarr.push(arrsort[i])</span><br><span class="line">        &#125;//若当前项与新数组最后一项不同，这添加到新数组</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> newarr;//返回新数组</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var arr = [1, 4, 5, 3, 2, 4, 5, 6, 5]</span><br><span class="line">console.log(sortarr(arr))</span><br></pre></td></tr></table></figure>
 	
 	</div>
 	
@@ -354,12 +338,8 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/10/24/%E7%90%86%E8%A7%A3cookie%E3%80%81session%E3%80%81token/" title="理解cookie、session、token" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2019/10/24/10%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84Win%E9%94%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%20%E7%9B%B8%E5%BD%93%E5%AE%9E%E7%94%A8%EF%BC%81/" title="10个常用的Win键快捷键 相当实用！" rel="next">
+			<a href="/2019/10/24/%E6%96%B0%E5%BB%BA%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3/" title="新建文本文档" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -377,29 +357,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/10/24/vue.js+element%E5%AE%9E%E7%8E%B0%E5%85%A8%E9%80%89%E5%8F%8D%E9%80%89/" title="vue.js+element实现全选反选">
-								vue.js+element实现全选反选			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 24日, 2019				
-							</p>
-							<p class="relate-post-content">
-								123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/10/24/vue.js+element%E5%AE%9E%E7%8E%B0%E5%85%A8%E9%80%89%E5%8F%8D%E9%80%89/" title="vue.js+element实现全选反选">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue.js+element实现全选反选"/>
-							</a>
-						</div>
-					</li>											
-			
 			
 					<li>
 						<div class="relate-post-text">
@@ -494,6 +451,30 @@ background-clip: padding-box;
 							<a href="/2019/10/24/%E7%90%86%E8%A7%A3cookie%E3%80%81session%E3%80%81token/" title="理解cookie、session、token">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="理解cookie、session、token"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/10/24/JS%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" title="JS数组去重的两种方法">
+								JS数组去重的两种方法			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 24日, 2019				
+							</p>
+							<p class="relate-post-content">
+								一、循环遍历法（传统思路）最简单粗暴的算法，新建一个空数组，然后遍历原数组，将不在新数组中的项添加到新数组，最后返回新数组
+12345678910111213141516171819function compare(arr) &#12...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/10/24/JS%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" title="JS数组去重的两种方法">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="JS数组去重的两种方法"/>
 							</a>
 						</div>
 					</li>											
