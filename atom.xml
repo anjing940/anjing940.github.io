@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-04T08:30:28.332Z</updated>
+  <updated>2019-11-04T08:44:25.763Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>H5C3新特性</title>
+    <link href="http://yoursite.com/2019/11/04/H5C3%E6%96%B0%E7%89%B9%E6%80%A7/"/>
+    <id>http://yoursite.com/2019/11/04/H5C3新特性/</id>
+    <published>2019-11-04T08:41:59.000Z</published>
+    <updated>2019-11-04T08:44:25.763Z</updated>
+    
+    <content type="html"><![CDATA[<p>CSS3新特性：</p><p>​     1.颜色：新增RGBA，HSLA模式 </p><ol start="2"><li><p>文字阴影（text-shadow） </p></li><li><p>边框： 圆角（border-radius）边框阴影： box-shadow </p></li><li><p>盒子模型：box-sizing </p></li><li><p>背景：background-size 设置背景图片的尺寸background-origin 设置背景图片的原点background-clip 设置背景图片的裁切区域，以”，”分隔可以设置多背景，用于自适应布局 </p></li><li><p>渐变：linear-gradient、radial-gradient </p></li><li><p>过渡：transition，可实现动画 </p></li><li><p>自定义动画 </p></li><li><p>在CSS3中唯一引入的伪元素 ：selection. </p></li><li><p>媒体查询，多栏布局 </p></li><li><p>border-image </p></li><li><p>2D转换：transform：translate(x，y) rotate(x，y) skew(x，y) scale(x，y) </p></li><li><p>3D转换 </p><p>14.新增选择器：属性选择器、伪类选择器、伪元素选择器。 </p></li></ol><p>H5新特性:</p><ol><li><p>拖拽释放(Drag and drop) API </p></li><li><p>语义化更好的内容标签（header,nav,footer,aside,article,section） </p></li><li><p>音频、视频API(audio,video) </p></li><li><p>画布(Canvas) API </p></li><li><p>地理(Geolocation) API </p></li><li><p>数据存储 localStorage、sessionStorage  </p></li><li><p>表单控件，calendar、date、time、email、url、search </p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;CSS3新特性：&lt;/p&gt;
+&lt;p&gt;​     1.颜色：新增RGBA，HSLA模式 &lt;/p&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;&lt;p&gt;文字阴影（text-shadow） &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;边框： 圆角（border-radius）边框阴影： box-sh
+      
+    
+    </summary>
+    
+    
+      <category term="H5C3" scheme="http://yoursite.com/categories/H5C3/"/>
+    
+    
+      <category term="H5C3" scheme="http://yoursite.com/tags/H5C3/"/>
+    
+  </entry>
   
   <entry>
     <title>人间失格读后感</title>
