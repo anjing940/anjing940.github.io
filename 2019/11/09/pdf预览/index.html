@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      Vue中nextTick正确使用 | 晓婷成长记录
+      pdf预览 | 晓婷成长记录
     
   </title>
   <meta name="author" content="xiaoting">
@@ -164,7 +164,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《Vue中nextTick正确使用》
+			当前文章&nbsp;:&nbsp;《pdf预览》
 		
 	</p>
 
@@ -266,18 +266,6 @@
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
-
-	
-		<div class="layout-toc">
-			<div id="layout-toc">
-				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
-			</div>
-		</div>
-
-		
-		<script src="/plugin/toc/katelog.min.js"></script>
-
-		
 	 
 
 <div class="layout-post">
@@ -285,8 +273,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/11/04/Vue%E4%B8%ADnextTick%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" itemprop="url">
-		Vue中nextTick正确使用
+	<a href="/2019/11/09/pdf%E9%A2%84%E8%A7%88/" itemprop="url">
+		pdf预览
 	</a>
 
 	</div>
@@ -299,9 +287,9 @@
 
 	发布于
 
-	<a href="/2019/11/04/Vue%E4%B8%ADnextTick%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" itemprop="url">
-		<time datetime="2019-11-04T07:49:44.000Z" itemprop="datePublished">
-	  		2019-11-04
+	<a href="/2019/11/09/pdf%E9%A2%84%E8%A7%88/" itemprop="url">
+		<time datetime="2019-11-09T13:39:33.000Z" itemprop="datePublished">
+	  		2019-11-09
 	  </time>
 	</a>
 	&nbsp;
@@ -317,9 +305,9 @@
 
 	更新于
 
-	<a href="/2019/11/04/Vue%E4%B8%ADnextTick%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" itemprop="url">
-		<time datetime="2019-11-04T07:49:44.000Z" itemprop="dateUpdated">
-	  		2019-11-04
+	<a href="/2019/11/09/pdf%E9%A2%84%E8%A7%88/" itemprop="url">
+		<time datetime="2019-11-09T13:39:33.000Z" itemprop="dateUpdated">
+	  		2019-11-09
 	  </time>
 	</a> 
 
@@ -344,19 +332,8 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>官方文档解释如下：</p>
-<p>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。</p>
-<p>获取更新后的DOM言外之意就是什么操作需要用到了更新后的DOM而不能使用之前的DOM或者使用更新前的DOM或出问题，所以就衍生出了这个获取更新后的DOM的Vue方法。所以放在Vue.nextTick()回调函数中的执行的应该是会对DOM进行操作的 js代码.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;app&quot;&gt;</span><br><span class="line">  &lt;div ref=&quot;msg&quot;&gt;&#123;&#123;msg&#125;&#125;&lt;/div&gt;</span><br><span class="line">  &lt;div v-if=&quot;msg1&quot;&gt;msg1 ****&#123;&#123;msg1&#125;&#125;&lt;/div&gt;</span><br><span class="line">  &lt;div v-if=&quot;msg2&quot;&gt;msg2 ****&#123;&#123;msg2&#125;&#125;&lt;/div&gt;</span><br><span class="line">  &lt;div v-if=&quot;msg3&quot;&gt;msg3 ****&#123;&#123;msg3&#125;&#125;&lt;/div&gt;</span><br><span class="line">  &lt;button @click=&quot;changeMsg&quot; style=&quot;width:100px;height: 30px;&quot;&gt;点我&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">export default&#123;</span><br><span class="line">    data()&#123;</span><br><span class="line">      return&#123;</span><br><span class="line">        msg: &apos;Hello Vue.&apos;,</span><br><span class="line">        msg1: &apos;&apos;,</span><br><span class="line">        msg2: &apos;&apos;,</span><br><span class="line">        msg3: &apos;&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">      changeMsg()&#123;</span><br><span class="line">        this.msg = &quot;Hello world.&quot;</span><br><span class="line">        this.msg1 = this.$refs.msg.innerHTML</span><br><span class="line">        this.$nextTick(() =&gt; &#123;</span><br><span class="line">          this.msg2 = this.$refs.msg.innerHTML</span><br><span class="line">        &#125;)</span><br><span class="line">        this.msg3 = this.$refs.msg.innerHTML</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+		<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;title&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;el-progress :percentage=&quot;progress&quot; :format=&quot;format(progress)&quot;&gt;&lt;/el-progress&gt;</span><br><span class="line">    &lt;canvas v-for=&quot;n in totalPage&quot; :id=&quot;&apos;the-canvas&apos; + n&quot; :key=&quot;n&quot; class=&quot;pdf-content&quot; style=&quot;background-color: antiquewhite&quot; charset=&quot;gb2312&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">    &lt;div class=&quot;handle-page&quot;&gt;</span><br><span class="line">      &lt;button @click=&quot;enlarge&quot;&gt;&lt;i class=&quot;el-icon-plus&quot;&gt;&lt;/i&gt;&lt;/button&gt;</span><br><span class="line">      &lt;button @click=&quot;letting&quot;&gt;&lt;i class=&quot;el-icon-minus&quot;&gt;&lt;/i&gt;&lt;/button&gt;</span><br><span class="line">      &lt;button @click=&quot;rotation&quot;&gt;&lt;i class=&quot;el-icon-refresh&quot;&gt;&lt;/i&gt;&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  import pdfJS from &apos;pdfjs-dist&apos;</span><br><span class="line">  export default &#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">      dataFlow: &#123;</span><br><span class="line">        type: String,</span><br><span class="line">        required: true,</span><br><span class="line">        default: &quot;&quot;,</span><br><span class="line">      &#125;,</span><br><span class="line">      title: &#123;</span><br><span class="line">        type: String,</span><br><span class="line">        default: &apos;&apos;,</span><br><span class="line">      &#125;,</span><br><span class="line">      loadPage: &#123;//权限控制的页面数</span><br><span class="line">        type: Number,</span><br><span class="line">        default: 0,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        pdfDoc: null,</span><br><span class="line">        totalPage: 0,//总的页面数</span><br><span class="line">        loadedPageCount: 0,//当前加载的页面数</span><br><span class="line">        scale: 1.3, //缩放倍数，1表示原始大小</span><br><span class="line">        rotate: 0,</span><br><span class="line">        progress: 0,//进度条</span><br><span class="line">        isShow: false</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">      dataFlow (newval, oldval) &#123;</span><br><span class="line">        if(newval) &#123;</span><br><span class="line">          this.isShow = false;</span><br><span class="line">          this.loadedPageCount = 0;</span><br><span class="line">          this.progress = 0;</span><br><span class="line">          console.log(newval);</span><br><span class="line">          this.getPDFFile(newval);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    created() &#123;</span><br><span class="line">      pdfJS.GlobalWorkerOptions.workerSrc = require(&apos;pdfjs-dist/build/pdf.worker.min.js&apos;);</span><br><span class="line">      this.getPDFFile(this.dataFlow);</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted() &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      getPDFFile (res) &#123;</span><br><span class="line">        if (!res) return</span><br><span class="line">        this.isShow = true;</span><br><span class="line">        this.loadedPageCount = 0;</span><br><span class="line">        // cmaps防止页面中乱码的问题,cdn引用和本地引用均可。cdn引入犹豫网络问题，容易加载丢失。</span><br><span class="line">        // let CMAP_URL = &apos;https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.943/cmaps/&apos;;</span><br><span class="line">        let CMAP_URL = &apos;./static/cmaps/&apos;;</span><br><span class="line">        /***********其实这里是base64解决跨域的关键************/</span><br><span class="line">        let raw = window.atob(res) //从这里 到下面 得到 rawArray</span><br><span class="line">        let rawLength = raw.length</span><br><span class="line">        let rawArray = new Uint8Array(new ArrayBuffer(rawLength))</span><br><span class="line">        for(var i = 0;i&lt;rawLength;i++)&#123;</span><br><span class="line">          rawArray[i] = raw.charCodeAt(i)</span><br><span class="line">        &#125;</span><br><span class="line">        /********************************************/</span><br><span class="line">        // 也就是这里！！！  这些语句是我们将base64格式的数据转成pdf.js可以解析的格式  !</span><br><span class="line">        // (https://img-blog.csdnimg.cn/20190321174128417.png)这个是rawArray的最终格式 通过此链接可以查看图片</span><br><span class="line">        // console.log(rawArray)</span><br><span class="line">        pdfJS.getDocument(&#123;data: rawArray,cMapUrl: CMAP_URL,cMapPacked: true,&#125;).then(pdf =&gt; &#123;</span><br><span class="line">          this.pdfDoc = pdf;</span><br><span class="line">          console.log(this.pdfDoc)</span><br><span class="line">          this.renderPage();</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;,</span><br><span class="line">      renderPage() &#123;</span><br><span class="line">        const that = this;</span><br><span class="line">        if(this.loadPage == 0 || this.loadPage &gt;= this.pdfDoc.numPages) &#123;</span><br><span class="line">          this.totalPage = this.pdfDoc.numPages;//总页数</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          this.totalPage = this.loadPage;</span><br><span class="line">        &#125;</span><br><span class="line">        //一次加载了所有页，也可以一页页加载</span><br><span class="line">        for(var i = 1; i&lt;=this.totalPage; i++) &#123;</span><br><span class="line">          this.pdfDoc.getPage(i).then((page) =&gt; &#123;</span><br><span class="line">            var viewport = page.getViewport(this.scale, this.rotate); //对视图展示的操作</span><br><span class="line">            var canvas = document.getElementById(&apos;the-canvas&apos; + page.pageNumber);</span><br><span class="line">            var context = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">            canvas.height = viewport.height;</span><br><span class="line">            canvas.width = viewport.width;</span><br><span class="line">            var renderContext = &#123;</span><br><span class="line">              canvasContext: context,</span><br><span class="line">              viewport: viewport</span><br><span class="line">            &#125;;</span><br><span class="line">            // 先加载完成所有页面，后渲染所有页面</span><br><span class="line">            page.render(renderContext).promise.then(() =&gt; &#123;</span><br><span class="line">              this.loadedPageCount ++;//加载一个+1，最后总数和totalPage一样了，表示pdf加载完了</span><br><span class="line">              this.$nextTick(() =&gt; &#123;</span><br><span class="line">                this.progress = Math.round( this.loadedPageCount / this.totalPage * 100);</span><br><span class="line">                this.format(this.progress);</span><br><span class="line">              &#125;)</span><br><span class="line">            &#125;);</span><br><span class="line">          &#125;).catch(error =&gt; &#123;</span><br><span class="line">            this.progress = 100;</span><br><span class="line">            console.log(error);</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      //放大</span><br><span class="line">      enlarge()&#123;</span><br><span class="line">        if(this.progress == 100) &#123;</span><br><span class="line">          this.progress = 0;</span><br><span class="line">          this.loadedPageCount = 0;</span><br><span class="line">          this.scale += 0.1;</span><br><span class="line">          this.renderPage();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      //缩小</span><br><span class="line">      letting()&#123;</span><br><span class="line">        if(this.progress == 100) &#123;</span><br><span class="line">          this.progress = 0;</span><br><span class="line">          this.loadedPageCount = 0;</span><br><span class="line">          this.scale -= 0.1;</span><br><span class="line">          this.renderPage();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      // 旋转</span><br><span class="line">      rotation()&#123;</span><br><span class="line">        if(this.progress == 100) &#123;</span><br><span class="line">          this.progress = 0;</span><br><span class="line">          this.loadedPageCount = 0;</span><br><span class="line">          this.rotate += 90;</span><br><span class="line">          this.renderPage();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      format(percentage) &#123;</span><br><span class="line">        return percentage === 100 ? &apos;满&apos; : `$&#123;percentage&#125;%`;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style lang=&quot;scss&quot; scoped&gt;</span><br><span class="line">  .handle-page &#123;</span><br><span class="line">    border-radius: 3px;</span><br><span class="line">    position: fixed;</span><br><span class="line">    top: 280px;</span><br><span class="line">    right: 48%;</span><br><span class="line">    transform: translateX(500px);</span><br><span class="line">    background-color: rgb(240, 240, 240);</span><br><span class="line">    border: 1px solid #C4C9D0;</span><br><span class="line">    button &#123;</span><br><span class="line">      display: block;</span><br><span class="line">      width: 30px;</span><br><span class="line">      height: 30px;</span><br><span class="line">      padding: 10px 0;</span><br><span class="line">      margin: 0 10px;</span><br><span class="line">      border: 0;</span><br><span class="line">      outline: none;</span><br><span class="line">      box-sizing:content-box;</span><br><span class="line">      font-size: 14px;</span><br><span class="line">      cursor: pointer;</span><br><span class="line">      border-bottom: 1px solid #C4C9D0;</span><br><span class="line">      background-color: rgb(240, 240, 240);</span><br><span class="line">      &amp;:hover &#123;</span><br><span class="line">        color: #009A52;</span><br><span class="line">      &#125;</span><br><span class="line">      &amp;:last-child &#123;</span><br><span class="line">        border-bottom: none;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  .pdf-content &#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    left: 50%;</span><br><span class="line">    transform: translateX(-50%);</span><br><span class="line">    background-color: antiquewhite;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
 
-<p>点击前</p>
-<p><img src="https://img2018.cnblogs.com/blog/1249970/201812/1249970-20181225173222675-1187052446.png" alt="img"></p>
-<p>点击后</p>
-<p><img src="https://img2018.cnblogs.com/blog/1249970/201812/1249970-20181225173309466-1782014173.png" alt="img"></p>
-<p>msg2显示的内容是变换之后的。其根本原因是因为Vue中DOM更新是异步的。</p>
-<h3 id="什么时候需要用的Vue-nextTick"><a href="#什么时候需要用的Vue-nextTick" class="headerlink" title="什么时候需要用的Vue.nextTick()"></a>什么时候需要用的Vue.nextTick()</h3><p>1.你在Vue生命周期的created()钩子函数进行的DOM操作一定要放在Vue.nextTick()的回调函数中。原因是什么呢，原因是在created()钩子函数执行的时候DOM 其实并未进行任何渲染，而此时进行DOM操作无异于徒劳，所以此处一定要将DOM操作的js代码放进Vue.nextTick()的回调函数中。与之对应的就是mounted钩子函数，因为该钩子函数执行时所有的DOM挂载和渲染都已完成，此时在该钩子函数中进行任何DOM操作都不会有问题 。</p>
-<p>2.在数据变化后要执行的某个操作，而这个操作需要使用随数据改变而改变的DOM结构的时候，这个操作都应该放进Vue.nextTick()的回调函数中。</p>
-<p>原因是，Vue是异步执行dom更新的，一旦观察到数据变化，Vue就会开启一个队列，然后把在同一个事件循环 (event loop) 当中观察到数据变化的 watcher 推送进这个队列。如果这个watcher被触发多次，只会被推送到队列一次。这种缓冲行为可以有效的去掉重复数据造成的不必要的计算和DOm操作。而在下一个事件循环时，Vue会清空队列，并进行必要的DOM更新。<br>当你设置this.msg1 = this.$refs.msg.innerHTML,DOM 并不会马上更新，而是在异步队列被清除，也就是下一个事件循环开始时执行更新时才会进行必要的DOM更新。如果此时你想要根据更新的 DOM 状态去做某些事情，就会出现问题。。为了在数据变化之后等待 Vue 完成更新 DOM ，可以在数据变化之后立即使用 Vue.nextTick(callback) 。这样回调函数在 DOM 更新完成后就会调用。</p>
 	
 	</div>
 	
@@ -375,12 +352,8 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/11/04/Vue%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E7%9A%84%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD/" title="Vue实现路由的按需加载" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2019/10/24/10%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84Win%E9%94%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%20%E7%9B%B8%E5%BD%93%E5%AE%9E%E7%94%A8%EF%BC%81/" title="10个常用的Win键快捷键 相当实用！" rel="next">
+			<a href="/2019/11/04/H5C3%E6%96%B0%E7%89%B9%E6%80%A7/" title="H5C3新特性" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -398,29 +371,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/11/09/pdf%E9%A2%84%E8%A7%88/" title="pdf预览">
-								pdf预览			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十一月 9日, 2019				
-							</p>
-							<p class="relate-post-content">
-								123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/11/09/pdf%E9%A2%84%E8%A7%88/" title="pdf预览">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="pdf预览"/>
-							</a>
-						</div>
-					</li>											
-			
 			
 					<li>
 						<div class="relate-post-text">
@@ -469,6 +419,31 @@ vue异步组件技术 ==== 异步加载vue-router配置路由 , 使用vue的异�
 							<a href="/2019/11/04/Vue%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E7%9A%84%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD/" title="Vue实现路由的按需加载">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="Vue实现路由的按需加载"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/11/04/Vue%E4%B8%ADnextTick%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" title="Vue中nextTick正确使用">
+								Vue中nextTick正确使用			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 4日, 2019				
+							</p>
+							<p class="relate-post-content">
+								官方文档解释如下：
+在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+获取更新后的DOM言外之意就是什么操作需要用到了更新后的DOM而不能使用之前的DOM或者使用更新前的DOM或出问...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/11/04/Vue%E4%B8%ADnextTick%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" title="Vue中nextTick正确使用">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="Vue中nextTick正确使用"/>
 							</a>
 						</div>
 					</li>											
