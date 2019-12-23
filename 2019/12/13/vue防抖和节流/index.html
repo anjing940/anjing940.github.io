@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      Vue中nextTick正确使用 | 晓婷成长记录
+      vue防抖和节流 | 晓婷成长记录
     
   </title>
   <meta name="author" content="xiaoting">
@@ -164,7 +164,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《Vue中nextTick正确使用》
+			当前文章&nbsp;:&nbsp;《vue防抖和节流》
 		
 	</p>
 
@@ -266,18 +266,6 @@
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
-
-	
-		<div class="layout-toc">
-			<div id="layout-toc">
-				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
-			</div>
-		</div>
-
-		
-		<script src="/plugin/toc/katelog.min.js"></script>
-
-		
 	 
 
 <div class="layout-post">
@@ -285,8 +273,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/11/04/Vue%E4%B8%ADnextTick%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" itemprop="url">
-		Vue中nextTick正确使用
+	<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" itemprop="url">
+		vue防抖和节流
 	</a>
 
 	</div>
@@ -299,9 +287,9 @@
 
 	发布于
 
-	<a href="/2019/11/04/Vue%E4%B8%ADnextTick%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" itemprop="url">
-		<time datetime="2019-11-04T07:49:44.000Z" itemprop="datePublished">
-	  		2019-11-04
+	<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" itemprop="url">
+		<time datetime="2019-12-13T07:32:43.000Z" itemprop="datePublished">
+	  		2019-12-13
 	  </time>
 	</a>
 	&nbsp;
@@ -317,9 +305,9 @@
 
 	更新于
 
-	<a href="/2019/11/04/Vue%E4%B8%ADnextTick%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" itemprop="url">
-		<time datetime="2019-11-04T07:49:44.000Z" itemprop="dateUpdated">
-	  		2019-12-05
+	<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" itemprop="url">
+		<time datetime="2019-12-13T07:32:43.000Z" itemprop="dateUpdated">
+	  		2019-12-13
 	  </time>
 	</a> 
 
@@ -344,20 +332,7 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>官方文档解释如下：</p>
-<p>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。</p>
-<p>获取更新后的DOM言外之意就是什么操作需要用到了更新后的DOM而不能使用之前的DOM或者使用更新前的DOM或出问题，所以就衍生出了这个获取更新后的DOM的Vue方法。所以放在Vue.nextTick()回调函数中的执行的应该是会对DOM进行操作的 js代码.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"app"</span>&gt;</span><br><span class="line">  &lt;div ref=<span class="string">"msg"</span>&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div v-if="msg1"&gt;msg1 ****&#123;&#123;msg1&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">  &lt;div v-<span class="keyword">if</span>=<span class="string">"msg2"</span>&gt;msg2 ****&#123;&#123;msg2&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div v-if="msg3"&gt;msg3 ****&#123;&#123;msg3&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">  &lt;button @click=<span class="string">"changeMsg"</span> style=<span class="string">"width:100px;height: 30px;"</span>&gt;点我&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</span><br><span class="line">    data()&#123;</span><br><span class="line">      <span class="keyword">return</span>&#123;</span><br><span class="line">        msg: <span class="string">'Hello Vue.'</span>,</span><br><span class="line">        msg1: <span class="string">''</span>,</span><br><span class="line">        msg2: <span class="string">''</span>,</span><br><span class="line">        msg3: <span class="string">''</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">      changeMsg()&#123;</span><br><span class="line">        <span class="keyword">this</span>.msg = <span class="string">"Hello world."</span></span><br><span class="line">        <span class="keyword">this</span>.msg1 = <span class="keyword">this</span>.$refs.msg.innerHTML</span><br><span class="line">        <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.msg2 = <span class="keyword">this</span>.$refs.msg.innerHTML</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">this</span>.msg3 = <span class="keyword">this</span>.$refs.msg.innerHTML</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>点击前</p>
-<p><img src="https://img2018.cnblogs.com/blog/1249970/201812/1249970-20181225173222675-1187052446.png" alt="img"></p>
-<p>点击后</p>
-<p><img src="https://img2018.cnblogs.com/blog/1249970/201812/1249970-20181225173309466-1782014173.png" alt="img"></p>
-<p>msg2显示的内容是变换之后的。其根本原因是因为Vue中DOM更新是异步的。</p>
-<h3 id="什么时候需要用的Vue-nextTick"><a href="#什么时候需要用的Vue-nextTick" class="headerlink" title="什么时候需要用的Vue.nextTick()"></a>什么时候需要用的Vue.nextTick()</h3><p>1.你在Vue生命周期的created()钩子函数进行的DOM操作一定要放在Vue.nextTick()的回调函数中。原因是什么呢，原因是在created()钩子函数执行的时候DOM 其实并未进行任何渲染，而此时进行DOM操作无异于徒劳，所以此处一定要将DOM操作的js代码放进Vue.nextTick()的回调函数中。与之对应的就是mounted钩子函数，因为该钩子函数执行时所有的DOM挂载和渲染都已完成，此时在该钩子函数中进行任何DOM操作都不会有问题 。</p>
-<p>2.在数据变化后要执行的某个操作，而这个操作需要使用随数据改变而改变的DOM结构的时候，这个操作都应该放进Vue.nextTick()的回调函数中。</p>
-<p>原因是，Vue是异步执行dom更新的，一旦观察到数据变化，Vue就会开启一个队列，然后把在同一个事件循环 (event loop) 当中观察到数据变化的 watcher 推送进这个队列。如果这个watcher被触发多次，只会被推送到队列一次。这种缓冲行为可以有效的去掉重复数据造成的不必要的计算和DOm操作。而在下一个事件循环时，Vue会清空队列，并进行必要的DOM更新。<br>当你设置this.msg1 = this.$refs.msg.innerHTML,DOM 并不会马上更新，而是在异步队列被清除，也就是下一个事件循环开始时执行更新时才会进行必要的DOM更新。如果此时你想要根据更新的 DOM 状态去做某些事情，就会出现问题。。为了在数据变化之后等待 Vue 完成更新 DOM ，可以在数据变化之后立即使用 Vue.nextTick(callback) 。这样回调函数在 DOM 更新完成后就会调用。</p>
-	
+			
 	</div>
 	
 	<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
@@ -375,12 +350,12 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/11/04/Vue%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E7%9A%84%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD/" title="Vue实现路由的按需加载" rel="prev">
+			<a href="/2019/12/23/vue%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="vue文件上传组件" rel="prev">
 				&laquo;上一篇
 			</a>
 		
 		
-			<a href="/2019/10/24/10%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84Win%E9%94%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%20%E7%9B%B8%E5%BD%93%E5%AE%9E%E7%94%A8%EF%BC%81/" title="10个常用的Win键快捷键 相当实用！" rel="next">
+			<a href="/2019/12/13/js%E6%B7%B1%E5%85%8B%E9%9A%86%E6%B5%85%E5%85%8B%E9%9A%86/" title="js深克隆浅克隆" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -418,29 +393,6 @@
 							<a href="/2019/12/23/vue%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="vue文件上传组件">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue文件上传组件"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="vue防抖和节流">
-								vue防抖和节流			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十二月 13日, 2019				
-							</p>
-							<p class="relate-post-content">
-								
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="vue防抖和节流">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue防抖和节流"/>
 							</a>
 						</div>
 					</li>											
@@ -540,6 +492,31 @@ vue异步组件技术 ==== 异步加载vue-router配置路由 , 使用vue的异�
 							<a href="/2019/11/04/Vue%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E7%9A%84%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD/" title="Vue实现路由的按需加载">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="Vue实现路由的按需加载"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/11/04/Vue%E4%B8%ADnextTick%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" title="Vue中nextTick正确使用">
+								Vue中nextTick正确使用			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 4日, 2019				
+							</p>
+							<p class="relate-post-content">
+								官方文档解释如下：
+在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+获取更新后的DOM言外之意就是什么操作需要用到了更新后的DOM而不能使用之前的DOM或者使用更新前的DOM或出问...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/11/04/Vue%E4%B8%ADnextTick%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8/" title="Vue中nextTick正确使用">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="Vue中nextTick正确使用"/>
 							</a>
 						</div>
 					</li>											
