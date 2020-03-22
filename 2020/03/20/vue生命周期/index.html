@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      vue项目中keepAlive的使用 | 晓婷成长记录
+      vue生命周期 | 晓婷成长记录
     
   </title>
   <meta name="author" content="xiaoting">
@@ -164,7 +164,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《vue项目中keepAlive的使用》
+			当前文章&nbsp;:&nbsp;《vue生命周期》
 		
 	</p>
 
@@ -266,6 +266,18 @@
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
 	 
 
 <div class="layout-post">
@@ -273,8 +285,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2020/03/20/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url">
-		vue项目中keepAlive的使用
+	<a href="/2020/03/20/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" itemprop="url">
+		vue生命周期
 	</a>
 
 	</div>
@@ -287,7 +299,7 @@
 
 	发布于
 
-	<a href="/2020/03/20/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url">
+	<a href="/2020/03/20/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" itemprop="url">
 		<time datetime="2020-03-20T03:10:20.000Z" itemprop="datePublished">
 	  		2020-03-20
 	  </time>
@@ -305,9 +317,9 @@
 
 	更新于
 
-	<a href="/2020/03/20/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url">
+	<a href="/2020/03/20/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" itemprop="url">
 		<time datetime="2020-03-20T03:10:20.000Z" itemprop="dateUpdated">
-	  		2020-03-21
+	  		2020-03-22
 	  </time>
 	</a> 
 
@@ -332,71 +344,34 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p><code>&lt;keep-alive&gt;</code>是Vue的内置组件，能在组件切换时保持之前的加载状态（缓存不活动的组件），防止重复渲染DOM，减少接口请求，减少服务器压力。</p>
-<p><strong>prop:</strong></p>
-<ul>
-<li>include: 字符串或正则表达式。只有匹配的组件会被缓存。</li>
-<li>exclude: 字符串或正则表达式。任何匹配的组件都不会被缓存。</li>
-</ul>
-<p><strong>常见用法</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'payOrder'</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      username: <span class="string">''</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+		<p>Vue 实例从创建到销毁的过程，就是生命周期。也就是从开始创建、初始化数据、编译模板、挂载Dom→渲染、更新→渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。</p>
+<p><img src="D:%5Chexo%5Csource_posts%5Canjing%5C1741752219-59c9b774a4ccf_articlex.png" alt="1741752219-59c9b774a4ccf_articlex"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">  &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">  &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">  &lt;title&gt;vue生命周期学习&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">  &lt;script src="https:/</span><span class="regexp">/cdn.bootcss.com/</span>vue/<span class="number">2.4</span><span class="number">.2</span>/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">  &lt;div id="</span>app<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;h1&gt;&#123;&#123;message&#125;&#125;&lt;/h1&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;script&gt;</span></span><br><span class="line"><span class="string">  var vm = new Vue(&#123;</span></span><br><span class="line"><span class="string">    el: '#app',</span></span><br><span class="line"><span class="string">    data: &#123;</span></span><br><span class="line"><span class="string">      message: 'Vue的生命周期'</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    beforeCreate: function() &#123;</span></span><br><span class="line"><span class="string">      console.group('------beforeCreate创建前状态------');</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">" , "</span>el     : <span class="string">" + this.$el); //undefined</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>data   : <span class="string">" + this.$data); //undefined </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>message: <span class="string">" + this.message) </span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    created: function() &#123;</span></span><br><span class="line"><span class="string">      console.group('------created创建完毕状态------');</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>el     : <span class="string">" + this.$el); //undefined</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>data   : <span class="string">" + this.$data); //已被初始化 </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>message: <span class="string">" + this.message); //已被初始化</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    beforeMount: function() &#123;</span></span><br><span class="line"><span class="string">      console.group('------beforeMount挂载前状态------');</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>el     : <span class="string">" + (this.$el)); //已被初始化</span></span><br><span class="line"><span class="string">      console.log(this.$el);</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>data   : <span class="string">" + this.$data); //已被初始化  </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>message: <span class="string">" + this.message); //已被初始化  </span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    mounted: function() &#123;</span></span><br><span class="line"><span class="string">      console.group('------mounted 挂载结束状态------');</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>el     : <span class="string">" + this.$el); //已被初始化</span></span><br><span class="line"><span class="string">      console.log(this.$el);    </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>data   : <span class="string">" + this.$data); //已被初始化</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>message: <span class="string">" + this.message); //已被初始化 </span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    beforeUpdate: function () &#123;</span></span><br><span class="line"><span class="string">      console.group('beforeUpdate 更新前状态===============》');</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>el     : <span class="string">" + this.$el);</span></span><br><span class="line"><span class="string">      console.log(this.$el);   </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>data   : <span class="string">" + this.$data); </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>message: <span class="string">" + this.message); </span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    updated: function () &#123;</span></span><br><span class="line"><span class="string">      console.group('updated 更新完成状态===============》');</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>el     : <span class="string">" + this.$el);</span></span><br><span class="line"><span class="string">      console.log(this.$el); </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>data   : <span class="string">" + this.$data); </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>message: <span class="string">" + this.message); </span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    beforeDestroy: function () &#123;</span></span><br><span class="line"><span class="string">      console.group('beforeDestroy 销毁前状态===============》');</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>el     : <span class="string">" + this.$el);</span></span><br><span class="line"><span class="string">      console.log(this.$el);    </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>data   : <span class="string">" + this.$data); </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>message: <span class="string">" + this.message); </span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    destroyed: function () &#123;</span></span><br><span class="line"><span class="string">      console.group('destroyed 销毁完成状态===============》');</span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>el     : <span class="string">" + this.$el);</span></span><br><span class="line"><span class="string">      console.log(this.$el);  </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>data   : <span class="string">" + this.$data); </span></span><br><span class="line"><span class="string">      console.log("</span>%c%s<span class="string">", "</span>color:red<span class="string">","</span>message: <span class="string">" + this.message)</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;)</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;keep-alive include=<span class="string">"payOrder"</span>&gt;</span><br><span class="line">  &lt;router-view /&gt;</span><br><span class="line">&lt;<span class="regexp">/keep-alive&gt;</span></span><br></pre></td></tr></table></figure>
+<p>运行打印结果</p>
+<p><img src="D:%5Chexo%5Csource_posts%5Canjing%5C%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200322161837.png" alt="微信图片_20200322161837"></p>
+<h5 id="1-在beforeCreate和created钩子函数之间的生命周期"><a href="#1-在beforeCreate和created钩子函数之间的生命周期" class="headerlink" title="1. 在beforeCreate和created钩子函数之间的生命周期"></a><strong>1. 在beforeCreate和created钩子函数之间的生命周期</strong></h5><p>创建vue实例，vue(),在创建vue实例的时候执行了init(),在执行init()的时候调用beforeCtreate钩子函数，监听data数据，初始化vue内部事件，进行属性和方法计算，然后调用create钩子函数，<strong>created</strong>的时候数据已经和<strong>data属性进行绑定,此时还是没有el</strong></p>
+<h5 id="2-created钩子函数和beforeMount间的生命周期"><a href="#2-created钩子函数和beforeMount间的生命周期" class="headerlink" title="2. created钩子函数和beforeMount间的生命周期"></a><strong>2. created钩子函数和beforeMount间的生命周期</strong></h5><p>首先会判断对象是否有<strong>el选项</strong>。<strong>如果有的话就继续向下编译，如果没有</strong>el选项<strong>，则停止编译，也就意味着停止了生命周期，直到在该vue实例上调用vm.$mount(el)。</strong></p>
+<p><strong>模板编译</strong>，把data对象里面的数据和vue语法写的模板编译成HTML。编译过程分三种情况：1）实例内部有template属性，直接调用，然后调用render函数去渲染；2）没有该属性调用外部html；3）都没有抛出错误；</p>
+<p>编译模板完成，调用<strong>beforeMount钩子函数</strong>；</p>
+<h5 id="3-beforeMount和mounted-钩子函数间的生命周期"><a href="#3-beforeMount和mounted-钩子函数间的生命周期" class="headerlink" title="3. beforeMount和mounted 钩子函数间的生命周期"></a><strong>3. beforeMount和mounted 钩子函数间的生命周期</strong></h5><p>此时是给vue实例对象添加<strong>$el成员</strong>，并且替换掉挂在的DOM元素。因为在之前console中打印的结果可以看到<strong>beforeMount</strong>之前el上还是undefined</p>
+<p>挂载结束，调用<strong>Mounted钩子函数</strong>；</p>
+<h4 id="4-mounted"><a href="#4-mounted" class="headerlink" title="4. mounted"></a><strong>4. mounted</strong></h4><p><img src="https://segmentfault.com/img/bVVUYC?w=424&h=274" alt="clipboard.png"></p>
+<p>在mounted之前h1中还是通过<strong></strong>进行占位的，因为此时还有挂在到页面上，还是JavaScript中的虚拟DOM形式存在的。在mounted之后可以看到h1中的内容发生了变化。</p>
+<h5 id="5-beforeUpdate钩子函数和updated钩子函数间的生命周期"><a href="#5-beforeUpdate钩子函数和updated钩子函数间的生命周期" class="headerlink" title="5. beforeUpdate钩子函数和updated钩子函数间的生命周期"></a><strong>5. beforeUpdate钩子函数和updated钩子函数间的生命周期</strong></h5><p><img src="https://segmentfault.com/img/bVVU0E?w=558&h=295" alt="clipboard.png"></p>
+<p>当vue发现data中的数据发生了改变，会<strong>触发对应组件的重新渲染</strong>，先后调用<strong>beforeUpdate</strong>和<strong>updated</strong>钩子函数。我们在console中输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.message = &apos;触发组件更新&apos;</span><br></pre></td></tr></table></figure>
 
-<p><strong>利用路由中的meta属性来控制</strong></p>
-<p>使用$route.meta的keepAlive属性,keep-alive代码可以结合v-if进行包裹，如果meta中的keepAlive为true进行缓存，否侧不进行缓存，</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;keep-alive&gt;</span><br><span class="line">      &lt;router-view v-<span class="keyword">if</span>=<span class="string">"$route.meta.keepAlive"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/keep-alive&gt;</span></span><br><span class="line"><span class="regexp">&lt;router-view v-if="!$route.meta.keepAlive" /</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<p>需要在<code>router</code>中设置router的元信息meta：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"/"</span>,</span><br><span class="line">    name: <span class="string">"Home"</span>,</span><br><span class="line">    component: Home,</span><br><span class="line">    meta:&#123;</span><br><span class="line">      keepAlive:<span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"/payment"</span>,</span><br><span class="line">    name: <span class="string">"payment"</span>,</span><br><span class="line">    redirect: <span class="string">'/payment/order'</span>,</span><br><span class="line">    component: Payment,</span><br><span class="line">    children: [</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">"order"</span>,</span><br><span class="line">        name: <span class="string">"payOrder"</span>,</span><br><span class="line">        meta:&#123;</span><br><span class="line">          keepAlive:<span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"@/views/payment/pay_order.vue"</span>),</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">  &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-
-<p>也可以通过路由导航钩子实现页面的刷新</p>
-<ul>
-<li>首页是A页面</li>
-<li>B页面跳转到A，A页面需要缓存</li>
-<li>C页面跳转到A，A页面不需要被缓存</li>
-</ul>
-<p>思路是在每个路由的<code>beforeRouteLeave(to, from, next)</code>钩子中设置<code>to.meta.keepAlive</code>：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    name: <span class="string">'A'</span>,</span><br><span class="line">    component: A,</span><br><span class="line">    meta: &#123;</span><br><span class="line">        keepAlive: <span class="literal">true</span> <span class="comment">// 需要被缓存</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;&#125;,</span><br><span class="line">    beforeRouteLeave(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">         <span class="comment">// 设置下一个路由的 meta</span></span><br><span class="line">        to.meta.keepAlive = <span class="literal">true</span>;  <span class="comment">// B 跳转到 A 时，让 A 缓存，即不刷新</span></span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;&#125;,</span><br><span class="line">    beforeRouteLeave(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">        <span class="comment">// 设置下一个路由的 meta</span></span><br><span class="line">        to.meta.keepAlive = <span class="literal">false</span>; <span class="comment">// C 跳转到 A 时让 A 不缓存，即刷新</span></span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>keep-alive生命周期钩子函数：activated、deactivated</strong></p>
-<p>使用<code>&lt;keep-alive&gt;</code>会将数据保留在内存中，如果要在每次进入页面的时候获取最新的数据，需要在<code>activated</code>阶段获取数据，承担原来created钩子中获取数据的任务。</p>
-<p><strong>使用keep-alive时钩子函数执行顺序：</strong></p>
-<p>beforeRouteEnter–&gt; created –&gt; mounted –&gt; activated –&gt; deactivated，</p>
-<p>再次进入缓存页面时只会执行：</p>
-<p>beforeRouteEnter–&gt; activated –&gt; deactivated</p>
-<p>所以在缓存页面中如果需要第二次进入页面仍然发送请求，可以将ajax请求放在activated中</p>
-<p><strong>不使用keep-alive时钩子函数执行顺序：</strong></p>
-<p>beforeRouteEnter–&gt; created –&gt; mounted –&gt; destroyed</p>
-<p><code>keep-alive</code>相关的钩子函数：</p>
-<ul>
-<li><strong>activated</strong>： 缓存的组件再次进入时会触发</li>
-<li><strong>deactivated</strong>： 缓存的组件离开时会触发</li>
-</ul>
-<p>路由元信息meta中添加一个isBack字段，用来解决beforeRouterEnter不能直接访问vue实例。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">"/"</span>,</span><br><span class="line">    name: <span class="string">"Home"</span>,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span> (<span class="string">'@/views/Home.vue'</span>),</span><br><span class="line">    meta:&#123;</span><br><span class="line">      keepAlive:<span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"/order"</span>,</span><br><span class="line">    name: <span class="string">"payOrder"</span>,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"@/views/payment/pay_order.vue"</span>),</span><br><span class="line">    meta:&#123;</span><br><span class="line">      keepAlive:<span class="literal">true</span>,</span><br><span class="line">      isBack: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"/info"</span>,</span><br><span class="line">    name: <span class="string">"payInfo"</span>,</span><br><span class="line">    meta:&#123;</span><br><span class="line">      keepAlive:<span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"@/views/payment/pay_info.vue"</span>),</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>借助<code>beforeRouteEnter</code>钩子函数来判断页面来源：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteEnter(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">from</span>.name === <span class="string">'payInfo'</span>) &#123; <span class="comment">//判断是从哪个路由过来的，若是detail页面不需要刷新获取新数据，直接用之前缓存的数据即可</span></span><br><span class="line">      to.meta.isBack = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>最后，需要借助keep-alive提供钩子函数<code>activated</code>来完成是否更新：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">activated() &#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.$route.meta.isBack) &#123;</span><br><span class="line">      <span class="comment">// 如果isBack是false，表明需要获取新数据，否则就不再请求，直接使用缓存的数据</span></span><br><span class="line">      <span class="keyword">this</span>.getData(); <span class="comment">// ajax获取数据方法</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据</span></span><br><span class="line">    <span class="keyword">this</span>.$route.meta.isBack = <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
-
-<p>在<strong>keep-alive组件前进的页面刷新导致keep-alive组件状态丢失</strong></p>
-<p>继续以上面的A、B页面为例，在进入详情B页面后，然后刷新，这时列表A页面的缓存的数据都丢失了，由于上面的判断规则也会导致不会重新获取数据。所以对于这种问题，还需要额外加一些判断条件。由于keep-alive第一次进入时会执行<strong>created</strong>方法，所以利用这点加一个标识来加以判断：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一次进入keep-alive路由组件时</span></span><br><span class="line"> created() &#123;</span><br><span class="line">   <span class="keyword">this</span>.isFirstEnter = <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 只有第一次进入或者刷新页面后才会执行此钩子函数，使用keep-alive后（2+次）进入不会再执行此钩子函数</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>activated钩子函数也需要增加对应的判断：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">activated() &#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.$route.meta.isBack || <span class="keyword">this</span>.isFirstEnter)&#123;</span><br><span class="line">        <span class="comment">// 如果isBack是false，表明需要获取新数据，否则就不再请求，直接使用缓存的数据</span></span><br><span class="line">        <span class="comment">// 如果isFirstEnter是true，表明是第一次进入此页面或用户刷新了页面，需获取新数据</span></span><br><span class="line">        <span class="keyword">this</span>.data = <span class="string">''</span><span class="comment">// 把数据清空，可以稍微避免让用户看到之前缓存的数据</span></span><br><span class="line">        <span class="keyword">this</span>.getData();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据</span></span><br><span class="line">    <span class="keyword">this</span>.$route.meta.isBack=<span class="literal">false</span></span><br><span class="line">    <span class="comment">// 恢复成默认的false，避免isBack一直是true，导致每次都获取新数据</span></span><br><span class="line">    <span class="keyword">this</span>.isFirstEnter=<span class="literal">false</span>;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>缓存过多keep-alive组件，因常驻内存会导致内存占用过多</strong></li>
-</ul>
-<p>这是一个特别需要注意的问题，尤其是当整个系统或者系统大部分页面都使用keep-alive来缓存组件时，由于其是缓存在内存中的，若不加处理，内存堆积越来越大，导致系统卡顿。正确的解决方案是：<strong>需要及时销毁掉内存缓存的组件</strong>。</p>
+<p>发现触发了组件的更新：</p>
+<p><img src="https://segmentfault.com/img/bVVU55?w=500&h=356" alt="clipboard.png"></p>
+<h5 id="6-beforeDestroy和destroyed钩子函数间的生命周期"><a href="#6-beforeDestroy和destroyed钩子函数间的生命周期" class="headerlink" title="6.beforeDestroy和destroyed钩子函数间的生命周期"></a><strong>6.beforeDestroy和destroyed钩子函数间的生命周期</strong></h5><p><img src="https://segmentfault.com/img/bVVU6C?w=383&h=368" alt="clipboard.png"></p>
+<p><strong>beforeDestroy</strong>钩子函数在实例销毁之前调用。在这一步，实例仍然完全可用。<br><strong>destroyed</strong>钩子函数在Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。</p>
+<p><strong>1、什么是vue生命周期</strong>？<br>答： Vue 实例从创建到销毁的过程，就是生命周期。也就是从开始创建、初始化数据、编译模板、挂载Dom→渲染、更新→渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。</p>
+<p><strong>2、vue生命周期的作用是什么？</strong><br>答：它的生命周期中有多个事件钩子，让我们在控制整个Vue实例的过程时更容易形成好的逻辑。</p>
+<p><strong>3、vue生命周期总共有几个阶段？</strong><br>答：它可以总共分为8个阶段：创建前/后, 载入前/后,更新前/后,销毁前/销毁后</p>
+<p><strong>4、第一次页面加载会触发哪几个钩子？</strong><br>答：第一次页面加载时会触发 beforeCreate, created, beforeMount, mounted 这几个钩子</p>
+<p><strong>5、DOM 渲染在 哪个周期中就已经完成？</strong><br>答：DOM 渲染在 mounted 中就已经完成了。</p>
+<p><strong>6、简单描述每个周期具体适合哪些场景？</strong><br>答：生命周期钩子的一些使用方法： beforecreate : 可以在这加个loading事件，在加载实例时触发 created : 初始化完成时的事件写在这里，如在这结束loading事件，异步请求也适宜在这里调用 mounted : 挂载元素，获取到DOM节点 updated : 如果对数据统一处理，在这里写上相应函数 beforeDestroy : 可以做一个确认停止事件的确认框 nextTick : 更新数据后立即操作dom</p>
 	
 	</div>
 	
@@ -459,6 +434,32 @@
 							<a href="/2020/03/21/vue-router%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90/" title="vue-router导航钩子">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue-router导航钩子"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/03/20/vue%E9%A1%B9%E7%9B%AE%E4%B8%ADkeepAlive%E7%9A%84%E4%BD%BF%E7%94%A8/" title="vue项目中keepAlive的使用">
+								vue项目中keepAlive的使用			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 20日, 2020				
+							</p>
+							<p class="relate-post-content">
+								&lt;keep-alive&gt;是Vue的内置组件，能在组件切换时保持之前的加载状态（缓存不活动的组件），防止重复渲染DOM，减少接口请求，减少服务器压力。
+prop:
+
+include: 字符串或正则表达式。只有匹配的组件会被缓...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/03/20/vue%E9%A1%B9%E7%9B%AE%E4%B8%ADkeepAlive%E7%9A%84%E4%BD%BF%E7%94%A8/" title="vue项目中keepAlive的使用">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue项目中keepAlive的使用"/>
 							</a>
 						</div>
 					</li>											
@@ -654,29 +655,6 @@ vue异步组件技术 ==== 异步加载vue-router配置路由 , 使用vue的异�
 							<a href="/2020/03/10/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="测试文章">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="测试文章"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2020/01/03/%E5%88%9D%E5%A7%8B%E5%8C%96css/" title="初始化css">
-								初始化css			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								一月 3日, 2020				
-							</p>
-							<p class="relate-post-content">
-								123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2020/01/03/%E5%88%9D%E5%A7%8B%E5%8C%96css/" title="初始化css">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="初始化css"/>
 							</a>
 						</div>
 					</li>											
