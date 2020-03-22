@@ -307,7 +307,7 @@
 
 	<a href="/2020/03/20/vue%E9%A1%B9%E7%9B%AE%E4%B8%ADkeepAlive%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url">
 		<time datetime="2020-03-20T03:10:20.000Z" itemprop="dateUpdated">
-	  		2020-03-21
+	  		2020-03-22
 	  </time>
 	</a> 
 
@@ -381,7 +381,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">"/"</span>,</span><br><span class="line">    name: <span class="string">"Home"</span>,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span> (<span class="string">'@/views/Home.vue'</span>),</span><br><span class="line">    meta:&#123;</span><br><span class="line">      keepAlive:<span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"/order"</span>,</span><br><span class="line">    name: <span class="string">"payOrder"</span>,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"@/views/payment/pay_order.vue"</span>),</span><br><span class="line">    meta:&#123;</span><br><span class="line">      keepAlive:<span class="literal">true</span>,</span><br><span class="line">      isBack: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"/info"</span>,</span><br><span class="line">    name: <span class="string">"payInfo"</span>,</span><br><span class="line">    meta:&#123;</span><br><span class="line">      keepAlive:<span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"@/views/payment/pay_info.vue"</span>),</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <p>借助<code>beforeRouteEnter</code>钩子函数来判断页面来源：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteEnter(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">from</span>.name === <span class="string">'payInfo'</span>) &#123; <span class="comment">//判断是从哪个路由过来的，若是detail页面不需要刷新获取新数据，直接用之前缓存的数据即可</span></span><br><span class="line">      to.meta.isBack = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteEnter(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">from</span>.name === <span class="string">'payInfo'</span>) &#123; <span class="comment">//判断是从哪个路由过来的，若是payInfo页面不需要刷新获取新数据，直接用之前缓存的数据即可</span></span><br><span class="line">      to.meta.isBack = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
 <p>最后，需要借助keep-alive提供钩子函数<code>activated</code>来完成是否更新：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">activated() &#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.$route.meta.isBack) &#123;</span><br><span class="line">      <span class="comment">// 如果isBack是false，表明需要获取新数据，否则就不再请求，直接使用缓存的数据</span></span><br><span class="line">      <span class="keyword">this</span>.getData(); <span class="comment">// ajax获取数据方法</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据</span></span><br><span class="line">    <span class="keyword">this</span>.$route.meta.isBack = <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
@@ -415,6 +415,10 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
+			<a href="/2020/03/20/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" title="vue项目中keepAlive的使用" rel="prev">
+				&laquo;上一篇
+			</a>
+		
 		
 			<a href="/2020/03/10/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="测试文章" rel="next">
 				下一篇&raquo;
@@ -434,6 +438,31 @@
 <div class="relate-post">
 	
 		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/03/21/vue-router%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90/" title="vue-router导航钩子">
+								vue-router导航钩子			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 21日, 2020				
+							</p>
+							<p class="relate-post-content">
+								vue-router 的导航钩子，主要用来作用是拦截导航，判断用户是否登录跳转登录页面还是主页面，判断管理员权限，判断页面是否存在，不存在跳转404页面，优点：能适用多钟情况，体验感好，。
+1.全局导航钩子
+全局导航钩子主要有两种钩子...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/03/21/vue-router%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90/" title="vue-router导航钩子">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue-router导航钩子"/>
+							</a>
+						</div>
+					</li>											
+			
 			
 					<li>
 						<div class="relate-post-text">
@@ -648,30 +677,6 @@ vue异步组件技术 ==== 异步加载vue-router配置路由 , 使用vue的异�
 							<a href="/2020/01/03/%E5%88%9D%E5%A7%8B%E5%8C%96css/" title="初始化css">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="初始化css"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/12/13/js%E6%B7%B1%E5%85%8B%E9%9A%86%E6%B5%85%E5%85%8B%E9%9A%86/" title="js深克隆浅克隆">
-								js深克隆浅克隆			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十二月 13日, 2019				
-							</p>
-							<p class="relate-post-content">
-								一、js中的对象　　谈到对象的克隆，必定要说一下对象的概念。
-　　js中的数据类型分为两大类：原始类型和对象类型。　（1）原始类型包括：数值、字符串、布尔值、null、undefined（后两个是特殊的原始值，这里不做详细的说明，我的...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/12/13/js%E6%B7%B1%E5%85%8B%E9%9A%86%E6%B5%85%E5%85%8B%E9%9A%86/" title="js深克隆浅克隆">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="js深克隆浅克隆"/>
 							</a>
 						</div>
 					</li>											

@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      vue防抖和节流 | 晓婷成长记录
+      vue-router导航钩子 | 晓婷成长记录
     
   </title>
   <meta name="author" content="xiaoting">
@@ -164,7 +164,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《vue防抖和节流》
+			当前文章&nbsp;:&nbsp;《vue-router导航钩子》
 		
 	</p>
 
@@ -273,8 +273,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" itemprop="url">
-		vue防抖和节流
+	<a href="/2020/03/21/vue-router%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90/" itemprop="url">
+		vue-router导航钩子
 	</a>
 
 	</div>
@@ -287,9 +287,9 @@
 
 	发布于
 
-	<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" itemprop="url">
-		<time datetime="2019-12-13T07:32:43.000Z" itemprop="datePublished">
-	  		2019-12-13
+	<a href="/2020/03/21/vue-router%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90/" itemprop="url">
+		<time datetime="2020-03-21T08:16:20.000Z" itemprop="datePublished">
+	  		2020-03-21
 	  </time>
 	</a>
 	&nbsp;
@@ -305,9 +305,9 @@
 
 	更新于
 
-	<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" itemprop="url">
-		<time datetime="2019-12-13T07:32:43.000Z" itemprop="dateUpdated">
-	  		2019-12-23
+	<a href="/2020/03/21/vue-router%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90/" itemprop="url">
+		<time datetime="2020-03-21T08:16:20.000Z" itemprop="dateUpdated">
+	  		2020-03-22
 	  </time>
 	</a> 
 
@@ -332,12 +332,50 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>防抖<br>触发高频事件后 n 秒内函数只会执行一次，如果 n 秒内高频事件再次被触发，则重新计算时间；<br>思路：<br>每次触发事件时都取消之前的延时调用方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">let</span> timeout = <span class="literal">null</span>; <span class="comment">// 创建一个标记用来存放定时器的返回值</span></span><br><span class="line">     <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">       clearTimeout(timeout); <span class="comment">// 每当用户输入的时候把前一个 setTimeout clear 掉</span></span><br><span class="line">       timeout = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 然后又创建一个新的 setTimeout, 这样就能保证输入字符后的 interval 间隔内如果还有字符输入的话，就不会执行 fn 函数</span></span><br><span class="line">         fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">       &#125;, <span class="number">500</span>);</span><br><span class="line">     &#125;;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'防抖成功'</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> inp = <span class="built_in">document</span>.getElementById(<span class="string">'inp'</span>);</span><br><span class="line">   inp.addEventListener(<span class="string">'input'</span>, debounce(sayHi)); <span class="comment">// 防抖</span></span><br></pre></td></tr></table></figure>
+		<p>vue-router 的导航钩子，主要用来作用是拦截导航，判断用户是否登录跳转登录页面还是主页面，判断管理员权限，判断页面是否存在，不存在跳转404页面，<br>优点：能适用多钟情况，体验感好，。</p>
+<p><strong>1.全局导航钩子</strong></p>
+<p>全局导航钩子主要有两种钩子：前置守卫、后置钩子，</p>
+<p>注册一个全局前置守卫：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line"><span class="comment">// to: Route: 即将要进入的目标 路由对象</span></span><br><span class="line"><span class="comment">// from: Route: 当前导航正要离开的路由</span></span><br><span class="line"><span class="comment">// next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。</span></span><br><span class="line"><span class="keyword">const</span> token = getToken();<span class="comment">// 是否登录</span></span><br><span class="line"><span class="comment">// 未登录状态；当路由到route指定页时，跳转至login</span></span><br><span class="line"><span class="keyword">if</span> (!token &amp;&amp; to.name !==<span class="string">'login'</span>) &#123;</span><br><span class="line">	router.push(&#123; <span class="attr">path</span>: <span class="string">'/login'</span>, &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 已登录状态；当路由到login时，跳转至home </span></span><br><span class="line"><span class="keyword">if</span> (to.name === <span class="string">'login'</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (token != <span class="literal">null</span>) &#123;</span><br><span class="line">    router.push(&#123; <span class="attr">path</span>: <span class="string">'/Home'</span>, &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>节流<br>高频事件触发，但在 n 秒内只会执行一次，所以节流会稀释函数的执行频率。<br>思路：<br>每次触发事件时都判断当前是否有等待执行的延时函数。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">let</span> canRun = <span class="literal">true</span>; <span class="comment">// 通过闭包保存一个标记</span></span><br><span class="line">     <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (!canRun) <span class="keyword">return</span>; <span class="comment">// 在函数开头判断标记是否为 true，不为 true 则 return</span></span><br><span class="line">       canRun = <span class="literal">false</span>; <span class="comment">// 立即设置为 false</span></span><br><span class="line">       setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 将外部传入的函数的执行放在 setTimeout 中</span></span><br><span class="line">         fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">         <span class="comment">// 最后在 setTimeout 执行完毕后再把标记设置为 true(关键) 表示可以执行下一次循环了。当定时器没有执行的时候标记永远是 false，在开头被 return 掉</span></span><br><span class="line">         canRun = <span class="literal">true</span>;</span><br><span class="line">       &#125;, <span class="number">500</span>);</span><br><span class="line">     &#125;;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(e.target.innerWidth, e.target.innerHeight);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">window</span>.addEventListener(<span class="string">'resize'</span>, throttle(sayHi));</span><br></pre></td></tr></table></figure>
+<p>beforeEach函数有三个参数：<br>to: Route，代表要进入的目标，它是一个路由对象<br>from: Route，代表当前正要离开的路由，同样也是一个路由对象<br>next: Function，这是一个必须需要调用的方法，而具体的执行效果则依赖 next 方法调用的参数</p>
+<ul>
+<li><p>next()：进入管道中的下一个钩子，如果全部的钩子执行完了，则导航的状态就是 confirmed（确认的）</p>
+</li>
+<li><p>next(false)：这代表中断掉当前的导航，即 to 代表的路由对象不会进入，被中断，此时该表 URL 地址会被重置到 from 路由对应的地址</p>
+</li>
+<li><p>next(‘/’) 和 next({path: ‘/’})：在中断掉当前导航的同时，跳转到一个不同的地址</p>
+</li>
+<li><p>next(error)：如果传入参数是一个 Error 实例，那么导航被终止的同时会将错误传递给 router.onError() 注册过的回调</p>
+</li>
+</ul>
+<p>全局后置钩子：</p>
+<p>afterEach只有两个参数  afterEach((to,from)=&gt;{})</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">router.afterEach(<span class="function">(<span class="params">to,<span class="keyword">from</span></span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(to.path === <span class="string">"/list"</span>)&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">"后置钩子"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
+<p><strong>2. 路由独享的钩子</strong></p>
+<p>顾名思义，即单个路由独享的导航钩子，它是在路由配置上直接进行定义的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cont router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    routes: [</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">'/order'</span>,</span><br><span class="line">            component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"@/views/payment/pay_order.vue"</span>),,</span><br><span class="line">            beforeEnter: <span class="function">(<span class="params">to, <span class="keyword">from</span> ,next</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="comment">// do someting</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.组件内的导航钩子</strong></p>
+<p>组件内的导航钩子主要有这三种：beforeRouteEnter、beforeRouteUpdate、beforeRouteLeave。他们是直接在路由组件内部直接进行定义的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteEnter(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>, <span class="string">'beforeRouteEnter'</span>); <span class="comment">// undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(to, <span class="string">'组件独享守卫beforeRouteEnter第一个参数'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">from</span>, <span class="string">'组件独享守卫beforeRouteEnter第二个参数'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(next, <span class="string">'组件独享守卫beforeRouteEnter第三个参数'</span>);</span><br><span class="line">  next(<span class="function"><span class="params">vm</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//因为当钩子执行前，组件实例还没被创建</span></span><br><span class="line">  <span class="comment">// vm 就是当前组件的实例相当于上面的 this，所以在 next 方法里你就可以把 vm 当 this 来用了。</span></span><br><span class="line">    <span class="built_in">console</span>.log(vm);<span class="comment">//当前组件的实例</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">from</span>.name === <span class="string">'payInfo'</span>) &#123; <span class="comment">//判断是从哪个路由过来的，若是detail页面不需要刷新获取新数据，直接用之前缓存的数据即可</span></span><br><span class="line">      to.meta.isBack = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;,</span><br><span class="line">beforeRouteUpdate(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">  <span class="comment">// 可以访问组件实例 `this`</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>, <span class="string">'beforeRouteUpdate'</span>); <span class="comment">//当前组件实例</span></span><br><span class="line">  <span class="built_in">console</span>.log(to, <span class="string">'组件独享守卫beforeRouteUpdate第一个参数'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">from</span>, <span class="string">'组件独享守beforeRouteUpdate卫第二个参数'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(next, <span class="string">'组件独享守beforeRouteUpdate卫第三个参数'</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;,</span><br><span class="line">beforeRouteLeave(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">  <span class="comment">// 导航离开该组件的对应路由时调用</span></span><br><span class="line">  <span class="comment">// 可以访问组件实例 `this`</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>, <span class="string">'beforeRouteLeave'</span>); <span class="comment">//当前组件实例</span></span><br><span class="line">  <span class="built_in">console</span>.log(to, <span class="string">'组件独享守卫beforeRouteLeave第一个参数'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">from</span>, <span class="string">'组件独享守卫beforeRouteLeave第二个参数'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(next, <span class="string">'组件独享守卫beforeRouteLeave第三个参数'</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p><strong>完整的路由导航解析流程(不包括其他生命周期)：</strong></p>
+<ol>
+<li>触发进入其他路由。</li>
+<li>调用要离开路由的组件守卫<code>beforeRouteLeave</code></li>
+<li>调用局前置守卫：<code>beforeEach</code></li>
+<li>在重用的组件里调用 <code>beforeRouteUpdate</code></li>
+<li>调用路由独享守卫 <code>beforeEnter</code>。</li>
+<li>解析异步路由组件。</li>
+<li>在将要进入的路由组件中调用<code>beforeRouteEnter</code></li>
+<li>调用全局解析守卫 <code>beforeResolve</code></li>
+<li>导航被确认。</li>
+<li>调用全局后置钩子的 <code>afterEach</code>钩子。</li>
+<li>触发DOM更新(<code>mounted</code>)。</li>
+<li>执行<code>beforeRouteEnter</code>守卫中传给 next 的回调函数</li>
+</ol>
 	
 	</div>
 	
@@ -356,12 +394,8 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/12/23/vue%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="vue文件上传组件" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2019/12/13/js%E6%B7%B1%E5%85%8B%E9%9A%86%E6%B5%85%E5%85%8B%E9%9A%86/" title="js深克隆浅克隆" rel="next">
+			<a href="/2020/03/20/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" title="vue项目中keepAlive的使用" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -379,31 +413,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2020/03/21/vue-router%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90/" title="vue-router导航钩子">
-								vue-router导航钩子			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								三月 21日, 2020				
-							</p>
-							<p class="relate-post-content">
-								vue-router 的导航钩子，主要用来作用是拦截导航，判断用户是否登录跳转登录页面还是主页面，判断管理员权限，判断页面是否存在，不存在跳转404页面，优点：能适用多钟情况，体验感好，。
-1.全局导航钩子
-全局导航钩子主要有两种钩子...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2020/03/21/vue-router%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90/" title="vue-router导航钩子">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue-router导航钩子"/>
-							</a>
-						</div>
-					</li>											
-			
 			
 					<li>
 						<div class="relate-post-text">
@@ -450,6 +459,30 @@ include: 字符串或正则表达式。只有匹配的组件会被缓...
 							<a href="/2019/12/23/vue%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="vue文件上传组件">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue文件上传组件"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="vue防抖和节流">
+								vue防抖和节流			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 13日, 2019				
+							</p>
+							<p class="relate-post-content">
+								防抖触发高频事件后 n 秒内函数只会执行一次，如果 n 秒内高频事件再次被触发，则重新计算时间；思路：每次触发事件时都取消之前的延时调用方法：
+123456789101112131415function debounce(fn) &#...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="vue防抖和节流">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue防抖和节流"/>
 							</a>
 						</div>
 					</li>											

@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      vue防抖和节流 | 晓婷成长记录
+      vue项目中keepAlive的使用 | 晓婷成长记录
     
   </title>
   <meta name="author" content="xiaoting">
@@ -164,7 +164,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《vue防抖和节流》
+			当前文章&nbsp;:&nbsp;《vue项目中keepAlive的使用》
 		
 	</p>
 
@@ -273,8 +273,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" itemprop="url">
-		vue防抖和节流
+	<a href="/2020/03/20/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url">
+		vue项目中keepAlive的使用
 	</a>
 
 	</div>
@@ -287,9 +287,9 @@
 
 	发布于
 
-	<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" itemprop="url">
-		<time datetime="2019-12-13T07:32:43.000Z" itemprop="datePublished">
-	  		2019-12-13
+	<a href="/2020/03/20/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url">
+		<time datetime="2020-03-20T03:10:20.000Z" itemprop="datePublished">
+	  		2020-03-20
 	  </time>
 	</a>
 	&nbsp;
@@ -305,9 +305,9 @@
 
 	更新于
 
-	<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" itemprop="url">
-		<time datetime="2019-12-13T07:32:43.000Z" itemprop="dateUpdated">
-	  		2019-12-23
+	<a href="/2020/03/20/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" itemprop="url">
+		<time datetime="2020-03-20T03:10:20.000Z" itemprop="dateUpdated">
+	  		2020-03-21
 	  </time>
 	</a> 
 
@@ -332,12 +332,71 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>防抖<br>触发高频事件后 n 秒内函数只会执行一次，如果 n 秒内高频事件再次被触发，则重新计算时间；<br>思路：<br>每次触发事件时都取消之前的延时调用方法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">let</span> timeout = <span class="literal">null</span>; <span class="comment">// 创建一个标记用来存放定时器的返回值</span></span><br><span class="line">     <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">       clearTimeout(timeout); <span class="comment">// 每当用户输入的时候把前一个 setTimeout clear 掉</span></span><br><span class="line">       timeout = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 然后又创建一个新的 setTimeout, 这样就能保证输入字符后的 interval 间隔内如果还有字符输入的话，就不会执行 fn 函数</span></span><br><span class="line">         fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">       &#125;, <span class="number">500</span>);</span><br><span class="line">     &#125;;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'防抖成功'</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> inp = <span class="built_in">document</span>.getElementById(<span class="string">'inp'</span>);</span><br><span class="line">   inp.addEventListener(<span class="string">'input'</span>, debounce(sayHi)); <span class="comment">// 防抖</span></span><br></pre></td></tr></table></figure>
+		<p><code>&lt;keep-alive&gt;</code>是Vue的内置组件，能在组件切换时保持之前的加载状态（缓存不活动的组件），防止重复渲染DOM，减少接口请求，减少服务器压力。</p>
+<p><strong>prop:</strong></p>
+<ul>
+<li>include: 字符串或正则表达式。只有匹配的组件会被缓存。</li>
+<li>exclude: 字符串或正则表达式。任何匹配的组件都不会被缓存。</li>
+</ul>
+<p><strong>常见用法</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'payOrder'</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      username: <span class="string">''</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
 
-<p>节流<br>高频事件触发，但在 n 秒内只会执行一次，所以节流会稀释函数的执行频率。<br>思路：<br>每次触发事件时都判断当前是否有等待执行的延时函数。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">let</span> canRun = <span class="literal">true</span>; <span class="comment">// 通过闭包保存一个标记</span></span><br><span class="line">     <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (!canRun) <span class="keyword">return</span>; <span class="comment">// 在函数开头判断标记是否为 true，不为 true 则 return</span></span><br><span class="line">       canRun = <span class="literal">false</span>; <span class="comment">// 立即设置为 false</span></span><br><span class="line">       setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 将外部传入的函数的执行放在 setTimeout 中</span></span><br><span class="line">         fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">         <span class="comment">// 最后在 setTimeout 执行完毕后再把标记设置为 true(关键) 表示可以执行下一次循环了。当定时器没有执行的时候标记永远是 false，在开头被 return 掉</span></span><br><span class="line">         canRun = <span class="literal">true</span>;</span><br><span class="line">       &#125;, <span class="number">500</span>);</span><br><span class="line">     &#125;;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(e.target.innerWidth, e.target.innerHeight);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">window</span>.addEventListener(<span class="string">'resize'</span>, throttle(sayHi));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;keep-alive include=<span class="string">"payOrder"</span>&gt;</span><br><span class="line">  &lt;router-view /&gt;</span><br><span class="line">&lt;<span class="regexp">/keep-alive&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p><strong>利用路由中的meta属性来控制</strong></p>
+<p>使用$route.meta的keepAlive属性,keep-alive代码可以结合v-if进行包裹，如果meta中的keepAlive为true进行缓存，否侧不进行缓存，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;keep-alive&gt;</span><br><span class="line">      &lt;router-view v-<span class="keyword">if</span>=<span class="string">"$route.meta.keepAlive"</span> /&gt;</span><br><span class="line">&lt;<span class="regexp">/keep-alive&gt;</span></span><br><span class="line"><span class="regexp">&lt;router-view v-if="!$route.meta.keepAlive" /</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>需要在<code>router</code>中设置router的元信息meta：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"/"</span>,</span><br><span class="line">    name: <span class="string">"Home"</span>,</span><br><span class="line">    component: Home,</span><br><span class="line">    meta:&#123;</span><br><span class="line">      keepAlive:<span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"/payment"</span>,</span><br><span class="line">    name: <span class="string">"payment"</span>,</span><br><span class="line">    redirect: <span class="string">'/payment/order'</span>,</span><br><span class="line">    component: Payment,</span><br><span class="line">    children: [</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">"order"</span>,</span><br><span class="line">        name: <span class="string">"payOrder"</span>,</span><br><span class="line">        meta:&#123;</span><br><span class="line">          keepAlive:<span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"@/views/payment/pay_order.vue"</span>),</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">  &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过路由导航钩子实现页面的刷新</p>
+<ul>
+<li>首页是A页面</li>
+<li>B页面跳转到A，A页面需要缓存</li>
+<li>C页面跳转到A，A页面不需要被缓存</li>
+</ul>
+<p>思路是在每个路由的<code>beforeRouteLeave(to, from, next)</code>钩子中设置<code>to.meta.keepAlive</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    name: <span class="string">'A'</span>,</span><br><span class="line">    component: A,</span><br><span class="line">    meta: &#123;</span><br><span class="line">        keepAlive: <span class="literal">true</span> <span class="comment">// 需要被缓存</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;&#125;,</span><br><span class="line">    beforeRouteLeave(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">         <span class="comment">// 设置下一个路由的 meta</span></span><br><span class="line">        to.meta.keepAlive = <span class="literal">true</span>;  <span class="comment">// B 跳转到 A 时，让 A 缓存，即不刷新</span></span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;&#125;,</span><br><span class="line">    beforeRouteLeave(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">        <span class="comment">// 设置下一个路由的 meta</span></span><br><span class="line">        to.meta.keepAlive = <span class="literal">false</span>; <span class="comment">// C 跳转到 A 时让 A 不缓存，即刷新</span></span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>keep-alive生命周期钩子函数：activated、deactivated</strong></p>
+<p>使用<code>&lt;keep-alive&gt;</code>会将数据保留在内存中，如果要在每次进入页面的时候获取最新的数据，需要在<code>activated</code>阶段获取数据，承担原来created钩子中获取数据的任务。</p>
+<p><strong>使用keep-alive时钩子函数执行顺序：</strong></p>
+<p>beforeRouteEnter–&gt; created –&gt; mounted –&gt; activated –&gt; deactivated，</p>
+<p>再次进入缓存页面时只会执行：</p>
+<p>beforeRouteEnter–&gt; activated –&gt; deactivated</p>
+<p>所以在缓存页面中如果需要第二次进入页面仍然发送请求，可以将ajax请求放在activated中</p>
+<p><strong>不使用keep-alive时钩子函数执行顺序：</strong></p>
+<p>beforeRouteEnter–&gt; created –&gt; mounted –&gt; destroyed</p>
+<p><code>keep-alive</code>相关的钩子函数：</p>
+<ul>
+<li><strong>activated</strong>： 缓存的组件再次进入时会触发</li>
+<li><strong>deactivated</strong>： 缓存的组件离开时会触发</li>
+</ul>
+<p>路由元信息meta中添加一个isBack字段，用来解决beforeRouterEnter不能直接访问vue实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">"/"</span>,</span><br><span class="line">    name: <span class="string">"Home"</span>,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span> (<span class="string">'@/views/Home.vue'</span>),</span><br><span class="line">    meta:&#123;</span><br><span class="line">      keepAlive:<span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"/order"</span>,</span><br><span class="line">    name: <span class="string">"payOrder"</span>,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"@/views/payment/pay_order.vue"</span>),</span><br><span class="line">    meta:&#123;</span><br><span class="line">      keepAlive:<span class="literal">true</span>,</span><br><span class="line">      isBack: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">"/info"</span>,</span><br><span class="line">    name: <span class="string">"payInfo"</span>,</span><br><span class="line">    meta:&#123;</span><br><span class="line">      keepAlive:<span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"@/views/payment/pay_info.vue"</span>),</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>借助<code>beforeRouteEnter</code>钩子函数来判断页面来源：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteEnter(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">from</span>.name === <span class="string">'payInfo'</span>) &#123; <span class="comment">//判断是从哪个路由过来的，若是detail页面不需要刷新获取新数据，直接用之前缓存的数据即可</span></span><br><span class="line">      to.meta.isBack = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>最后，需要借助keep-alive提供钩子函数<code>activated</code>来完成是否更新：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">activated() &#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.$route.meta.isBack) &#123;</span><br><span class="line">      <span class="comment">// 如果isBack是false，表明需要获取新数据，否则就不再请求，直接使用缓存的数据</span></span><br><span class="line">      <span class="keyword">this</span>.getData(); <span class="comment">// ajax获取数据方法</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据</span></span><br><span class="line">    <span class="keyword">this</span>.$route.meta.isBack = <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>在<strong>keep-alive组件前进的页面刷新导致keep-alive组件状态丢失</strong></p>
+<p>继续以上面的A、B页面为例，在进入详情B页面后，然后刷新，这时列表A页面的缓存的数据都丢失了，由于上面的判断规则也会导致不会重新获取数据。所以对于这种问题，还需要额外加一些判断条件。由于keep-alive第一次进入时会执行<strong>created</strong>方法，所以利用这点加一个标识来加以判断：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一次进入keep-alive路由组件时</span></span><br><span class="line"> created() &#123;</span><br><span class="line">   <span class="keyword">this</span>.isFirstEnter = <span class="literal">true</span>;</span><br><span class="line">  <span class="comment">// 只有第一次进入或者刷新页面后才会执行此钩子函数，使用keep-alive后（2+次）进入不会再执行此钩子函数</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>activated钩子函数也需要增加对应的判断：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">activated() &#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.$route.meta.isBack || <span class="keyword">this</span>.isFirstEnter)&#123;</span><br><span class="line">        <span class="comment">// 如果isBack是false，表明需要获取新数据，否则就不再请求，直接使用缓存的数据</span></span><br><span class="line">        <span class="comment">// 如果isFirstEnter是true，表明是第一次进入此页面或用户刷新了页面，需获取新数据</span></span><br><span class="line">        <span class="keyword">this</span>.data = <span class="string">''</span><span class="comment">// 把数据清空，可以稍微避免让用户看到之前缓存的数据</span></span><br><span class="line">        <span class="keyword">this</span>.getData();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 恢复成默认的false，避免isBack一直是true，导致下次无法获取数据</span></span><br><span class="line">    <span class="keyword">this</span>.$route.meta.isBack=<span class="literal">false</span></span><br><span class="line">    <span class="comment">// 恢复成默认的false，避免isBack一直是true，导致每次都获取新数据</span></span><br><span class="line">    <span class="keyword">this</span>.isFirstEnter=<span class="literal">false</span>;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>缓存过多keep-alive组件，因常驻内存会导致内存占用过多</strong></li>
+</ul>
+<p>这是一个特别需要注意的问题，尤其是当整个系统或者系统大部分页面都使用keep-alive来缓存组件时，由于其是缓存在内存中的，若不加处理，内存堆积越来越大，导致系统卡顿。正确的解决方案是：<strong>需要及时销毁掉内存缓存的组件</strong>。</p>
 	
 	</div>
 	
@@ -356,12 +415,12 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/12/23/vue%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="vue文件上传组件" rel="prev">
+			<a href="/2020/03/21/vue-router%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90/" title="vue-router导航钩子" rel="prev">
 				&laquo;上一篇
 			</a>
 		
 		
-			<a href="/2019/12/13/js%E6%B7%B1%E5%85%8B%E9%9A%86%E6%B5%85%E5%85%8B%E9%9A%86/" title="js深克隆浅克隆" rel="next">
+			<a href="/2020/03/20/vue%E9%A1%B9%E7%9B%AE%E4%B8%ADkeepAlive%E7%9A%84%E4%BD%BF%E7%94%A8/" title="vue项目中keepAlive的使用" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -407,32 +466,6 @@
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2020/03/20/vue%E9%A1%B9%E7%9B%AE%E4%B8%ADkeepAlive%E7%9A%84%E4%BD%BF%E7%94%A8/" title="vue项目中keepAlive的使用">
-								vue项目中keepAlive的使用			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								三月 20日, 2020				
-							</p>
-							<p class="relate-post-content">
-								&lt;keep-alive&gt;是Vue的内置组件，能在组件切换时保持之前的加载状态（缓存不活动的组件），防止重复渲染DOM，减少接口请求，减少服务器压力。
-prop:
-
-include: 字符串或正则表达式。只有匹配的组件会被缓...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2020/03/20/vue%E9%A1%B9%E7%9B%AE%E4%B8%ADkeepAlive%E7%9A%84%E4%BD%BF%E7%94%A8/" title="vue项目中keepAlive的使用">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue项目中keepAlive的使用"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2019/12/23/vue%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="vue文件上传组件">
 								vue文件上传组件			
 							</a>
@@ -450,6 +483,30 @@ include: 字符串或正则表达式。只有匹配的组件会被缓...
 							<a href="/2019/12/23/vue%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="vue文件上传组件">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue文件上传组件"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="vue防抖和节流">
+								vue防抖和节流			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 13日, 2019				
+							</p>
+							<p class="relate-post-content">
+								防抖触发高频事件后 n 秒内函数只会执行一次，如果 n 秒内高频事件再次被触发，则重新计算时间；思路：每次触发事件时都取消之前的延时调用方法：
+123456789101112131415function debounce(fn) &#...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="vue防抖和节流">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue防抖和节流"/>
 							</a>
 						</div>
 					</li>											
