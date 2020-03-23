@@ -266,6 +266,18 @@
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
 	 
 
 <div class="layout-post">
@@ -332,12 +344,8 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>一、 单向数据流 — 只能从一个方向修改数据</p>
-<p>​      数据从父组件传给子组件，只能单向绑定，子组件对父组件的数据只能访问不能修改。</p>
+		<h2 id="一、-单向数据流-—-只能从一个方向修改数据"><a href="#一、-单向数据流-—-只能从一个方向修改数据" class="headerlink" title="一、 单向数据流 — 只能从一个方向修改数据"></a>一、 单向数据流 — 只能从一个方向修改数据</h2><p>​      数据从父组件传给子组件，只能单向绑定，子组件对父组件的数据只能访问不能修改。</p>
 <p>​      父组件通过props传递数据给子组件，父组件是不能是直接访问子组件的数据的。</p>
-<p>二 、 数据双向绑定原理</p>
-<p>vue.js 采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter， getter ， 在数据变动时发布消息给订阅者，触发性赢得监听回调事件。下面先介绍Object.defineProperty() 这个方法：</p>
-<p><img src="https://img-blog.csdnimg.cn/20190716194906328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RheGluemE=,size_16,color_FFFFFF,t_70" alt="img"></p>
 	
 	</div>
 	
