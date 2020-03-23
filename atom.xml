@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-23T10:44:35.539Z</updated>
+  <updated>2020-03-23T10:47:12.033Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2020/03/23/Vue%E4%B8%AD%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%8E%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E4%B8%A4%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
     <id>http://yoursite.com/2020/03/23/Vue中单向数据流与双向绑定两者的区别/</id>
     <published>2020-03-23T10:39:07.000Z</published>
-    <updated>2020-03-23T10:44:35.539Z</updated>
+    <updated>2020-03-23T10:47:12.033Z</updated>
     
-    <content type="html"><![CDATA[<p>一、 单向数据流 — 只能从一个方向修改数据</p><p>​      数据从父组件传给子组件，只能单向绑定，子组件对父组件的数据只能访问不能修改。</p><p>​      父组件通过props传递数据给子组件，父组件是不能是直接访问子组件的数据的。</p>]]></content>
+    <content type="html"><![CDATA[<p>一、 单向数据流 — 只能从一个方向修改数据</p><p>​      数据从父组件传给子组件，只能单向绑定，子组件对父组件的数据只能访问不能修改。</p><p>​      父组件通过props传递数据给子组件，父组件是不能是直接访问子组件的数据的。</p><p>二 、 数据双向绑定原理</p><p>vue.js 采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter， getter ， 在数据变动时发布消息给订阅者，触发性赢得监听回调事件。下面先介绍Object.defineProperty() 这个方法：</p><p><img src="https://img-blog.csdnimg.cn/20190716194906328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RheGluemE=,size_16,color_FFFFFF,t_70" alt="img"></p>]]></content>
     
     <summary type="html">
     
@@ -32,7 +32,7 @@
         &lt;p&gt;一、 单向数据流 — 只能从一个方向修改数据&lt;/p&gt;
 &lt;p&gt;​      数据从父组件传给子组件，只能单向绑定，子组件对父组件的数据只能访问不能修改。&lt;/p&gt;
 &lt;p&gt;​      父组件通过props传递数据给子组件，父组件是不能是直接访问子组件的数据的。&lt;/p&gt;
-
+&lt;p&gt;二
       
     
     </summary>
