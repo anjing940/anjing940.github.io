@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-24T10:42:20.041Z</updated>
+  <updated>2020-03-24T13:48:10.457Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue首屏加载过慢是为什么？怎么解决？</title>
+    <link href="http://yoursite.com/2020/03/24/vue%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E8%BF%87%E6%85%A2%E6%98%AF%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F/"/>
+    <id>http://yoursite.com/2020/03/24/vue首屏加载过慢是为什么？怎么解决？/</id>
+    <published>2020-03-24T13:39:34.000Z</published>
+    <updated>2020-03-24T13:48:10.457Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一、vue首屏加载过慢的原因"><a href="#一、vue首屏加载过慢的原因" class="headerlink" title="一、vue首屏加载过慢的原因"></a>一、vue首屏加载过慢的原因</h2><p>毋庸置疑的，网速慢肯定会导致首屏加载过慢，但是在这里我们不做讨论；<br>vue项目作为一个单页面应用，如果不对路由进行处理，在加载首页的时候，就会将所有组件全部加载，并向服务器请求数据，这必将拖慢加载速度；<br>通过查看Network，发现整个网站加载时间长达10几秒，加载时间最长的就是js、css文件和媒体文件及图片，如下图所示：</p><h2 id="二、解决方案"><a href="#二、解决方案" class="headerlink" title="二、解决方案"></a>二、解决方案</h2><h3 id="1-Vue-router懒加载"><a href="#1-Vue-router懒加载" class="headerlink" title="1.Vue-router懒加载"></a>1.Vue-router懒加载</h3><p>什么是Vue-router懒加载？Vue-router懒加载就是按需加载组件，只有当路由被访问时才会加载对应的组件，而不是在加载首页的时候就加载，项目越大，对首屏加载的速度提升得越明显。代码如下：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首页底部导航</span></span><br><span class="line"><span class="keyword">const</span> index = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([], () =&gt; r(<span class="built_in">require</span>(<span class="string">'@/pages/home/index/index'</span>)))</span><br><span class="line"><span class="comment">// 首页</span></span><br><span class="line"><span class="keyword">const</span> home = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([], () =&gt; r(<span class="built_in">require</span>(<span class="string">'@/pages/home/home/home'</span>)))</span><br></pre></td></tr></table></figure><h3 id="2-使用CDN加速"><a href="#2-使用CDN加速" class="headerlink" title="2.使用CDN加速"></a>2.使用CDN加速</h3><p>在做项目时，我们会用到很多库，采用cdn加载可以加快加载速度。详情可以查看<a href="http://www.cnblogs.com/Fordestiny/p/8684556.html" target="_blank" rel="noopener">Vue项目使用CDN优化首屏加载</a>。</p><h3 id="3-gzip压缩"><a href="#3-gzip压缩" class="headerlink" title="3. gzip压缩"></a>3. gzip压缩</h3><p> 方法一：使用Nginx反向代理，配置nginx.conf文件，在http节点下加如下代码：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gzip on;</span><br><span class="line">gzip_static on;</span><br><span class="line">gzip_buffers <span class="number">4</span> <span class="number">16</span>k;</span><br><span class="line">gzip_comp_level <span class="number">5</span>;</span><br><span class="line">gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span><br></pre></td></tr></table></figure><p>方法二：使用node压缩，需要使用compression库，代码如下：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> compression = <span class="built_in">require</span>(<span class="string">'compression'</span>);</span><br><span class="line">app.use(compression());</span><br></pre></td></tr></table></figure><h3 id="4-异步加载组件"><a href="#4-异步加载组件" class="headerlink" title="4.异步加载组件"></a>4.异步加载组件</h3><p> 这里已经有前人栽好树，我们直接右转就可以了。<a href="https://segmentfault.com/a/1190000012138052" target="_blank" rel="noopener">vue异步组件(高级异步组件)使用场景及实践</a>。</p><h3 id="5-服务端渲染"><a href="#5-服务端渲染" class="headerlink" title="5.服务端渲染"></a>5.服务端渲染</h3><p>使用pug/jade、ejs、vue通用应用框架Nuxt等等都可以实现后端渲染，并且后端渲染还能对seo优化起到作用。这里配上<a href="https://zh.nuxtjs.org/" target="_blank" rel="noopener">Nuxt.js中文官网</a>。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;一、vue首屏加载过慢的原因&quot;&gt;&lt;a href=&quot;#一、vue首屏加载过慢的原因&quot; class=&quot;headerlink&quot; title=&quot;一、vue首屏加载过慢的原因&quot;&gt;&lt;/a&gt;一、vue首屏加载过慢的原因&lt;/h2&gt;&lt;p&gt;毋庸置疑的，网速慢肯定会导致首屏加载过慢，但
+      
+    
+    </summary>
+    
+    
+      <category term="Vue" scheme="http://yoursite.com/categories/Vue/"/>
+    
+    
+      <category term="Vue" scheme="http://yoursite.com/tags/Vue/"/>
+    
+  </entry>
   
   <entry>
     <title>vue-router实现原理</title>
@@ -516,33 +542,6 @@
       
       
         &lt;p&gt;小时候的叶藏是一个心思很重的孩子，太早的成熟使他有着同龄人所没有的敏感。虽然生活在所有人中间，但是给人的感觉确实离群索居的，与周围的人显得那么格格不入。在很小的时候他就知道他的幸福观与这世上所有人的幸福观都大相径庭，并为此而彻夜难眠痛苦呻吟走火入魔，这种状态，在其他人看来或
-      
-    
-    </summary>
-    
-    
-      <category term="其他" scheme="http://yoursite.com/categories/%E5%85%B6%E4%BB%96/"/>
-    
-    
-      <category term="其他" scheme="http://yoursite.com/tags/%E5%85%B6%E4%BB%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>云端有个小卖部读后感</title>
-    <link href="http://yoursite.com/2019/11/04/%E4%BA%91%E7%AB%AF%E6%9C%89%E4%B8%AA%E5%B0%8F%E5%8D%96%E9%83%A8%E8%AF%BB%E5%90%8E%E6%84%9F/"/>
-    <id>http://yoursite.com/2019/11/04/云端有个小卖部读后感/</id>
-    <published>2019-11-04T08:28:02.000Z</published>
-    <updated>2019-11-04T08:30:11.243Z</updated>
-    
-    <content type="html"><![CDATA[<p> 一次坐火车去闺蜜那里,到的太早,闲来无事去书店买了这本云端有个小卖部,今天写下读完的感受.</p><p> 我几乎是含泪看完的这本书,主人公并没有天赋异禀,也没有帅气多金,他只是一个普通的不能在普通的凡人,甚至在牛大田和毛婷婷,连小球球都比不上的让人深刻,相反他的外婆王莺莺确很出彩,火急火燎的暴脾气,每天开着拖拉机去进货,甚至把刘十三从一个城市拉回老家,她从不去表达自己对刘十三的爱,确又无时不刻不在展现她的爱.她不想让刘十三在外面闯荡,却不会去阻拦他,甚至心疼他在外过的拮据,偷偷塞钱,做刘十三爱吃的饭菜.知道自己癌症后隐瞒把刘十三接回来陪自己.可能是隔代亲,也可能刘十三是唯一的把他和自己的女儿联系在一起的那个人,遗憾的是他最后都没有在见到过自己的女儿.<br>​ 刘十三,一个拼了命想去大城市的年轻人,他妈妈留下的笔记就是去大城市工作,找个爱的女孩结婚,考上清货北大.他和我们是一样的普通到不能再普通,事业一直停滞不前,同事之间的关系也很现实,当你在低谷,没有人会拉你,他们还会使劲的去踩踏你,感情上他一直忘不掉女神，一直恋恋不舍，直到时间模糊了他的记忆，这也是人生吧，当时觉得天大的事情，若干年后回头看时，也不过尔尔。难过可以，伤心可以，但是不能放弃自己，很庆幸刘十三遇到了程霜，那个女孩带她走了出来，让他明白了什么是爱.<br>​ 小球球让人心疼到骨子里,在该拥有童真童趣的年纪要伪装自己的情绪,担负起责任,甚至知道被误解了都不会去为自己辩解,他的懂事让人心疼.<br>​ 程霜,是个那么开朗，又让人那么心疼的姑娘，和病魔抗争了那么久，最终还是离开了，生命不知道何时就会终止,拼全力去努力生活享受所有好的与坏的处境,没有什么比活着更幸福.<br>​ 最后的最后,王莺莺和程霜都离开了刘十三,球球去了福利院,美好的事情从来都不属于生活,生活本来就是悲喜交加的.毛婷婷不管弟弟怎么做,从没有放弃过他,毛婷婷的婚礼上，一直在等她的弟弟，不过没有能够等到。她在婚礼之后，就要离开云边镇，去到远方，这也是一个姐姐对自己的唯一亲人的告别吧。,牛大田烧掉棋牌室为了秦小贞,都是生活的影子,也是这些事情丰富了刘十三的生活.</p><p> 悲伤和希望，都是一缕光，得与失从来都是成对出现的。</p><ol><li>有朵盛开的云，缓缓滑过山顶，随风飘向天边 ，我们慢慢明白，有些告别，就是最后一面。</li><li>山风微微，像月光下晃动的海浪， 温和而柔软，停留在时光的背后， 变成小时候听过的故事。 在遥远的城市，陌生的地方， 有他未曾见过的山和海。　</li><li>人和人之间舒服的关系，是可以一直不说话，也可以随时说话。　　</li><li>生命是有光的。 在我熄灭以前，能够照亮你一点，就是我所有能做的了。 我爱你，你要记得我。　　</li><li>有些人刻苦铭心， 没几年会遗忘。 有些人不论生死， 都陪在身旁。　</li><li>等待而已， 也叫努力? 是在等别人离开， 还是在等自己放弃?　　</li><li>云边有个小卖部，货架堆着岁月和夕阳，背后就是山。老人靠着躺椅假装睡着，小孩子偷走了一块糖。泪水几点钟落地，飞鸟要去向何方。人们聚和离，云朵来又往。讲故事的人，总有一个故事不愿讲。时光飞逝，悄悄话变成纸张。　　</li><li>夏夜的歌声，冬至的歌声， 都从水面掠过，皱起一层波纹， 像天空坠落的泪水，又归于天空。 人们随口说的一些话，跌落墙角， 风吹不走，阳光烧不掉，独自沉眠。　　</li><li>“我有很重要的事， 输了的话， 我就真的一无所有了。”　　</li><li>这世上大部分抒情，都会被认作是无病呻吟。能理解你得了什么病，基本上就是知己。</li><li>刘十三的家在山间，院子开了一个小卖部，从窗户伸出手去，彷佛摸到云朵　</li><li>程霜离开的时候，春风穿过云边镇，花瓣纷飞，好像幸福真的存在似的。　</li><li>原来世界上很多事情，不是你有计划，有毅力就能做到的。　　</li><li>他一无所知，无法描绘所有人创造的未来世界里，如何创造一个家。他孜孜不倦地承诺和分享，只是把扎根他每个细胞的小镇生涯，换了本日历，成为他反复的描绘。　　</li><li>如果每件事情都算来算去，那么等到想明白，可能就来不及做了。　</li><li>比你强的人，要么对你怜悯，要么对你无视。　　</li><li>印象中，水库秋冬弥漫水雾，春夏明艳斑斓，白天水波娴静温柔，深不见底。它能包裹孩子仰面漂游，也能藏着吃人水猴的传说。　</li><li>山这边是刘十三的童年，山那边是外婆的海。山风微微，像月光下晃动的海浪，有的，没的，温和而柔软，停留在时光的背后，变成小时候听过的故事。　　</li><li>有些人刻骨铭心，没几年就遗忘。有些人不论生死，都陪在你身旁。　　</li><li>再习惯等待，等不来依旧难过，那种难过，书上说叫做失望。直到长大后，他才明白，还有更大的难过，叫做绝望。</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt; 一次坐火车去闺蜜那里,到的太早,闲来无事去书店买了这本云端有个小卖部,今天写下读完的感受.&lt;/p&gt;
-&lt;p&gt; 我几乎是含泪看完的这本书,主人公并没有天赋异禀,也没有帅气多金,他只是一个普通的不能在普通的凡人,甚至在牛大田和毛婷婷,连小球球都比不上的让人深刻,相反他的外婆王莺
       
     
     </summary>

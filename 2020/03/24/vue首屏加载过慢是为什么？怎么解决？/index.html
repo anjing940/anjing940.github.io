@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      js为一个元素绑定多个事件 | 晓婷成长记录
+      vue首屏加载过慢是为什么？怎么解决？ | 晓婷成长记录
     
   </title>
   <meta name="author" content="xiaoting">
@@ -164,7 +164,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《js为一个元素绑定多个事件》
+			当前文章&nbsp;:&nbsp;《vue首屏加载过慢是为什么？怎么解决？》
 		
 	</p>
 
@@ -285,8 +285,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/11/04/js%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%BB%91%E5%AE%9A%E5%A4%9A%E4%B8%AA%E4%BA%8B%E4%BB%B6/" itemprop="url">
-		js为一个元素绑定多个事件
+	<a href="/2020/03/24/vue%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E8%BF%87%E6%85%A2%E6%98%AF%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F/" itemprop="url">
+		vue首屏加载过慢是为什么？怎么解决？
 	</a>
 
 	</div>
@@ -299,9 +299,9 @@
 
 	发布于
 
-	<a href="/2019/11/04/js%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%BB%91%E5%AE%9A%E5%A4%9A%E4%B8%AA%E4%BA%8B%E4%BB%B6/" itemprop="url">
-		<time datetime="2019-11-04T08:15:24.000Z" itemprop="datePublished">
-	  		2019-11-04
+	<a href="/2020/03/24/vue%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E8%BF%87%E6%85%A2%E6%98%AF%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F/" itemprop="url">
+		<time datetime="2020-03-24T13:39:34.000Z" itemprop="datePublished">
+	  		2020-03-24
 	  </time>
 	</a>
 	&nbsp;
@@ -317,9 +317,9 @@
 
 	更新于
 
-	<a href="/2019/11/04/js%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%BB%91%E5%AE%9A%E5%A4%9A%E4%B8%AA%E4%BA%8B%E4%BB%B6/" itemprop="url">
-		<time datetime="2019-11-04T08:15:24.000Z" itemprop="dateUpdated">
-	  		2019-12-02
+	<a href="/2020/03/24/vue%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E8%BF%87%E6%85%A2%E6%98%AF%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F/" itemprop="url">
+		<time datetime="2020-03-24T13:39:34.000Z" itemprop="dateUpdated">
+	  		2020-03-24
 	  </time>
 	</a> 
 
@@ -330,8 +330,8 @@
 			<i class="fa fa-tags"></i>
 			
 	
-		<a href="/tags/Js/" class=" ">
-			Js
+		<a href="/tags/Vue/" class=" ">
+			Vue
 		</a>
 	
 		
@@ -344,13 +344,19 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>onclick()这种写法是DOM0级规范的写法，是所有的浏览器支持的，但是这种写法有不能同时绑定多个事件、使代码耦合在了一起的弊端。但是addEventListener() 是DOM2标准中定义的方法，它可以控制是在事件捕获阶段或者是在冒泡阶段调用事件处理程序。既然这个是DOM2标准中定义的，那么只有支持DOM2级事件处理程序的浏览器才支持这个方法（IE9,Firefox,Safari,Chrome和Opera支持）。</p>
-<h3 id="一、onclick-方式"><a href="#一、onclick-方式" class="headerlink" title="一、onclick()方式"></a><strong>一、onclick()方式</strong></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;绑定多个事件&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        window.onload = function()&#123;</span></span><br><span class="line"><span class="regexp">            document.getElementById('btn').onclick = function () &#123;</span></span><br><span class="line"><span class="regexp">                alert(1);</span></span><br><span class="line"><span class="regexp">            &#125;;</span></span><br><span class="line"><span class="regexp">            document.getElementById('btn').onclick = function () &#123;</span></span><br><span class="line"><span class="regexp">                alert(2);</span></span><br><span class="line"><span class="regexp">            &#125;;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">&lt;button id="btn"&gt;点我&lt;/</span>button&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+		<h2 id="一、vue首屏加载过慢的原因"><a href="#一、vue首屏加载过慢的原因" class="headerlink" title="一、vue首屏加载过慢的原因"></a>一、vue首屏加载过慢的原因</h2><p>毋庸置疑的，网速慢肯定会导致首屏加载过慢，但是在这里我们不做讨论；<br>vue项目作为一个单页面应用，如果不对路由进行处理，在加载首页的时候，就会将所有组件全部加载，并向服务器请求数据，这必将拖慢加载速度；<br>通过查看Network，发现整个网站加载时间长达10几秒，加载时间最长的就是js、css文件和媒体文件及图片，如下图所示：</p>
+<h2 id="二、解决方案"><a href="#二、解决方案" class="headerlink" title="二、解决方案"></a>二、解决方案</h2><h3 id="1-Vue-router懒加载"><a href="#1-Vue-router懒加载" class="headerlink" title="1.Vue-router懒加载"></a>1.Vue-router懒加载</h3><p>什么是Vue-router懒加载？Vue-router懒加载就是按需加载组件，只有当路由被访问时才会加载对应的组件，而不是在加载首页的时候就加载，项目越大，对首屏加载的速度提升得越明显。代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首页底部导航</span></span><br><span class="line"><span class="keyword">const</span> index = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([], () =&gt; r(<span class="built_in">require</span>(<span class="string">'@/pages/home/index/index'</span>)))</span><br><span class="line"><span class="comment">// 首页</span></span><br><span class="line"><span class="keyword">const</span> home = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([], () =&gt; r(<span class="built_in">require</span>(<span class="string">'@/pages/home/home/home'</span>)))</span><br></pre></td></tr></table></figure>
 
-<p>运行结果是第二个onclick把第一个onclick给覆盖了，虽然大部分情况用on就可以完成想要的结果，但是有时又需要执行多个相同的事件，很明显如果用on不能完成</p>
-<h3 id="二、addEventListener-方法"><a href="#二、addEventListener-方法" class="headerlink" title="二、addEventListener()方法"></a>二、addEventListener()方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;绑定多个事件&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        window.onload = function()&#123;</span></span><br><span class="line"><span class="regexp">            document.getElementById('btn').addEventListener('click', function()&#123;</span></span><br><span class="line"><span class="regexp">                alert(1);</span></span><br><span class="line"><span class="regexp">            &#125;, false);</span></span><br><span class="line"><span class="regexp">            document.getElementById('btn').addEventListener('click', function()&#123;</span></span><br><span class="line"><span class="regexp">                alert(2);</span></span><br><span class="line"><span class="regexp">            &#125;, false);</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">&lt;button id="btn"&gt;点我&lt;/</span>button&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-使用CDN加速"><a href="#2-使用CDN加速" class="headerlink" title="2.使用CDN加速"></a>2.使用CDN加速</h3><p>在做项目时，我们会用到很多库，采用cdn加载可以加快加载速度。详情可以查看<a href="http://www.cnblogs.com/Fordestiny/p/8684556.html" target="_blank" rel="noopener">Vue项目使用CDN优化首屏加载</a>。</p>
+<h3 id="3-gzip压缩"><a href="#3-gzip压缩" class="headerlink" title="3. gzip压缩"></a>3. gzip压缩</h3><p> 方法一：使用Nginx反向代理，配置nginx.conf文件，在http节点下加如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gzip on;</span><br><span class="line">gzip_static on;</span><br><span class="line">gzip_buffers <span class="number">4</span> <span class="number">16</span>k;</span><br><span class="line">gzip_comp_level <span class="number">5</span>;</span><br><span class="line">gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span><br></pre></td></tr></table></figure>
 
-<p>addEventListenert方法第一个参数填写事件名，第二个参数是一个函数，第三个参数是指在冒泡阶段还是捕获阶段处理事件处理程序。true代表捕获阶段处理， false代表冒泡阶段处理。第三个参数可以省略，大多数情况也不需要用到第三个参数，不写第三个参数默认false</p>
+<p>方法二：使用node压缩，需要使用compression库，代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> compression = <span class="built_in">require</span>(<span class="string">'compression'</span>);</span><br><span class="line">app.use(compression());</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-异步加载组件"><a href="#4-异步加载组件" class="headerlink" title="4.异步加载组件"></a>4.异步加载组件</h3><p> 这里已经有前人栽好树，我们直接右转就可以了。<a href="https://segmentfault.com/a/1190000012138052" target="_blank" rel="noopener">vue异步组件(高级异步组件)使用场景及实践</a>。</p>
+<h3 id="5-服务端渲染"><a href="#5-服务端渲染" class="headerlink" title="5.服务端渲染"></a>5.服务端渲染</h3><p>使用pug/jade、ejs、vue通用应用框架Nuxt等等都可以实现后端渲染，并且后端渲染还能对seo优化起到作用。这里配上<a href="https://zh.nuxtjs.org/" target="_blank" rel="noopener">Nuxt.js中文官网</a>。</p>
 	
 	</div>
 	
@@ -369,12 +375,8 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/11/04/%E4%BA%91%E7%AB%AF%E6%9C%89%E4%B8%AA%E5%B0%8F%E5%8D%96%E9%83%A8%E8%AF%BB%E5%90%8E%E6%84%9F/" title="云端有个小卖部读后感" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2019/11/04/JS%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" title="JS数组去重的两种方法" rel="next">
+			<a href="/2020/03/24/vue-router%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" title="vue-router实现原理" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -392,174 +394,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/12/13/js%E6%B7%B1%E5%85%8B%E9%9A%86%E6%B5%85%E5%85%8B%E9%9A%86/" title="js深克隆浅克隆">
-								js深克隆浅克隆			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十二月 13日, 2019				
-							</p>
-							<p class="relate-post-content">
-								一、js中的对象　　谈到对象的克隆，必定要说一下对象的概念。
-　　js中的数据类型分为两大类：原始类型和对象类型。　（1）原始类型包括：数值、字符串、布尔值、null、undefined（后两个是特殊的原始值，这里不做详细的说明，我的...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/12/13/js%E6%B7%B1%E5%85%8B%E9%9A%86%E6%B5%85%E5%85%8B%E9%9A%86/" title="js深克隆浅克隆">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="js深克隆浅克隆"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/12/02/zTree%E7%BB%83%E4%B9%A0%E4%BD%BF%E7%94%A8/" title="zTree练习使用">
-								zTree练习使用			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十二月 2日, 2019				
-							</p>
-							<p class="relate-post-content">
-								123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/12/02/zTree%E7%BB%83%E4%B9%A0%E4%BD%BF%E7%94%A8/" title="zTree练习使用">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="zTree练习使用"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/11/22/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%80%E4%BA%9B%E9%AA%8C%E8%AF%81/" title="前端常见的一些验证">
-								前端常见的一些验证			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十一月 22日, 2019				
-							</p>
-							<p class="relate-post-content">
-								123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/11/22/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%80%E4%BA%9B%E9%AA%8C%E8%AF%81/" title="前端常见的一些验证">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="前端常见的一些验证"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/11/18/pc%E7%AB%AF%E5%B8%B8%E7%94%A8%E7%9A%84%E7%94%B5%E8%84%91%E5%B1%8F%E5%B9%95%E5%88%86%E8%BE%A8%E7%8E%87-%E5%93%8D%E5%BA%94%E5%BC%8F%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/" title="pc端常用的电脑屏幕分辨率(响应式媒体查询)">
-								pc端常用的电脑屏幕分辨率(响应式媒体查询)			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十一月 18日, 2019				
-							</p>
-							<p class="relate-post-content">
-								PC端****
-按屏幕宽度大小排序（主流的用橙色标明）
-分辨率   比例 | 设备尺寸
-1024*500 （8.9寸）
-1024*768 （比例4：3  | 10.4寸、12.1寸、14.1寸、15寸; ）
-1280*800（16：1...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/11/18/pc%E7%AB%AF%E5%B8%B8%E7%94%A8%E7%9A%84%E7%94%B5%E8%84%91%E5%B1%8F%E5%B9%95%E5%88%86%E8%BE%A8%E7%8E%87-%E5%93%8D%E5%BA%94%E5%BC%8F%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/" title="pc端常用的电脑屏幕分辨率(响应式媒体查询)">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="pc端常用的电脑屏幕分辨率(响应式媒体查询)"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/11/04/JS%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" title="JS数组去重的两种方法">
-								JS数组去重的两种方法			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十一月 4日, 2019				
-							</p>
-							<p class="relate-post-content">
-								一、循环遍历法（传统思路）最简单粗暴的算法，新建一个空数组，然后遍历原数组，将不在新数组中的项添加到新数组，最后返回新数组
-12345678910111213141516171819function compare(arr) &#12...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/11/04/JS%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" title="JS数组去重的两种方法">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="JS数组去重的两种方法"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/10/24/%E7%90%86%E8%A7%A3cookie%E3%80%81session%E3%80%81token/" title="理解cookie、session、token">
-								理解cookie、session、token			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 24日, 2019				
-							</p>
-							<p class="relate-post-content">
-								1、很久很久以前，Web 基本上就是文档的浏览而已， 既然是浏览，作为服务器， 不需要记录谁在某一段时间里都浏览了什么文档，每次请求都是一个新的HTTP协议， 就是请求加响应， 尤其是我不用记住是谁刚刚发了HTTP请求， 每个请求对我...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/10/24/%E7%90%86%E8%A7%A3cookie%E3%80%81session%E3%80%81token/" title="理解cookie、session、token">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="理解cookie、session、token"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2020/03/24/vue%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E8%BF%87%E6%85%A2%E6%98%AF%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F/" title="vue首屏加载过慢是为什么？怎么解决？">
-								vue首屏加载过慢是为什么？怎么解决？			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								三月 24日, 2020				
-							</p>
-							<p class="relate-post-content">
-								一、vue首屏加载过慢的原因毋庸置疑的，网速慢肯定会导致首屏加载过慢，但是在这里我们不做讨论；vue项目作为一个单页面应用，如果不对路由进行处理，在加载首页的时候，就会将所有组件全部加载，并向服务器请求数据，这必将拖慢加载速度；通过查...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2020/03/24/vue%E9%A6%96%E5%B1%8F%E5%8A%A0%E8%BD%BD%E8%BF%87%E6%85%A2%E6%98%AF%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F/" title="vue首屏加载过慢是为什么？怎么解决？">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue首屏加载过慢是为什么？怎么解决？"/>
-							</a>
-						</div>
-					</li>											
-			
 			
 					<li>
 						<div class="relate-post-text">
@@ -630,6 +464,178 @@ axios的作用？axios主要是用于向后台发起请求的，还有在请求�
 							<a href="/2020/03/24/vue%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E7%9A%84%E5%8E%9F%E7%90%86/" title="vue双向数据绑定的原理">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue双向数据绑定的原理"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/03/23/Vue%E4%B8%AD%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%8E%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E4%B8%A4%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB/" title="Vue中单向数据流">
+								Vue中单向数据流			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 23日, 2020				
+							</p>
+							<p class="relate-post-content">
+								​      数据从父组件传给子组件，只能单向绑定，子组件对父组件的数据只能访问不能修改。
+​      父组件通过props传递数据给子组件，父组件是不能是直接访问子组件的数据的。
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/03/23/Vue%E4%B8%AD%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%8E%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E4%B8%A4%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB/" title="Vue中单向数据流">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="Vue中单向数据流"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/03/23/vue%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" title="vue常见面试题">
+								vue常见面试题			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 23日, 2020				
+							</p>
+							<p class="relate-post-content">
+								1.什么是单页面应用，有什么优缺点？SPA——–single page application。单页面应用，即一个web项目就只有一个页面，其实，单页面应用，就是把整个项目的所有页面的所有内容分成了很多的组件，可以重复利用的，可以任意...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/03/23/vue%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" title="vue常见面试题">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue常见面试题"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/03/21/vue-router%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90/" title="vue-router导航钩子">
+								vue-router导航钩子			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 21日, 2020				
+							</p>
+							<p class="relate-post-content">
+								vue-router 的导航钩子，主要用来作用是拦截导航，判断用户是否登录跳转登录页面还是主页面，判断管理员权限，判断页面是否存在，不存在跳转404页面，优点：能适用多钟情况，体验感好，。
+1.全局导航钩子
+全局导航钩子主要有两种钩子...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/03/21/vue-router%E5%AF%BC%E8%88%AA%E9%92%A9%E5%AD%90/" title="vue-router导航钩子">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue-router导航钩子"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/03/20/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="vue生命周期">
+								vue生命周期			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 20日, 2020				
+							</p>
+							<p class="relate-post-content">
+								Vue 实例从创建到销毁的过程，就是生命周期。也就是从开始创建、初始化数据、编译模板、挂载Dom→渲染、更新→渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。
+
+12345678910111213141516171819202...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/03/20/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="vue生命周期">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue生命周期"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/03/20/vue%E9%A1%B9%E7%9B%AE%E4%B8%ADkeepAlive%E7%9A%84%E4%BD%BF%E7%94%A8/" title="vue项目中keepAlive的使用">
+								vue项目中keepAlive的使用			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 20日, 2020				
+							</p>
+							<p class="relate-post-content">
+								&lt;keep-alive&gt;是Vue的内置组件，能在组件切换时保持之前的加载状态（缓存不活动的组件），防止重复渲染DOM，减少接口请求，减少服务器压力。
+prop:
+
+include: 字符串或正则表达式。只有匹配的组件会被缓...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/03/20/vue%E9%A1%B9%E7%9B%AE%E4%B8%ADkeepAlive%E7%9A%84%E4%BD%BF%E7%94%A8/" title="vue项目中keepAlive的使用">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue项目中keepAlive的使用"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/12/23/vue%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="vue文件上传组件">
+								vue文件上传组件			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 23日, 2019				
+							</p>
+							<p class="relate-post-content">
+								上传组件(我用的是element ui 自定义上传组件)
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/12/23/vue%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="vue文件上传组件">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue文件上传组件"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="vue防抖和节流">
+								vue防抖和节流			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十二月 13日, 2019				
+							</p>
+							<p class="relate-post-content">
+								防抖触发高频事件后 n 秒内函数只会执行一次，如果 n 秒内高频事件再次被触发，则重新计算时间；思路：每次触发事件时都取消之前的延时调用方法：
+123456789101112131415function debounce(fn) &#...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="vue防抖和节流">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue防抖和节流"/>
 							</a>
 						</div>
 					</li>											
