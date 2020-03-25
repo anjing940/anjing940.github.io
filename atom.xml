@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-24T13:48:10.457Z</updated>
+  <updated>2020-03-25T08:40:51.462Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>http讲解</title>
+    <link href="http://yoursite.com/2020/03/25/http%E8%AE%B2%E8%A7%A3/"/>
+    <id>http://yoursite.com/2020/03/25/http讲解/</id>
+    <published>2020-03-25T07:43:56.000Z</published>
+    <updated>2020-03-25T08:40:51.462Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Http与Https的区别："><a href="#Http与Https的区别：" class="headerlink" title="Http与Https的区别："></a>Http与Https的区别：</h2><blockquote><p>Http与Https的区别：</p></blockquote><ol><li>HTTP 的URL 以http:// 开头，而HTTPS 的URL 以https:// 开头</li><li>HTTP 是不安全的，而 HTTPS 是安全的</li><li>HTTP 标准端口是80 ，而 HTTPS 的标准端口是443</li><li>在OSI 网络模型中，HTTP工作于应用层，而HTTPS 的安全传输机制工作在传输层</li><li>HTTP 无法加密，而HTTPS 对传输的数据进行加密</li><li>HTTP无需证书，而HTTPS 需要CA机构wosign的颁发的SSL证书</li></ol><h2 id="URI和URL的区别"><a href="#URI和URL的区别" class="headerlink" title="URI和URL的区别"></a>URI和URL的区别</h2><blockquote><p>URI和URL的区别</p></blockquote><p><strong>URI，是uniform resource identifier，统一资源标识符，用来唯一的标识一个资源。</strong></p><p><strong>URL是uniform resource locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。</strong></p><h2 id="什么是Http协议无状态协议-怎么解决Http协议无状态协议"><a href="#什么是Http协议无状态协议-怎么解决Http协议无状态协议" class="headerlink" title="什么是Http协议无状态协议?怎么解决Http协议无状态协议?"></a>什么是Http协议无状态协议?怎么解决Http协议无状态协议?</h2><ul><li><strong>无状态协议对于事务处理没有记忆能力缺少状态意味着如果后续处理需要前面的信息</strong></li><li><strong>也就是说，当客户端一次HTTP请求完成以后，客户端再发送一次HTTP请求，HTTP并不知道当前客户端是一个”老用户“。</strong></li><li><strong>可以使用Cookie来解决无状态的问题，Cookie就相当于一个通行证，第一次访问的时候给客户端发送一个Cookie，当客户端再次来的时候，拿着Cookie(通行证)，那么服务器就知道这个是”老用户“。</strong></li></ul><h2 id="常用的HTTP方法有哪些？"><a href="#常用的HTTP方法有哪些？" class="headerlink" title="常用的HTTP方法有哪些？"></a>常用的HTTP方法有哪些？</h2><blockquote><p>常用的HTTP方法有哪些?</p></blockquote><ul><li>GET： 用于请求访问已经被URI（统一资源标识符）识别的资源，可以通过URL传参给服务器</li><li>POST：用于传输信息给服务器，主要功能与GET方法类似，但一般推荐使用POST方式。</li><li><strong><em>PUT： 传输文件，报文主体中包含文件内容，保存到对应URI位置。</em></strong></li><li>HEAD： 获得报文首部，与GET方法类似，只是不返回报文主体，一般用于验证URI是否有效。</li><li><strong><em>DELETE：删除文件，与PUT方法相反，删除对应URI位置的文件。</em></strong></li><li>OPTIONS：查询相应URI支持的HTTP方法。</li></ul><h2 id="Get-方法与Post方法的区别"><a href="#Get-方法与Post方法的区别" class="headerlink" title="Get 方法与Post方法的区别"></a>Get 方法与Post方法的区别</h2><p>  1) get重点在从服务器上获取资源，post重点在向服务器发送数据</p><p>  2）get传送数据是通过URL请求，以field(字段)的形式，置于URL后，并用“?”连接，多个请求数据间用”&amp;”连接，例如<a href="http://127.0.0.1:8080/Test/login.action?name=admin&amp;password=admin，这个过程用户是可见的；***post传输数据通过Http的post机制，将字段与对应值封存在请求实体中发送给服务器，这个过程对用户是不可见的。" target="_blank" rel="noopener">http://127.0.0.1:8080/Test/login.action?name=admin&amp;password=admin，这个过程用户是可见的；***post传输数据通过Http的post机制，将字段与对应值封存在请求实体中发送给服务器，这个过程对用户是不可见的。</a>***</p><p>  3）Get传输的数据量少，因为受到URL长度的限制，但效率较高；Post可以传输大量的数据，所以上传文件时只能用post方式。</p><p>  4）Get是不安全的，因为URL是可见的，可能会泄漏私密信息，如密码等；Post较Get安全性较高。</p><p>  5）Get方式只能支持ASCII字符，可以正确传递中文字符。</p><h2 id="一次完整的HTTP请求所经历的7个步骤"><a href="#一次完整的HTTP请求所经历的7个步骤" class="headerlink" title="一次完整的HTTP请求所经历的7个步骤"></a>一次完整的HTTP请求所经历的7个步骤</h2><blockquote><p>一次完整的HTTP请求所经历的7个步骤</p></blockquote><p>HTTP通信机制是在一次完整的HTTP通信过程中，Web浏览器与Web服务器之间将完成下列7个步骤：</p><ul><li>建立TCP连接</li></ul><p>在HTTP工作开始之前，Web浏览器首先要通过网络与Web服务器建立连接，该连接是通过TCP来完成的，该协议与IP协议共同构建 Internet，即著名的TCP/IP协议族，因此Internet又被称作是TCP/IP网络。<strong>HTTP是比TCP更高层次的应用层协议，根据规则， 只有低层协议建立之后才能，才能进行更层协议的连接，因此，首先要建立TCP连接，一般TCP连接的端口号是80。</strong></p><ul><li>Web浏览器向Web服务器发送请求行</li></ul><p>一旦建立了TCP连接，<strong>Web浏览器就会向Web服务器发送请求命令</strong>。例如：GET /sample/hello.jsp HTTP/1.1。</p><ul><li>Web浏览器发送请求头<ul><li>浏览器发送其请求命令之后，还要以头信息的形式向Web服务器发送一些别的信息，<strong>之后浏览器发送了一空白行来通知服务器</strong>，它已经结束了该头信息的发送。</li></ul></li><li>Web服务器应答<ul><li>客户机向服务器发出请求后，服务器会客户机回送应答， <strong>HTTP/1.1 200 OK ，应答的第一部分是协议的版本号和应答状态码。</strong></li></ul></li><li>Web服务器发送应答头<ul><li>正如客户端会随同请求发送关于自身的信息一样，服务器也会随同应答向用户发送关于它自己的数据及被请求的文档。</li></ul></li><li>Web服务器向浏览器发送数据<ul><li>Web服务器向浏览器发送头信息后，它会发送一个空白行来表示头信息的发送到此为结束，接着，<strong>它就以Content-Type应答头信息所描述的格式发送用户所请求的实际数据</strong>。</li></ul></li><li>Web服务器关闭TCP连接<ul><li>一般情况下，一旦Web服务器向浏览器发送了请求数据，它就要关闭TCP连接，然后如果浏览器或者服务器在其头信息加入了这行代码：</li></ul></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection:keep-alive</span><br></pre></td></tr></table></figure><p>TCP连接在发送后将仍然保持打开状态，于是，浏览器可以继续通过相同的连接发送请求。保持连接节省了为每个请求建立新连接所需的时间，还节约了网络带宽。</p><p>建立TCP连接-&gt;发送请求行-&gt;发送请求头-&gt;（到达服务器）发送状态行-&gt;发送响应头-&gt;发送响应数据-&gt;断TCP连接</p><p>最具体的HTTP请求过程：<a href="http://blog.51cto.com/linux5588/1351007" target="_blank" rel="noopener">http://blog.51cto.com/linux5588/1351007</a></p><h2 id="常见的HTTP相应状态码"><a href="#常见的HTTP相应状态码" class="headerlink" title="常见的HTTP相应状态码"></a>常见的HTTP相应状态码</h2><blockquote><p>常见的HTTP相应状态码</p></blockquote><ul><li>200：请求被正常处理</li><li>204：请求被受理但没有资源可以返回</li><li>206：客户端只是请求资源的一部分，服务器只对请求的部分资源执行GET方法，相应报文中通过Content-Range指定范围的资源。</li><li>301：永久性重定向</li><li>302：临时重定向</li><li>303：与302状态码有相似功能，只是它希望客户端在请求一个URI的时候，能通过GET方法重定向到另一个URI上</li><li><strong><em>304：发送附带条件的请求时，条件不满足时返回，与重定向无关</em></strong></li><li>307：临时重定向，与302类似，只是强制要求使用POST方法</li><li><strong><em>400：请求报文语法有误，服务器无法识别</em></strong></li><li><strong><em>401：请求需要认证</em></strong>    （未授权：登录失败）</li><li>403：请求的对应资源禁止被访问</li><li><strong><em>404：服务器无法找到对应资源</em></strong></li><li>500：服务器内部错误</li><li>503：服务器正忙</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Http与Https的区别：&quot;&gt;&lt;a href=&quot;#Http与Https的区别：&quot; class=&quot;headerlink&quot; title=&quot;Http与Https的区别：&quot;&gt;&lt;/a&gt;Http与Https的区别：&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Http与Http
+      
+    
+    </summary>
+    
+    
+      <category term="Js" scheme="http://yoursite.com/categories/Js/"/>
+    
+    
+      <category term="Js" scheme="http://yoursite.com/tags/Js/"/>
+    
+  </entry>
   
   <entry>
     <title>vue首屏加载过慢是为什么？怎么解决？</title>
@@ -525,32 +552,6 @@
     
     
       <category term="H5C3" scheme="http://yoursite.com/tags/H5C3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>人间失格读后感</title>
-    <link href="http://yoursite.com/2019/11/04/%E4%BA%BA%E9%97%B4%E5%A4%B1%E6%A0%BC%E8%AF%BB%E5%90%8E%E6%84%9F/"/>
-    <id>http://yoursite.com/2019/11/04/人间失格读后感/</id>
-    <published>2019-11-04T08:28:22.000Z</published>
-    <updated>2019-11-04T08:30:28.332Z</updated>
-    
-    <content type="html"><![CDATA[<p>小时候的叶藏是一个心思很重的孩子，太早的成熟使他有着同龄人所没有的敏感。虽然生活在所有人中间，但是给人的感觉确实离群索居的，与周围的人显得那么格格不入。在很小的时候他就知道他的幸福观与这世上所有人的幸福观都大相径庭，并为此而彻夜难眠痛苦呻吟走火入魔，这种状态，在其他人看来或许是离经叛道的，一旦他表露这种想法的话，大概会被人当做精神病人送进冷冰冰的医院吧。</p><p>他决定扮演一个小丑，来掩饰自己真实的内心世界，来取悦这世上所有的人，自己的亲人朋友，自己的老师同学，乃至周围的各种形形色色的所有人。读到这里，心真的很难不痛，这本不是一个孩子应该承受的！</p><p>长大后的叶藏越发的颓废，逃课、酗酒、抽烟、娼妓，糜烂的生活像极了我们眼中坏小子的形象。他陷得越来越深了，终于在某一天，与常子一起跳入了冰冷的河水中，常子死了，叶藏还活着，只是这种活着真的是叶藏所需要的吗？行尸走肉一般卑微的活着。。。除了压抑，还是压抑，找不到别的形容词更能形容读人间失格的感觉。</p><p>与其说人间失格是太宰治最后的遗著，不如说这是他留给这个冷冰冰的世界的遗书更合适。太宰治在《人间失格》中，藉大庭叶藏的独白表达他的人生与思想：「信赖是罪吗？」「已经没有回头路了，不论怎麼做，做什麼，都只会徒劳无功，只会让人觉得更差耻吧了！」「苟活著就是罪恶的种子！我的不幸，是无力拒绝他人的不幸。一旦拒绝，不论对方或是自己心裏，永远都有一道无法弥补的白色裂痕。我被这样的恐惧胁迫著。问问老天：不抵抗是罪吗？」</p><p>非常沉重的独白，是人生绝望的极致。太了解人生，也就绝对悲观。这也许就是太宰治的成就，也是他的悲剧。</p><p>活在自己的世界里，卑微而自由，这是叶藏或者是太宰治的选择。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;小时候的叶藏是一个心思很重的孩子，太早的成熟使他有着同龄人所没有的敏感。虽然生活在所有人中间，但是给人的感觉确实离群索居的，与周围的人显得那么格格不入。在很小的时候他就知道他的幸福观与这世上所有人的幸福观都大相径庭，并为此而彻夜难眠痛苦呻吟走火入魔，这种状态，在其他人看来或
-      
-    
-    </summary>
-    
-    
-      <category term="其他" scheme="http://yoursite.com/categories/%E5%85%B6%E4%BB%96/"/>
-    
-    
-      <category term="其他" scheme="http://yoursite.com/tags/%E5%85%B6%E4%BB%96/"/>
     
   </entry>
   
