@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      Vue中单向数据流 | 晓婷成长记录
+      vuex详解 | 晓婷成长记录
     
   </title>
   <meta name="author" content="xiaoting">
@@ -164,7 +164,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《Vue中单向数据流》
+			当前文章&nbsp;:&nbsp;《vuex详解》
 		
 	</p>
 
@@ -266,6 +266,18 @@
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
 	 
 
 <div class="layout-post">
@@ -273,8 +285,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2020/03/23/Vue%E4%B8%AD%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/" itemprop="url">
-		Vue中单向数据流
+	<a href="/2020/03/26/vuex%E8%AF%A6%E8%A7%A3/" itemprop="url">
+		vuex详解
 	</a>
 
 	</div>
@@ -287,9 +299,9 @@
 
 	发布于
 
-	<a href="/2020/03/23/Vue%E4%B8%AD%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/" itemprop="url">
-		<time datetime="2020-03-23T10:39:07.000Z" itemprop="datePublished">
-	  		2020-03-23
+	<a href="/2020/03/26/vuex%E8%AF%A6%E8%A7%A3/" itemprop="url">
+		<time datetime="2020-03-26T06:30:39.000Z" itemprop="datePublished">
+	  		2020-03-26
 	  </time>
 	</a>
 	&nbsp;
@@ -305,9 +317,9 @@
 
 	更新于
 
-	<a href="/2020/03/23/Vue%E4%B8%AD%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/" itemprop="url">
-		<time datetime="2020-03-23T10:39:07.000Z" itemprop="dateUpdated">
-	  		2020-03-24
+	<a href="/2020/03/26/vuex%E8%AF%A6%E8%A7%A3/" itemprop="url">
+		<time datetime="2020-03-26T06:30:39.000Z" itemprop="dateUpdated">
+	  		2020-03-26
 	  </time>
 	</a> 
 
@@ -332,8 +344,69 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>​      数据从父组件传给子组件，只能单向绑定，子组件对父组件的数据只能访问不能修改。</p>
-<p>​      父组件通过props传递数据给子组件，父组件是不能是直接访问子组件的数据的。</p>
+		<h2 id="vuex是什么？"><a href="#vuex是什么？" class="headerlink" title="vuex是什么？"></a>vuex是什么？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vuex 是一个专门为vue.js应用程序开发的状态管理模式。</span><br></pre></td></tr></table></figure>
+
+<p>这个状态我们可以理解为在data中的属性，需要共享给其他组件使用的部分。</p>
+<p>也就是说，是我们需要共享的data，使用vuex进行统一集中式的管理</p>
+<h2 id="vuex中，有默认的五种基本的对象："><a href="#vuex中，有默认的五种基本的对象：" class="headerlink" title="vuex中，有默认的五种基本的对象："></a><strong>vuex中，有默认的五种基本的对象：</strong></h2><ul>
+<li>state：存储状态（变量）</li>
+<li>getters：对数据获取之前的再次编译，可以理解为state的计算属性。我们在组件中使用 $sotre.getters.fun()</li>
+<li>mutations：修改状态，并且是同步的。在组件中使用$store.commit(‘’,params)。这个和我们组件中的自定义事件类似。</li>
+<li>actions：异步操作。在组件中使用是$store.dispath(‘’)</li>
+<li>modules：store的子模块，为了开发大型项目，方便状态管理而使用的。</li>
+</ul>
+<h2 id="vuex的使用"><a href="#vuex的使用" class="headerlink" title="vuex的使用"></a>vuex的使用</h2><p>在命令行输入下面命令，安装vuex</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex --save</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装成功之后，我们就可以在store.js中尽情玩耍我们的vuex了！</strong></p>
+<p>在store.js文件中，引入vuex并且使用vuex，这里注意我的变量名是大写Vue和Vuex　</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"><span class="keyword">const</span> state = &#123;</span><br><span class="line">    count: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'./router'</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./vuex/store'</span> <span class="comment">// 引入store</span></span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* eslint-disable no-new */</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    router,</span><br><span class="line">    store,</span><br><span class="line">    components: &#123; App &#125;,</span><br><span class="line">    template: <span class="string">'&lt;App/&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>然我我们在任意一个组件中就可以使用我们定义的count属性了。</p>
+<p>这里我们在helloWorld中使用一下，去除helloworld.vue中不用的标签</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"hello"</span>&gt;</span><br><span class="line">    &lt;h3&gt;&#123;&#123;$store.state.count&#125;&#125;&lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们继续操作store.js文件</p>
+<p>我们在sotre.js中定义mutations对象，该对象中有两个方法，mutations里面的参数，第一个默认为state，接下来的为自定义参数。</p>
+<p>我们在mutations中定义两个方法，增加和减少，并且设置一个参数n，默认值为0，然后在Vuex.Store中使用它</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * mutations 里面放置的是我们操作state对象属性的方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> mutations = &#123;</span><br><span class="line">    mutationsAddCount(state, n = <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (state.count += n)</span><br><span class="line">    &#125;,</span><br><span class="line">    mutationsReduceCount(state, n = <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (state.count -= n)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state,</span><br><span class="line">    mutations</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>然后我们在helloWorld.vue中，使用这个方法</p>
+<p>还记得我们如何在组件中使用mutations吗？就和自定义事件非常相似</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"hello"</span>&gt;</span><br><span class="line">    &lt;h3&gt;&#123;&#123;$store.state.count&#125;&#125;&lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;button @click="handleAddClick(10)"&gt;增加&lt;/</span>button&gt;</span><br><span class="line">      &lt;button @click=<span class="string">"handleReduceClick(10)"</span>&gt;减少&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    handleAddClick(n)&#123;</span><br><span class="line">      <span class="keyword">this</span>.$store.commit(<span class="string">'mutationsAddCount'</span>,n);</span><br><span class="line">    &#125;,</span><br><span class="line">    handleReduceClick(n)&#123;</span><br><span class="line">      <span class="keyword">this</span>.$store.commit(<span class="string">'mutationsReduceCount'</span>,n);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>来浏览器看一下效果如何！</p>
+<p>我们可以看到每当触发事件时，我们都可以在vue开发工具中看到我们触发的mutations方法，以及参数</p>
+<p>接下来就是actions，actions是异步操作</p>
+<p>创建actions对象，并且使用</p>
+<p>这里我在两个方法中使用了两个不同的参数，一个是context，它是一个和store对象具有相同对象属性的参数。在第二个函数中，我是直接使用了这个对象的commit的方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> actions = &#123;</span><br><span class="line">    actionsAddCount(context, n = <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(context)</span><br><span class="line">        <span class="keyword">return</span> context.commit(<span class="string">'mutationsAddCount'</span>, n)</span><br><span class="line">    &#125;,</span><br><span class="line">    actionsReduceCount(&#123; commit &#125;, n = <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> commit(<span class="string">'mutationsReduceCount'</span>, n)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state,</span><br><span class="line">    mutations,</span><br><span class="line">    actions</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在helloWorld.vue中</p>
+<p>在methods中，增加两个方法，使用dispath来触发</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;异步操作&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;button @click="handleActionsAdd(10)"&gt;异步增加&lt;/</span>button&gt;</span><br><span class="line">    &lt;button @click=<span class="string">"handleActionsReduce(10)"</span>&gt;异步减少&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">handleActionsAdd(n)&#123;</span><br><span class="line">  <span class="keyword">this</span>.$store.dispatch(<span class="string">'actionsAddCount'</span>,n)</span><br><span class="line">&#125;,</span><br><span class="line">handleActionsReduce(n)&#123;</span><br><span class="line">  <span class="keyword">this</span>.$store.dispatch(<span class="string">'actionsReduceCount'</span>,n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>进入浏览器看下效果如何！</p>
+<p>最后就是getters</p>
+<p>我们一般使用getters来获取我们的state，因为它算是state的一个计算属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getters = &#123;</span><br><span class="line">    getterCount(state, n = <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (state.count += n)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state,</span><br><span class="line">    mutations,</span><br><span class="line">    actions,</span><br><span class="line">    getters</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getters = &#123;</span><br><span class="line">    getterCount(state) &#123;</span><br><span class="line">        <span class="keyword">return</span> (state.count += <span class="number">10</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>getters算是非常简单的了。</p>
+<p>到这里，如果全都看懂了，vuex你已经没有压力了。</p>
+<p>但是vuex官方给了我们一个更简单的方式来使用vuex， 也就是 {mapState, mapMutations, mapActions, mapGetters}</p>
+<p>只要我们把上面基础的搞懂，这些都不在话下，只是方面我们书写罢了。</p>
+<p>就这么简单，这里我们用到了es6的扩展运算符。如果不熟悉的同学还是去看看阮一峰大神的《Es6标准入门》这本书，我是看完了，受益匪浅！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> &#123;mapState, mapMutations, mapActions, mapGetters&#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'HelloWorld'</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      msg: <span class="string">'Welcome to Your Vue.js App'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapMutations(&#123;</span><br><span class="line">      handleAddClick: <span class="string">'mutationsAddCount'</span>,</span><br><span class="line">      handleReduceClick: <span class="string">'mutationsReduceCount'</span></span><br><span class="line">    &#125;),</span><br><span class="line">    ...mapActions(&#123;</span><br><span class="line">      handleActionsAdd: <span class="string">'actionsAddCount'</span>,</span><br><span class="line">      handleActionsReduce: <span class="string">'actionsReduceCount'</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// handleAddClick(n)&#123;</span></span><br><span class="line">    <span class="comment">//   this.$store.commit('mutationsAddCount',n);</span></span><br><span class="line">    <span class="comment">// &#125;,</span></span><br><span class="line">    <span class="comment">// handleReduceClick(n)&#123;</span></span><br><span class="line">    <span class="comment">//   this.$store.commit('mutationsReduceCount',n);</span></span><br><span class="line">    <span class="comment">// &#125;,</span></span><br><span class="line">    <span class="comment">// handleActionsAdd(n)&#123;</span></span><br><span class="line">    <span class="comment">//   this.$store.dispatch('actionsAddCount',n)</span></span><br><span class="line">    <span class="comment">// &#125;,</span></span><br><span class="line">    <span class="comment">// handleActionsReduce(n)&#123;</span></span><br><span class="line">    <span class="comment">//   this.$store.dispatch('actionsReduceCount',n)</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    count()&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.$store.getters.getterCount</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>同理，getters和 state也可以使用 mapState，mapGetters</p>
 	
 	</div>
 	
@@ -352,12 +425,8 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2020/03/24/vue%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E7%9A%84%E5%8E%9F%E7%90%86/" title="vue双向数据绑定的原理" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2020/03/23/vue%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" title="vue常见面试题" rel="next">
+			<a href="/2020/03/25/js%E4%B8%AD%E5%AF%B9%E8%B1%A1%EF%BC%8C%E6%95%B0%E7%BB%84%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" title="js中对象，数组，字符串的常用操作" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -375,33 +444,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2020/03/26/vuex%E8%AF%A6%E8%A7%A3/" title="vuex详解">
-								vuex详解			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								三月 26日, 2020				
-							</p>
-							<p class="relate-post-content">
-								vuex是什么？1vuex 是一个专门为vue.js应用程序开发的状态管理模式。
-
-这个状态我们可以理解为在data中的属性，需要共享给其他组件使用的部分。
-也就是说，是我们需要共享的data，使用vuex进行统一集中式的管理
-vue...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2020/03/26/vuex%E8%AF%A6%E8%A7%A3/" title="vuex详解">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vuex详解"/>
-							</a>
-						</div>
-					</li>											
-			
 			
 					<li>
 						<div class="relate-post-text">
@@ -469,6 +511,31 @@ vue...
 							<a href="/2020/03/24/vue%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E7%9A%84%E5%8E%9F%E7%90%86/" title="vue双向数据绑定的原理">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue双向数据绑定的原理"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/03/23/Vue%E4%B8%AD%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/" title="Vue中单向数据流">
+								Vue中单向数据流			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 23日, 2020				
+							</p>
+							<p class="relate-post-content">
+								​      数据从父组件传给子组件，只能单向绑定，子组件对父组件的数据只能访问不能修改。
+​      父组件通过props传递数据给子组件，父组件是不能是直接访问子组件的数据的。
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/03/23/Vue%E4%B8%AD%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81/" title="Vue中单向数据流">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="Vue中单向数据流"/>
 							</a>
 						</div>
 					</li>											
