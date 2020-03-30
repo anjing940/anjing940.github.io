@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      js为一个元素绑定多个事件 | 晓婷成长记录
+      js深拷贝与浅拷贝 | 晓婷成长记录
     
   </title>
   <meta name="author" content="xiaoting">
@@ -164,7 +164,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《js为一个元素绑定多个事件》
+			当前文章&nbsp;:&nbsp;《js深拷贝与浅拷贝》
 		
 	</p>
 
@@ -266,18 +266,6 @@
 		插件作者：KELEN
 		插件来源: https://github.com/KELEN/katelog
 -->
-
-	
-		<div class="layout-toc">
-			<div id="layout-toc">
-				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
-			</div>
-		</div>
-
-		
-		<script src="/plugin/toc/katelog.min.js"></script>
-
-		
 	 
 
 <div class="layout-post">
@@ -285,8 +273,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/2019/11/04/js%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%BB%91%E5%AE%9A%E5%A4%9A%E4%B8%AA%E4%BA%8B%E4%BB%B6/" itemprop="url">
-		js为一个元素绑定多个事件
+	<a href="/2019/12/13/js%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" itemprop="url">
+		js深拷贝与浅拷贝
 	</a>
 
 	</div>
@@ -299,9 +287,9 @@
 
 	发布于
 
-	<a href="/2019/11/04/js%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%BB%91%E5%AE%9A%E5%A4%9A%E4%B8%AA%E4%BA%8B%E4%BB%B6/" itemprop="url">
-		<time datetime="2019-11-04T08:15:24.000Z" itemprop="datePublished">
-	  		2019-11-04
+	<a href="/2019/12/13/js%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" itemprop="url">
+		<time datetime="2019-12-13T03:01:14.000Z" itemprop="datePublished">
+	  		2019-12-13
 	  </time>
 	</a>
 	&nbsp;
@@ -317,9 +305,9 @@
 
 	更新于
 
-	<a href="/2019/11/04/js%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0%E7%BB%91%E5%AE%9A%E5%A4%9A%E4%B8%AA%E4%BA%8B%E4%BB%B6/" itemprop="url">
-		<time datetime="2019-11-04T08:15:24.000Z" itemprop="dateUpdated">
-	  		2020-03-27
+	<a href="/2019/12/13/js%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" itemprop="url">
+		<time datetime="2019-12-13T03:01:14.000Z" itemprop="dateUpdated">
+	  		2020-03-30
 	  </time>
 	</a> 
 
@@ -344,13 +332,37 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<p>onclick()这种写法是DOM0级规范的写法，是所有的浏览器支持的，但是这种写法有不能同时绑定多个事件、使代码耦合在了一起的弊端。但是addEventListener() 是DOM2标准中定义的方法，它可以控制是在事件捕获阶段或者是在冒泡阶段调用事件处理程序。既然这个是DOM2标准中定义的，那么只有支持DOM2级事件处理程序的浏览器才支持这个方法（IE9,Firefox,Safari,Chrome和Opera支持）。</p>
-<h3 id="一、onclick-方式"><a href="#一、onclick-方式" class="headerlink" title="一、onclick()方式"></a><strong>一、onclick()方式</strong></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;绑定多个事件&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        window.onload = function()&#123;</span></span><br><span class="line"><span class="regexp">            document.getElementById('btn').onclick = function () &#123;</span></span><br><span class="line"><span class="regexp">                alert(1);</span></span><br><span class="line"><span class="regexp">            &#125;;</span></span><br><span class="line"><span class="regexp">            document.getElementById('btn').onclick = function () &#123;</span></span><br><span class="line"><span class="regexp">                alert(2);</span></span><br><span class="line"><span class="regexp">            &#125;;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">&lt;button id="btn"&gt;点我&lt;/</span>button&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+		<p>如何区分深拷贝与浅拷贝，简单点来说，就是假设B复制了A，当修改A时，看B是否会发生变化，如果B也跟着变了，说明这是浅拷贝，拿人手短，如果B没变，那就是深拷贝，自食其力。</p>
+<p>此篇文章中也会简单阐述到<strong>栈堆</strong>，<strong>基本数据类型</strong>与<strong>引用数据类型</strong>，因为这些概念能更好的让你理解深拷贝与浅拷贝。</p>
+<p>我们来举个浅拷贝例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let a=[0,1,2,3,4],</span><br><span class="line">    b=a;</span><br><span class="line">console.log(a===b);</span><br><span class="line">a[0]=1;</span><br><span class="line">console.log(a,b);</span><br></pre></td></tr></table></figure>
 
-<p>运行结果是第二个onclick把第一个onclick给覆盖了，虽然大部分情况用on就可以完成想要的结果，但是有时又需要执行多个相同的事件，很明显如果用on不能完成</p>
-<h3 id="二、addEventListener-方法"><a href="#二、addEventListener-方法" class="headerlink" title="二、addEventListener()方法"></a>二、addEventListener()方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;绑定多个事件&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        window.onload = function()&#123;</span></span><br><span class="line"><span class="regexp">            document.getElementById('btn').addEventListener('click', function()&#123;</span></span><br><span class="line"><span class="regexp">                alert(1);</span></span><br><span class="line"><span class="regexp">            &#125;, false);</span></span><br><span class="line"><span class="regexp">            document.getElementById('btn').addEventListener('click', function()&#123;</span></span><br><span class="line"><span class="regexp">                alert(2);</span></span><br><span class="line"><span class="regexp">            &#125;, false);</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">&lt;button id="btn"&gt;点我&lt;/</span>button&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img2018.cnblogs.com/blog/1038579/201906/1038579-20190602134948903-2126273911.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>addEventListenert方法第一个参数填写事件名，第二个参数是一个函数，第三个参数是指在冒泡阶段还是捕获阶段处理事件处理程序。true代表捕获阶段处理， false代表冒泡阶段处理。第三个参数可以省略，大多数情况也不需要用到第三个参数，不写第三个参数默认false</p>
+<p>嗯？明明b复制了a，为啥修改数组a，数组b也跟着变了，这里原文作者不禁陷入了沉思。</p>
+<p>那么这里，就得引入基本数据类型与引用数据类型的概念了。</p>
+<p>面试常问，基本数据类型有哪些，<strong>number，string，boolean，null，undefined，symbol</strong>以及未来ES10新增的<strong>BigInt</strong>(任意精度整数)七类。</p>
+<p>引用数据类型(Object类)有常规名值对的无序对象{a:1}，数组[1,2,3]，以及函数等。</p>
+<p>而这两类数据存储分别是这样的：</p>
+<p><strong>a.基本类型–名值存储在栈内存中</strong>，例如let a=1;</p>
+<p><img src="https://images2018.cnblogs.com/blog/1213309/201711/1213309-20171124130901890-511917244.jpg" alt="img"></p>
+<p>当你b=a复制时，栈内存会新开辟一个内存，例如这样：</p>
+<p> <img src="https://images2018.cnblogs.com/blog/1213309/201711/1213309-20171124131822437-430949998.jpg" alt="img"></p>
+<p>所以当你此时修改a=2，对b并不会造成影响，因为此时的b已自食其力，翅膀硬了，不受a的影响了。当然，let a=1,b=a;虽然b不受a影响，但这也算不上深拷贝，因为深拷贝本身只针对较为复杂的object类型数据。</p>
+<p><strong>b.引用数据类型–名存在栈内存中，值存在于堆内存中，但是栈内存会提供一个引用的地址指向堆内存中的值</strong>，我们以上面浅拷贝的例子画个图：</p>
+<p><img src="https://images2018.cnblogs.com/blog/1213309/201711/1213309-20171124133428359-1292133331.jpg" alt="img"></p>
+<p>当b=a进行拷贝时，其实复制的是a的引用地址，而并非堆里面的值。</p>
+<p><img src="https://images2018.cnblogs.com/blog/1213309/201711/1213309-20171124133647796-1390255671.jpg" alt="img"></p>
+<p>而当我们<strong>a[0]=1</strong>时进行数组修改时，由于a与b指向的是同一个地址，所以自然b也受了影响，这就是所谓的浅拷贝了。</p>
+<p> <img src="https://images2018.cnblogs.com/blog/1213309/201711/1213309-20171124133934328-67216865.jpg" alt="img"></p>
+<p>那，要是在堆内存中也开辟一个新的内存专门为b存放值，就像基本类型那样，岂不就达到深拷贝的效果了</p>
+<p><img src="https://images2018.cnblogs.com/blog/1213309/201711/1213309-20171124140906203-2099568933.jpg" alt="img"></p>
+<p><strong>1.我们怎么去实现深拷贝呢，这里可以JSON对象的parse和stringify。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function deepClone(obj)&#123;</span><br><span class="line">    let _obj = JSON.stringify(obj),</span><br><span class="line">        objClone = JSON.parse(_obj);</span><br><span class="line">    return objClone</span><br><span class="line">&#125;    </span><br><span class="line">let a=[0,1,[2,3],4],</span><br><span class="line">    b=deepClone(a);</span><br><span class="line">a[0]=1;</span><br><span class="line">a[2][0]=1;</span><br><span class="line">console.log(a,b);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://images2018.cnblogs.com/blog/1213309/201711/1213309-20171124154610578-1742013996.png" alt="img"></p>
+<p>看到，这下b是完全不受a的影响了。</p>
 	
 	</div>
 	
@@ -369,12 +381,12 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/2019/11/04/%E4%BA%91%E7%AB%AF%E6%9C%89%E4%B8%AA%E5%B0%8F%E5%8D%96%E9%83%A8%E8%AF%BB%E5%90%8E%E6%84%9F/" title="云端有个小卖部读后感" rel="prev">
+			<a href="/2019/12/13/vue%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" title="vue防抖和节流" rel="prev">
 				&laquo;上一篇
 			</a>
 		
 		
-			<a href="/2019/11/04/JS%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95/" title="JS数组去重的两种方法" rel="next">
+			<a href="/2019/12/03/vue%E9%A1%B5%E9%9D%A2%E5%8B%BE%E9%80%89%E7%BF%BB%E9%A1%B5%E8%AE%B0%E5%BF%86%E5%8A%9F%E8%83%BD/" title="vue页面勾选翻页记忆功能" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -570,30 +582,6 @@ axios的作用？axios主要是用于向后台发起请求的，还有在请求�
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/12/13/js%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="js深拷贝与浅拷贝">
-								js深拷贝与浅拷贝			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十二月 13日, 2019				
-							</p>
-							<p class="relate-post-content">
-								如何区分深拷贝与浅拷贝，简单点来说，就是假设B复制了A，当修改A时，看B是否会发生变化，如果B也跟着变了，说明这是浅拷贝，拿人手短，如果B没变，那就是深拷贝，自食其力。
-此篇文章中也会简单阐述到栈堆，基本数据类型与引用数据类型，因为这...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/12/13/js%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="js深拷贝与浅拷贝">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="js深拷贝与浅拷贝"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2019/12/02/zTree%E7%BB%83%E4%B9%A0%E4%BD%BF%E7%94%A8/" title="zTree练习使用">
 								zTree练习使用			
 							</a>
@@ -633,6 +621,34 @@ axios的作用？axios主要是用于向后台发起请求的，还有在请求�
 							<a href="/2019/11/22/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%80%E4%BA%9B%E9%AA%8C%E8%AF%81/" title="前端常见的一些验证">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="前端常见的一些验证"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/11/18/pc%E7%AB%AF%E5%B8%B8%E7%94%A8%E7%9A%84%E7%94%B5%E8%84%91%E5%B1%8F%E5%B9%95%E5%88%86%E8%BE%A8%E7%8E%87-%E5%93%8D%E5%BA%94%E5%BC%8F%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/" title="pc端常用的电脑屏幕分辨率(响应式媒体查询)">
+								pc端常用的电脑屏幕分辨率(响应式媒体查询)			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 18日, 2019				
+							</p>
+							<p class="relate-post-content">
+								PC端****
+按屏幕宽度大小排序（主流的用橙色标明）
+分辨率   比例 | 设备尺寸
+1024*500 （8.9寸）
+1024*768 （比例4：3  | 10.4寸、12.1寸、14.1寸、15寸; ）
+1280*800（16：1...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/11/18/pc%E7%AB%AF%E5%B8%B8%E7%94%A8%E7%9A%84%E7%94%B5%E8%84%91%E5%B1%8F%E5%B9%95%E5%88%86%E8%BE%A8%E7%8E%87-%E5%93%8D%E5%BA%94%E5%BC%8F%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/" title="pc端常用的电脑屏幕分辨率(响应式媒体查询)">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="pc端常用的电脑屏幕分辨率(响应式媒体查询)"/>
 							</a>
 						</div>
 					</li>											
