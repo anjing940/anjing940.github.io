@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      整理一些前端基础技能点（一） | 晓婷成长记录
+      整理一些前端基础技能点 | 晓婷成长记录
     
   </title>
   <meta name="author" content="xiaoting">
@@ -164,7 +164,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《整理一些前端基础技能点（一）》
+			当前文章&nbsp;:&nbsp;《整理一些前端基础技能点》
 		
 	</p>
 
@@ -286,7 +286,7 @@
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
 	<a href="/2020/03/27/%E6%95%B4%E7%90%86%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E6%8A%80%E8%83%BD%E7%82%B9/" itemprop="url">
-		整理一些前端基础技能点（一）
+		整理一些前端基础技能点
 	</a>
 
 	</div>
@@ -319,7 +319,7 @@
 
 	<a href="/2020/03/27/%E6%95%B4%E7%90%86%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E6%8A%80%E8%83%BD%E7%82%B9/" itemprop="url">
 		<time datetime="2020-03-27T10:08:33.000Z" itemprop="dateUpdated">
-	  		2020-03-31
+	  		2020-04-05
 	  </time>
 	</a> 
 
@@ -344,84 +344,7 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<h2 id="VUE部分"><a href="#VUE部分" class="headerlink" title="VUE部分"></a>VUE部分</h2><h3 id="vueAPP适配是怎么写的，用的什么单位？"><a href="#vueAPP适配是怎么写的，用的什么单位？" class="headerlink" title="vueAPP适配是怎么写的，用的什么单位？"></a>vueAPP适配是怎么写的，用的什么单位？</h3><p>原理是借助px2rem 插件方便的将px单位转为了rem</p>
-<p>具体步骤：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install px2rem-loader  lib-flexible --save</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在main.js中引入lib-flexible</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import 'lib-flexible/flexible.js'</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在build下的 utils.js中，找到generateLoaders 方法，添加以下代码</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> px2remLoader = &#123;    </span><br><span class="line">loader: <span class="string">'px2rem-loader'</span>,   </span><br><span class="line">options: &#123;    </span><br><span class="line">remUnit: <span class="number">37.5</span></span><br><span class="line">&#125;&#125; </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateLoaders</span> (<span class="params">loader, loaderOptions</span>) </span></span><br><span class="line"><span class="function"></span>&#123;    <span class="keyword">const</span> loaders = [cssLoader, px2remLoader]   </span><br><span class="line"><span class="keyword">if</span> (loader) &#123;        </span><br><span class="line">loaders.push(&#123;        </span><br><span class="line">loader: loader + <span class="string">'-loader'</span>,        </span><br><span class="line">options: <span class="built_in">Object</span>.assign(&#123;&#125;, loaderOptions, &#123;        </span><br><span class="line">sourceMap: options.sourceMap        </span><br><span class="line">&#125;)    </span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>重启项目，会发现自己设置的px被转为rem 了</p>
-</li>
-<li><p>但是有一定的局限性</p>
-</li>
-<li><p>以上实现转换适用于：</p>
-<p>（1）组件中编写的<style></style>下的css</p>
-<p>（2）从index.js或者main.js中import ‘../../static/css/reset.css’引入css</p>
-<p>（3）在组件的<script type=”text/ecmascript-6″> import ‘../../static/css/reset.css'</script>中引入css</p>
-<p>另外的情况不适用：</p>
-<p>（1）组件<style></style>中@import “../../static/css/reset.css (可考虑上面（2）、（3）的形式引入)</p>
-<p>（2）外部样式:<link rel=”stylesheet” href=”static/css/reset.css”></p>
-<p>（3）元素内部样式：style=”height: 417px; width: 550px;”</p>
-<p>另外我要补充的是：在做移动端适配的时候我们不建议给字体也设置rem的单位，针对这种情况，我为字体适配的解决方案是使用媒体查询，文件以</p>
-<p>组件<style></style>中@import “../../static/css/reset.css形式引入，可完美解决移动端适配问题</p>
-</li>
-</ul>
-<h3 id="计算属性和监听器有什么区别"><a href="#计算属性和监听器有什么区别" class="headerlink" title="计算属性和监听器有什么区别"></a>计算属性和监听器有什么区别</h3><h6 id="计算属性缓存vs方法"><a href="#计算属性缓存vs方法" class="headerlink" title="计算属性缓存vs方法"></a>计算属性缓存vs方法</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"home"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"head"</span> @click=<span class="string">"back()"</span>&gt;</span><br><span class="line">      &lt;van-icon name=<span class="string">"arrow-left"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"icon-left"</span> /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;p&gt;&#123;&#123; msg &#125;&#125;&lt;/</span>p&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123; msg.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>) &#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">        &lt;p&gt;&#123;&#123; reveredMessage &#125;&#125;&lt;/</span>p&gt;</span><br><span class="line">        &lt;p&gt; 调用methods中的方法 &#123;&#123; changeMsg() &#125;&#125; &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default &#123;</span></span><br><span class="line"><span class="regexp">    name: 'payOrder',</span></span><br><span class="line"><span class="regexp">    components: &#123; </span></span><br><span class="line"><span class="regexp">      [Icon.name]: Icon,</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    data() &#123;</span></span><br><span class="line"><span class="regexp">      return &#123;</span></span><br><span class="line"><span class="regexp">        msg: 'hello'</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    watch: &#123;</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    computed: &#123;</span></span><br><span class="line"><span class="regexp">      /</span><span class="regexp">/ 计算属性的getter </span></span><br><span class="line"><span class="regexp">      reveredMessage: function () &#123;</span></span><br><span class="line"><span class="regexp">          /</span><span class="regexp">/ this 指向时vm的实例</span></span><br><span class="line"><span class="regexp">          return this.msg.split('').reverse().join('')</span></span><br><span class="line"><span class="regexp">          &#125;</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">    methods: &#123;</span></span><br><span class="line"><span class="regexp">        changeMsg() &#123;</span></span><br><span class="line"><span class="regexp">        return this.msg.split('').reverse().join('')</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>我们可以将同一个函数定义一个方法而不是一个计算属性。两种方式的最终结果确实完全相同的，然而，不同的<strong><em>计算属性是基于他们的响应式依赖进行缓存的，只在相关响应式依赖发生改变时，他们才会重新求值。这就意味这只要msg还没发生改变</em></strong>，<strong>多次访问<code>reveredMessage</code>计算属性会立即返回之前的计算结果，而不必再次执行函数。***</strong>方法每次都会去重新计算结果***</p>
-<p>为什么需要缓存？假如我们有一个性能开销比较大的计算属性getCount, 它需要遍历一个巨大的数组并作出大量的计算。然后我们有可能有其他的计算属性依赖于getCount,如果没有缓存，我们将不可避免的多次去执行getCount的getter！。。。。当然了，如果你不希望有缓存，换一句话来说，你可以使用方法来代替。</p>
-<h6 id="计算属性vs侦听属性"><a href="#计算属性vs侦听属性" class="headerlink" title="计算属性vs侦听属性"></a>计算属性vs侦听属性</h6><p>Vue提供了一种更为通用的方式来观察和响应Vue实列上的数据变化：<code>侦听属性</code>。当然你有一些数据需要随着其他数据的变化而变动时你很容易滥用<code>wathch</code>，–。我们最好的做法时使用计算属性而不是命令式的watch回调。下面我们可以想想这个例子</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span> &#123;&#123; fullName &#125;&#125; <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>主要看js代码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cosnt vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        firstName: <span class="string">''</span>,</span><br><span class="line">        lastName: <span class="string">''</span>,</span><br><span class="line">        fullName: <span class="string">''</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">        firstName: <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.fullName = newVal + <span class="keyword">this</span>.lastVal</span><br><span class="line">        &#125;,</span><br><span class="line">        lastName: <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.fullName = <span class="keyword">this</span>.firstName + newVal</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>watch</code>的话每次就只能监听到一个属性。而且命令是重复的，将它和计算属性进行对比。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span> &#123;&#123; fullName &#125;&#125; <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>看js代码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cosnt vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        firstName: <span class="string">''</span>,</span><br><span class="line">        lastName: <span class="string">''</span>,</span><br><span class="line">        <span class="comment">// fullName: '',</span></span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">        fullName: &#123;</span><br><span class="line">            <span class="comment">// 只需要执行一次就OK</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="keyword">this</span>.lastName</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="侦听器"><a href="#侦听器" class="headerlink" title="侦听器"></a>侦听器</h3><p>虽然计算属性在大多数情况下更加适合，但有时候也需要一个自定义的侦听器。这就是为什么Vue通过watch选项提供了一个更加通用的方法，来响应数据的变化。当需要在数据变化时执行异步或者开销较大的操作时，这个方法时最有用的。</p>
-<p><strong>总结***</strong>watch是观察某一个属性的变化，重新计算属性值。computed是通过所依赖的属性的变化重新计算属性值。<strong>*但如果要在数据变化的同时</strong>进行异步操作或者是比较大的开销，那么watch为最佳选择**。</p>
-<h3 id="v-for渲染列表是key是用来做什么的？"><a href="#v-for渲染列表是key是用来做什么的？" class="headerlink" title="v-for渲染列表是key是用来做什么的？"></a>v-for渲染列表是key是用来做什么的？</h3><p>我们知道，vue和react都实现了一套虚拟DOM，使我们可以不直接操作DOM元素，只操作数据便可以重新渲染页面。而隐藏在背后的原理便是其高效的Diff算法。</p>
-<p>vue和react的虚拟DOM的Diff算法大致相同，其核心是基于两个简单的假设：</p>
-<p><strong>1. 两个相同的组件产生类似的DOM结构，不同的组件产生不同的DOM结构。</strong></p>
-<p><strong>2. 同一层级的一组节点，他们可以通过唯一的id进行区分。</strong></p>
-<p>基于以上这两点假设，使得虚拟DOM的Diff算法的复杂度从<strong>O(n^3)</strong>降到了<strong>O(n)</strong>。</p>
-<p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191016162-1229549117.png" alt="img"></p>
-<p>当页面的数据发生变化时，Diff算法只会比较同一层级的节点：</p>
-<p><strong>如果节点类型不同，直接干掉前面的节点，再创建并插入新的节点，不会再比较这个节点以后的子节点了。</strong></p>
-<p><strong>如果节点类型相同，则会重新设置该节点的属性，从而实现节点的更新。</strong></p>
-<p>当某一层有很多相同的节点时，也就是列表节点时，Diff算法的更新过程默认情况下也是遵循以上原则。</p>
-<p>比如一下这个情况：</p>
-<p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191056146-436654927.png" alt="img"></p>
-<p>我们希望可以在B和C之间加一个F，Diff算法默认执行起来是这样的：</p>
-<p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191119318-368188268.png" alt="img"></p>
-<p>即把C更新成F，D更新成C，E更新成D，最后再插入E，是不是很没有效率？</p>
-<p>所以我们<strong>需要使用key来给每个节点做一个唯一标识，Diff算法就可以正确的识别此节点，找到正确的位置区插入新的节点。</strong></p>
-<p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191142334-13876328.png" alt="img"></p>
-<p>所以一句话，<strong>key的作用主要是为了高效的更新虚拟DOM</strong>。另外vue中在使用相同标签名元素的过渡切换时，也会使用到key属性，其目的也是为了让vue可以区分它们，</p>
-<p>否则vue只会替换其内部属性而不会触发过渡效果。</p>
-<h3 id="vue-在哪个生命周期进行数据请求"><a href="#vue-在哪个生命周期进行数据请求" class="headerlink" title="vue 在哪个生命周期进行数据请求"></a>vue 在哪个生命周期进行数据请求</h3><p>看实际情况，一般在 created（或beforeRouter） 里面就可以，如果涉及到需要页面加载完成之后的话就用 mounted。</p>
-<p>在created的时候，视图中的html并没有渲染出来，所以此时如果直接去操作html的dom节点，一定找不到相关的元素<br>而在mounted中，由于此时html已经渲染出来了，所以可以直接操作dom节点，（此时document.getelementById 即可生效了）</p>
-<h3 id="vue中插槽的作用"><a href="#vue中插槽的作用" class="headerlink" title="vue中插槽的作用"></a>vue中插槽的作用</h3><p><strong>插槽，其实就相当于占位符。</strong>它在组件中给你的HTML模板占了一个位置，让你来传入一些东西。插槽又分为匿名插槽、具名插槽以及作用域插槽。</p>
-<p>你可能不太明白，为什么我要给子组件中传入HTML，而不直接写在子组件中呢？答案是这样的。你可以想象一个场景，<strong>你有五个页面，这五个页面中只有一个区域的内容不一样，你会怎么去写这五个页面呢？复制粘贴是一种办法，但在vue中，插槽(slot)是更好的做法。</strong></p>
-<p><strong>父组件向子组件传递dom时会用到插槽</strong></p>
-<p><strong>作用域插槽：当同一个子组件想要在不同的父组件里展示不同的状态，可以使用作用域插槽。展示的状态由父组件来决定</strong></p>
-<h6 id="匿名插槽"><a href="#匿名插槽" class="headerlink" title="匿名插槽"></a>匿名插槽</h6><p>我们又可以叫它单个插槽或者默认插槽。与具名插槽相对，它不需要设置name属性。（它隐藏的name属性为default。）</p>
-<h6 id="具名插槽"><a href="#具名插槽" class="headerlink" title="具名插槽"></a>具名插槽</h6><p>插槽有一个name属性与匿名插槽相对，加了name属性的匿名插槽就是具名插槽。</p>
-<h6 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h6><p>其实就是可以传递数据的插槽。子组件中的一些数据想在父组件中使用，必须通过规定的方法来传递。</p>
-<h2 id="JS部分"><a href="#JS部分" class="headerlink" title="JS部分"></a>JS部分</h2><h3 id="get和post有什么区别？"><a href="#get和post有什么区别？" class="headerlink" title="get和post有什么区别？"></a>get和post有什么区别？</h3><p>（1）get的参数会显示在浏览器地址栏中，而post的参数不会显示在浏览器地址栏中；</p>
+		<h2 id="JS部分"><a href="#JS部分" class="headerlink" title="JS部分"></a>JS部分</h2><h3 id="get和post有什么区别？"><a href="#get和post有什么区别？" class="headerlink" title="get和post有什么区别？"></a>get和post有什么区别？</h3><p>（1）get的参数会显示在浏览器地址栏中，而post的参数不会显示在浏览器地址栏中；</p>
 <p>（2）使用post提交的页面在点击【刷新】按钮的时候浏览器一般会提示“是否重新提交”，而get则不会；</p>
 <p>（3）用get的页面可以被搜索引擎抓取，而用post的则不可以；</p>
 <p>（4）用post可以提交的数据量非常大，而用get可以提交的数据量则非常小(2k)，受限于网页地址的长度。</p>
@@ -564,158 +487,7 @@ Symbol 类型
 
    Symbol 类型的对象永远不相等，即便创建的时候传入相同的值。因此，可以用解决属性名冲突的问题（适用于多少编码），做为标记。
 
-   这是 es6 新增的数据类型。    </code></pre><h2 id="CSS部分"><a href="#CSS部分" class="headerlink" title="CSS部分"></a>CSS部分</h2><h3 id="水平垂直居中有哪几种方法？"><a href="#水平垂直居中有哪几种方法？" class="headerlink" title="水平垂直居中有哪几种方法？"></a>水平垂直居中有哪几种方法？</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"home"</span>&gt;</span><br><span class="line">    &lt;!-- <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"head"</span> @<span class="attr">click</span>=<span class="string">"back()"</span>&gt;</span></span></span><br><span class="line">      &lt;van-icon name="arrow-left" class="icon-left" /&gt;</span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span> --&gt;</span></span><br><span class="line">    &lt;div class="box"&gt;</span><br><span class="line">      vvvvvvvklklklklkl</span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br><span class="line">&lt;style lang=<span class="string">"scss"</span> scoped&gt;</span><br><span class="line"><span class="comment">//第一种</span></span><br><span class="line">  .home&#123;</span><br><span class="line">    width: <span class="number">100</span>%;</span><br><span class="line">    height: <span class="number">500</span>px;</span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    align-items:center;</span><br><span class="line">    background: yellow ;</span><br><span class="line">  &#125;</span><br><span class="line">  .box&#123;</span><br><span class="line">    background-color: cornflowerblue;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line">  .home&#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    width: <span class="number">100</span>%;</span><br><span class="line">    height: <span class="number">500</span>px;</span><br><span class="line">    background: yellow ;</span><br><span class="line">  &#125;</span><br><span class="line">  .box&#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    left: <span class="number">50</span>%;</span><br><span class="line">    top:<span class="number">50</span>%;</span><br><span class="line">    transform: translate(<span class="number">-50</span>%, <span class="number">-50</span>%);</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line">  .home&#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    width: <span class="number">100</span>%;</span><br><span class="line">    height: <span class="number">500</span>px;</span><br><span class="line">    background: yellow ;</span><br><span class="line">  &#125;</span><br><span class="line">  .box&#123;</span><br><span class="line">      width: <span class="number">200</span>px;</span><br><span class="line">      height: <span class="number">200</span>px;</span><br><span class="line">      border: <span class="number">2</span>px solid red;</span><br><span class="line">      background-color: blue;</span><br><span class="line">      position: absolute;</span><br><span class="line">      left: <span class="number">0</span>;</span><br><span class="line">      right: <span class="number">0</span>;</span><br><span class="line">      top: <span class="number">0</span>;</span><br><span class="line">      bottom: <span class="number">0</span>;</span><br><span class="line">      margin: auto;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="flex弹性盒模型？"><a href="#flex弹性盒模型？" class="headerlink" title="flex弹性盒模型？"></a>flex弹性盒模型？</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">.flex&#123;</span><br><span class="line">     display: flex;</span><br><span class="line">     display: -webkit-flex;<span class="comment">/*Webkit内核的浏览器，必须加上-webkit前缀。*/</span></span><br><span class="line">     <span class="comment">/*注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。*/</span></span><br><span class="line">     flex-direction: row;<span class="comment">/*决定主轴的方向，即子项目（子元素）横向排列还是纵向排列*/</span></span><br><span class="line">     <span class="comment">/*row（默认值）：主轴为水平方向，起点在左端。</span></span><br><span class="line"><span class="comment">     row-reverse：主轴为水平方向，起点在右端。</span></span><br><span class="line"><span class="comment">     column：主轴为垂直方向，起点在上沿。</span></span><br><span class="line"><span class="comment">     column-reverse：主轴为垂直方向，起点在下沿。*/</span></span><br><span class="line">     flex-wrap:nowrap;<span class="comment">/*定义如果一条轴线排不下，如何换行*/</span></span><br><span class="line">     <span class="comment">/*nowrap（默认）：不换行。</span></span><br><span class="line"><span class="comment">     wrap：换行，第一行在上方。</span></span><br><span class="line"><span class="comment">     wrap-reverse：换行，第一行在下方。*/</span></span><br><span class="line">     justify-content: flex-start;<span class="comment">/*定义了项目在主轴上的对齐方式。*/</span></span><br><span class="line">     <span class="comment">/*flex-start（默认值）：左对齐</span></span><br><span class="line"><span class="comment">     flex-end：右对齐</span></span><br><span class="line"><span class="comment">     center： 居中</span></span><br><span class="line"><span class="comment">     space-between：两端对齐，项目之间的间隔都相等。</span></span><br><span class="line"><span class="comment">     space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。*/</span></span><br><span class="line">     align-items: flex-start;<span class="comment">/*定义项目在交叉轴上如何对齐。*/</span></span><br><span class="line">     <span class="comment">/*flex-start：交叉轴的起点对齐。</span></span><br><span class="line"><span class="comment">     flex-end：交叉轴的终点对齐。</span></span><br><span class="line"><span class="comment">     center：交叉轴的中点对齐。</span></span><br><span class="line"><span class="comment">     baseline: 项目的第一行文字的基线对齐。</span></span><br><span class="line"><span class="comment">     stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。*/</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/*项目，容器里的子元素默认成为项目，并拥有项目的默认属性*/</span></span><br><span class="line"> .flex-item&#123;</span><br><span class="line">     order:<span class="number">0</span>;<span class="comment">/*定义项目的排列顺序。数值越小，排列越靠前，默认为0。*/</span></span><br><span class="line">     flex-grow:<span class="number">0</span>;<span class="comment">/*定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。*/</span></span><br><span class="line">     <span class="comment">/*如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。*/</span></span><br><span class="line">     flex-shrink:<span class="number">1</span>;<span class="comment">/*定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。*/</span></span><br><span class="line">     flex-basis:auto;<span class="comment">/*定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。*/</span></span><br><span class="line">     flex:<span class="number">0</span> <span class="number">1</span> auto;<span class="comment">/*flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。*/</span></span><br><span class="line">     align-self:auto;<span class="comment">/*允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性*/</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<p>常用的布局：</p>
-<p><img src="https://img2020.cnblogs.com/blog/1249970/202003/1249970-20200328170753031-1902182557.png" alt="img"></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"home"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"left-box"</span>&gt;我是左左&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="right-box"&gt;</span></span><br><span class="line"><span class="regexp">      &lt;div class="right-top"&gt;我是佑佑一&lt;/</span>div&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"right-bottom"</span>&gt;我是佑佑二&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;style lang=<span class="string">"scss"</span> scoped&gt;</span><br><span class="line">.home&#123;</span><br><span class="line">  width: <span class="number">100</span>%;</span><br><span class="line">  height: <span class="number">2</span>rem;</span><br><span class="line">  background: burlywood;</span><br><span class="line">  display: flex;</span><br><span class="line">  color: aliceblue;</span><br><span class="line">  .left-box&#123;</span><br><span class="line">    flex: <span class="number">0</span> <span class="number">1</span> <span class="number">1</span>rem;    </span><br><span class="line">      <span class="comment">//order:1；</span></span><br><span class="line">  &#125;</span><br><span class="line">  .right-box&#123;　</span><br><span class="line">      <span class="comment">//order:0;</span></span><br><span class="line">    flex: <span class="number">1</span> <span class="number">1</span> auto;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-direction: column;</span><br><span class="line">    .right-top&#123;</span><br><span class="line">      flex: <span class="number">0</span> <span class="number">1</span> <span class="number">1</span>rem;</span><br><span class="line">      background: pink;</span><br><span class="line">    &#125;</span><br><span class="line">    .right-bottom&#123;</span><br><span class="line">      flex: <span class="number">1</span> <span class="number">1</span> auto;</span><br><span class="line">      background: powderblue;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>加order改变排列顺序</p>
-<p><img src="https://img2020.cnblogs.com/blog/1249970/202003/1249970-20200328171331595-1758060546.png" alt="img"></p>
-<p>宫格布局</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"home"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"item"</span>&gt;<span class="number">1</span>&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="item"&gt;2&lt;/</span>div&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"item"</span>&gt;<span class="number">3</span>&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="item"&gt;4&lt;/</span>div&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"item"</span>&gt;<span class="number">5</span>&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="item"&gt;6&lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;style lang="scss" scoped&gt;</span></span><br><span class="line"><span class="regexp">.home&#123;</span></span><br><span class="line"><span class="regexp">  width: 100%;</span></span><br><span class="line"><span class="regexp">  height: 3rem;</span></span><br><span class="line"><span class="regexp">  background: burlywood;</span></span><br><span class="line"><span class="regexp">  display: flex;</span></span><br><span class="line"><span class="regexp">  color: aliceblue;</span></span><br><span class="line"><span class="regexp">  flex-wrap: wrap;</span></span><br><span class="line"><span class="regexp">  font-size: 20px;</span></span><br><span class="line"><span class="regexp">  text-align: center;</span></span><br><span class="line"><span class="regexp">  .item&#123;</span></span><br><span class="line"><span class="regexp">    background: pink;</span></span><br><span class="line"><span class="regexp">    flex: 0 1 50%;</span></span><br><span class="line"><span class="regexp">    border: 0.02rem solid white;</span></span><br><span class="line"><span class="regexp">    height: 1rem;</span></span><br><span class="line"><span class="regexp">    box-sizing: border-box;</span></span><br><span class="line"><span class="regexp">    line-height: 1rem;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  .item:nth-child(odd)&#123;</span></span><br><span class="line"><span class="regexp">    border-right: 0rem;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">  .item &#123;</span></span><br><span class="line"><span class="regexp">    border-bottom: 0rem;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img2020.cnblogs.com/blog/1249970/202003/1249970-20200328202254426-2052158803.png" alt="img"></p>
-<h3 id="父盒子中子盒子浮动有什么后果？"><a href="#父盒子中子盒子浮动有什么后果？" class="headerlink" title="父盒子中子盒子浮动有什么后果？"></a>父盒子中子盒子浮动有什么后果？</h3><p>会产生高度塌陷；</p>
-<p>解决办法：</p>
-<p>1.父盒子添加高度</p>
-<p>2.父盒子添加overflow: hidden;</p>
-<p>3.在高度塌陷的父元素后面添加一个空白的div</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"clear"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;  </span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;style lang=<span class="string">"scss"</span> scoped&gt;</span><br><span class="line">.clear&#123;</span><br><span class="line">	clear: both;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="定位有哪些属性？相对定位是相对什么定位？"><a href="#定位有哪些属性？相对定位是相对什么定位？" class="headerlink" title="定位有哪些属性？相对定位是相对什么定位？"></a>定位有哪些属性？相对定位是相对什么定位？</h3><p>在CSS中关于定位的内容是：</p>
-<p>position:relative | absolute | static | fixed</p>
-<p>• static 自动定位，自动定位就是元素在页面普通文档流中由HTML自动定位，普通文档里中的元素也称为流动元素。不能通过z-index进行层次分级。</p>
-<p>• relative 相对定位，相对定位不脱离文档流，参考其在原来文档流中的位置，通过 top,bottom,left,right 定位，并且可以通过z-index进行层次分级。</p>
-<p>• absolute 绝对定位，绝对定位脱离文档流，依据最近的已经定位（绝对、相对或固定定位）的父元素，通过 top,bottom,left,right 定位。当父级 position 为 static 时，absolute元素将依据body根元素（浏览器窗口）进行定 位，可以通过z-index进行层次分级。</p>
-<p>• fixed 固定定位，固定定位与父元素无关（无论父元素是否定位），直接根据浏览器窗口定位，且不随滚动条拖动 页面而滚动，可通过z-index进行层次分级。</p>
-<p><a href="https://www.cnblogs.com/anjing940/p/12589582.html" target="_blank" rel="noopener">https://www.cnblogs.com/anjing940/p/12589582.html</a></p>
-<h3 id="行内元素块元素和行内块元素有什么区别？行内块元素在同一行显示时有默认空隙，如何解决？"><a href="#行内元素块元素和行内块元素有什么区别？行内块元素在同一行显示时有默认空隙，如何解决？" class="headerlink" title="行内元素块元素和行内块元素有什么区别？行内块元素在同一行显示时有默认空隙，如何解决？"></a>行内元素块元素和行内块元素有什么区别？行内块元素在同一行显示时有默认空隙，如何解决？</h3><p>　　HTML可以将元素分类方式分为行内元素、块状元素和行内块状元素三种。首先需要说明的是，这三者是可以互相转换的，使用display属性能够将三者任意转换：</p>
-<p>　　(1)display:inline;转换为行内元素</p>
-<p>　　(2)display:block;转换为块状元素</p>
-<p>　　(3)display:inline-block;转换为行内块状元素</p>
-<p><strong>对于标签，为inline元素，默认的垂直对齐方式是为以父元素的baseline，但是展示时又是以bottomline为对齐方式，因此造成了上下两个标签之间的间隙。</strong></p>
-<p>div{font-size:0};//推荐-把父元素的文字大小设置为0<br>img{vertical-align:top;}//改变其垂直对齐方式<br>img{display:block}; //将其改变为block元素<br>给图片设置浮动</p>
-<p>常见的块级元素有：<h1>~<h6>,<p>,<div>,<ul>,<ol>,<li>    等</p>
-<p>常见的行内元素有：<a>,<strong>,<b>,<em>,<del>,<span>等</p>
-<p>在行内元素中有几个特殊的标签，<img/>,<input/>,<td/>,可以设置它们的宽高度以及对齐属性</p>
-<h3 id="css3中的变形（transform）、过渡-transtion-、动画-animation"><a href="#css3中的变形（transform）、过渡-transtion-、动画-animation" class="headerlink" title="css3中的变形（transform）、过渡(transtion)、动画(animation)"></a>css3中的变形（transform）、过渡(transtion)、动画(animation)</h3><p>动画是使元素从一种样式逐渐变化为另一种样式的效果。</p>
-<h6 id="帧动画-animation"><a href="#帧动画-animation" class="headerlink" title="帧动画(animation)"></a><strong>帧动画(animation)</strong></h6><p>不仅有开始和结束状态，还可以用关键帧来定义中间的状态，做出比较复杂的动画。</p>
-<p>请用百分比来规定变化发生的时间，或用关键词 "from" 和 "to"，等同于 0% 和 100%。</p>
-<p>0% 是动画的开始，100% 是动画的完成。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@keyframes	规定动画。	</span><br><span class="line">animation	所有动画属性的简写属性，除了 animation-play-state 属性。</span><br><span class="line">animation-name	规定 @keyframes 动画的名称。	</span><br><span class="line">animation-duration	规定动画完成一个周期所花费的秒或毫秒。默认是 <span class="number">0</span>。	</span><br><span class="line">animation-timing-<span class="function"><span class="keyword">function</span>	规定动画的速度曲线。默认是 "<span class="title">ease</span>"。	</span></span><br><span class="line"><span class="function"><span class="title">animation</span>-<span class="title">delay</span>	规定动画何时开始。默认是 0。	</span></span><br><span class="line"><span class="function"><span class="title">animation</span>-<span class="title">iteration</span>-<span class="title">count</span>	规定动画被播放的次数。默认是 1。</span></span><br><span class="line"><span class="function"><span class="title">animation</span>-<span class="title">direction</span>	规定动画是否在下一周期逆向地播放。默认是 "<span class="title">normal</span>"。</span></span><br><span class="line"><span class="function"><span class="title">animation</span>-<span class="title">play</span>-<span class="title">state</span>	规定动画是否正在运行或暂停。默认是 "<span class="title">running</span>"。	</span></span><br><span class="line"><span class="function"><span class="title">animation</span>-<span class="title">fill</span>-<span class="title">mode</span>	规定对象动画时间之外的状态。</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;<span class="number">102</span>-动画模块-其它属性下&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        *&#123;</span></span><br><span class="line"><span class="regexp">            margin: 0;</span></span><br><span class="line"><span class="regexp">            padding: 0;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        .box1 &#123;</span></span><br><span class="line"><span class="regexp">            width: 100px;</span></span><br><span class="line"><span class="regexp">            height: 50px;</span></span><br><span class="line"><span class="regexp">            background-color: red;</span></span><br><span class="line"><span class="regexp">            position: absolute;</span></span><br><span class="line"><span class="regexp">            left: 0;</span></span><br><span class="line"><span class="regexp">            top: 0;</span></span><br><span class="line"><span class="regexp">            animation-name: sport;</span></span><br><span class="line"><span class="regexp">            animation-duration: 5s;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        @keyframes sport &#123;</span></span><br><span class="line"><span class="regexp">            0%&#123;</span></span><br><span class="line"><span class="regexp">                left: 0;</span></span><br><span class="line"><span class="regexp">                top: 0;</span></span><br><span class="line"><span class="regexp">            &#125;</span></span><br><span class="line"><span class="regexp">            25%&#123;</span></span><br><span class="line"><span class="regexp">                left: 300px;</span></span><br><span class="line"><span class="regexp">                top: 0;</span></span><br><span class="line"><span class="regexp">            &#125;</span></span><br><span class="line"><span class="regexp">            70%&#123;</span></span><br><span class="line"><span class="regexp">                left: 300px;</span></span><br><span class="line"><span class="regexp">                top: 300px;</span></span><br><span class="line"><span class="regexp">            &#125;</span></span><br><span class="line"><span class="regexp">            95%&#123;</span></span><br><span class="line"><span class="regexp">                left: 0;</span></span><br><span class="line"><span class="regexp">                top: 300px;</span></span><br><span class="line"><span class="regexp">            &#125;</span></span><br><span class="line"><span class="regexp">            100%&#123;</span></span><br><span class="line"><span class="regexp">                left: 0;</span></span><br><span class="line"><span class="regexp">                top: 0;</span></span><br><span class="line"><span class="regexp">            &#125;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>style&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">&lt;div class="box1"&gt;&lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
-
-<h6 id="补间动画（transition）"><a href="#补间动画（transition）" class="headerlink" title="补间动画（transition）"></a><strong>补间动画（transition）</strong></h6><p>只有开始和结束两种状态，补齐中间的动画</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">transition-property	规定设置过渡效果的 CSS 属性的名称。</span><br><span class="line">transition-duration	规定完成过渡效果需要多少秒或毫秒。</span><br><span class="line">transition-timing-<span class="function"><span class="keyword">function</span>	规定速度效果的速度曲线。</span></span><br><span class="line"><span class="function"><span class="title">transition</span>-<span class="title">delay</span>	定义过渡效果何时开始。</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">把鼠标指针放到 div 元素上，其宽度会从 <span class="number">100</span>px 逐渐变为 <span class="number">300</span>px：</span><br><span class="line">div</span><br><span class="line">&#123;</span><br><span class="line">width:<span class="number">100</span>px;</span><br><span class="line">transition: width <span class="number">2</span>s;</span><br><span class="line">-moz-transition: width <span class="number">2</span>s; <span class="comment">/* Firefox 4 */</span></span><br><span class="line">-webkit-transition: width <span class="number">2</span>s; <span class="comment">/* Safari 和 Chrome */</span></span><br><span class="line">-o-transition: width <span class="number">2</span>s; <span class="comment">/* Opera */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="transform"><a href="#transform" class="headerlink" title="transform"></a>transform</h6><p>属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">translate(x,y)	水平方向和垂直方向同时移动	 transform:translate(<span class="number">100</span>px,<span class="number">20</span>px):	</span><br><span class="line">scale(x,y)	scale(x,y)使元素水平方向和垂直方向同时缩放（也就是X轴和Y轴同时缩放）；		</span><br><span class="line">rotate(angle)	通过指定的角度参数对原元素指定一个<span class="number">2</span>D rotation（<span class="number">2</span>D 旋转） transform:rotate(<span class="number">30</span>deg)；</span><br><span class="line">skew(x-angle,y-angle)	skew(x,y)使元素在水平和垂直方向同时扭曲。transform:skew(<span class="number">30</span>deg,<span class="number">10</span>deg)；</span><br></pre></td></tr></table></figure>
-
-<h4 id="CSS3-新特性"><a href="#CSS3-新特性" class="headerlink" title="CSS3 新特性"></a>CSS3 新特性</h4><h6 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">:last-child /* 选择元素最后一个孩子 */</span><br><span class="line">:first-child /* 选择元素第一个孩子 */</span><br><span class="line">:nth-child(1) /* 按照第几个孩子给它设置样式 */</span><br><span class="line">:nth-child(even) /* 按照偶数 */</span><br><span class="line">:nth-child(odd)  /* 按照奇数 */</span><br><span class="line">:disabled /* 选择每个禁用的E元素 */</span><br><span class="line">:checked /* 选择每个被选中的E元素 */</span><br><span class="line">:not(selector) /* 选择非 selector 元素的每个元素 */</span><br><span class="line">::selection /* 选择被用户选取的元素部分 */</span><br></pre></td></tr></table></figure>
-
-<h6 id="背景和边框"><a href="#背景和边框" class="headerlink" title="背景和边框"></a>背景和边框</h6><ul>
-<li><p>背景：<br>background-size：规定背景图片的尺寸（cover：填充；100% 100%：拉伸）<br>background-origin：规定背景图片的定位区域<br>对于 background-origin 属性，有如下属性<br>背景图片可以放置于 content-box、padding-box 或 border-box 区域</p>
-</li>
-<li><p>边框：<br>border-radius：圆角<br>box-shadow / text-shadow：阴影<br>border-image：边框图片</p>
-</li>
-</ul>
-<h3 id="文本效果"><a href="#文本效果" class="headerlink" title="文本效果"></a>文本效果</h3><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>text-shadow</td>
-<td>向文本添加阴影</td>
-</tr>
-<tr>
-<td>text-justify</td>
-<td>规定当 text-align 设置为 “justify” 时所使用的对齐方法</td>
-</tr>
-<tr>
-<td>text-emphasis</td>
-<td>向元素的文本应用重点标记以及重点标记的前景色</td>
-</tr>
-<tr>
-<td>text-outline</td>
-<td>规定文本的轮廓</td>
-</tr>
-<tr>
-<td>text-overflow</td>
-<td>规定当文本溢出包含元素时发生的事情</td>
-</tr>
-<tr>
-<td>text-wrap</td>
-<td>规定文本的换行规则</td>
-</tr>
-<tr>
-<td>word-break</td>
-<td>规定非中日韩文本的换行规则</td>
-</tr>
-<tr>
-<td>word-wrap</td>
-<td>允许对长的不可分割的单词进行分割并换行到下一行</td>
-</tr>
-<tr>
-<td>text-decoration</td>
-<td>文本修饰符：overline、line-through、underline 分别是上划线、中划线、下划线</td>
-</tr>
-</tbody></table>
-<h3 id="常用选择器"><a href="#常用选择器" class="headerlink" title="常用选择器"></a>常用选择器</h3><h6 id="1-元素选择器"><a href="#1-元素选择器" class="headerlink" title="1.元素选择器"></a>1.元素选择器</h6><p>p{} //为所有的p元素设置样式。</p>
-<h6 id="2-ID选择器"><a href="#2-ID选择器" class="headerlink" title="2.ID选择器"></a>2.ID选择器</h6><p> #box{} //为id为box的元素设置样式。<strong>id值唯一，不能重复</strong></p>
-<h6 id="3-类选择器"><a href="#3-类选择器" class="headerlink" title="3.类选择器"></a>3.类选择器</h6><p> .box{} //为所有的class值为box的元素设置样式。</p>
-<h6 id="4-分组选择器（也叫并集选择器）"><a href="#4-分组选择器（也叫并集选择器）" class="headerlink" title="4.分组选择器（也叫并集选择器）"></a>4.分组选择器（也叫并集选择器）</h6><p> #box1,.box2,p{} //为为id为box1，class为box2和p的元素共同设置样式。</p>
-<h6 id="5-交集选择器"><a href="#5-交集选择器" class="headerlink" title="5.交集选择器"></a>5.交集选择器</h6><p>p.box1{} //为class值为box1的p元素设置样式，注意id为唯一值，一般id选择器不会存在于交集选择器中（没必要）。</p>
-<h6 id="6-后代选择器"><a href="#6-后代选择器" class="headerlink" title="6.后代选择器"></a>6.后代选择器</h6><p>语法：选择器1 选择器2{}</p>
-<h6 id="7-子元素选择器"><a href="#7-子元素选择器" class="headerlink" title="7.子元素选择器"></a>7.子元素选择器</h6><p>p>.box{} //选中制定父元素p的制定子元素。box。<strong>注意与后代元素选择器的区别</strong></p>
-<h6 id="8-伪类选择器"><a href="#8-伪类选择器" class="headerlink" title="8.伪类选择器"></a>8.伪类选择器</h6><p>伪类可以用来表示一些特殊的状态：<br><strong>由于选择器优先级的问题，给超链接a设置伪类时，需要注意他们的顺序，一般的顺序是：</strong><br><strong>love hate</strong> 记作（爱与恨）,方便记忆<br>:link>:visited>:hover>:active</p>
-<h6 id="选择器的优先级"><a href="#选择器的优先级" class="headerlink" title="选择器的优先级"></a>选择器的优先级</h6><p>为同一个元素设置多个样式时，此时哪个样式生效由选择器的优先级确定：</p>
-<p>选择器的优先级（权重）：</p>
-<table>
-<thead>
-<tr>
-<th align="center">·</th>
-<th align="center">内联样式</th>
-<th align="center">id选择器</th>
-<th align="center">类和伪类选择器</th>
-<th align="center">元素选择器</th>
-<th align="center">统配选择器</th>
-<th align="center">继承的样式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">优先级</td>
-<td align="center">1000</td>
-<td align="center">100</td>
-<td align="center">10</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">无</td>
-</tr>
-</tbody></table>
-<h2 id="H5部分"><a href="#H5部分" class="headerlink" title="H5部分"></a>H5部分</h2><h3 id="H5新增的语义化标签"><a href="#H5新增的语义化标签" class="headerlink" title="H5新增的语义化标签"></a>H5新增的语义化标签</h3><p>html5增加了<main><header><footer><aside><section><video><audio><time><data>之类的语义化标签, 搜索引擎会利用爬虫分析抓取页面结构内容，有利于SEO，页面结构更加清晰，利于维护.提高页面可访问性，不会在样式加载不正常的时候一团乱，维持基本结构。利于部分残障人士页面阅读器解析</p>
-<h3 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h3><p>浮动脱离了正常文档流,会导致父元素高度塌陷，后面元素会挤到浮动元素下方，造成布局错乱。</p>
-<h6 id="清除浮动："><a href="#清除浮动：" class="headerlink" title="清除浮动："></a>清除浮动：</h6><p>添加额外标签</p>
-<p>浮动元素末尾添加一个空的标签例如 <div style=”clear:both”></div>，其他标签br等亦可。</p>
-<p>使用 br标签和其自身的 html属性</p>
-<br clear="all" />
-
-<p>父元素设置 overflow：hidden</p>
-<p> 通过设置父元素overflow值设置为hidden(在支持BFC的浏览器触发BFC)；在IE6,IE7中还需要触发 hasLayout ，例如 zoom：1</p>
-<p>父元素设置 overflow：auto 属性</p>
-<p>父元素设置 overflow：auto 属性(在支持BFC的浏览器触发BFC)　同样IE6,IE7需要触发hasLayout，</p>
-<p>父元素也设置浮动</p>
-<p>父元素设置display:table</p>
-<p>使用 :after 伪元素</p>
-<h3 id="html第一行！doctype"><a href="#html第一行！doctype" class="headerlink" title="html第一行！doctype"></a>html第一行！doctype</h3><!DOCTYPE><p> 声明不是 HTML 标签；它是指示 web 浏览器关于页面使用哪个 HTML 版本进行编写的指令。</p>
-<h2 id="Es6部分"><a href="#Es6部分" class="headerlink" title="Es6部分"></a>Es6部分</h2><h3 id="let、const和var的区别"><a href="#let、const和var的区别" class="headerlink" title="let、const和var的区别"></a>let、const和var的区别</h3><h6 id="let"><a href="#let" class="headerlink" title="let:"></a>let:</h6><p>let 的用法类似于 var，但所声明的变量只在 let命令所在的代码块内有效（一个“{}”相当于一个代码块）</p>
+   这是 es6 新增的数据类型。    </code></pre><h2 id="Es6部分"><a href="#Es6部分" class="headerlink" title="Es6部分"></a>Es6部分</h2><h3 id="let、const和var的区别"><a href="#let、const和var的区别" class="headerlink" title="let、const和var的区别"></a>let、const和var的区别</h3><h6 id="let"><a href="#let" class="headerlink" title="let:"></a>let:</h6><p>let 的用法类似于 var，但所声明的变量只在 let命令所在的代码块内有效（一个“{}”相当于一个代码块）</p>
 <p>let它所声明的变量一定要在声明后使用，否则报错。</p>
 <p>只要块级作用域内存在 let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。</p>
 <p>不允许重复声明</p>
@@ -863,6 +635,30 @@ Symbol 类型
 			
 					<li>
 						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/04/03/js%E5%B0%8F%E8%80%83%E9%AA%8C/" title="js小考验">
+								js小考验			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								四月 3日, 2020				
+							</p>
+							<p class="relate-post-content">
+								一：字符串自己实现翻转
+1234567 var a='我是一个小画家' var b=a.split("");; var newStr = "";  for (var i = b.length-1;i&gt;=0; i--) &#123...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/04/03/js%E5%B0%8F%E8%80%83%E9%AA%8C/" title="js小考验">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="js小考验"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2020/03/31/%E6%9C%80%E8%BF%91%E9%9D%A2%E8%AF%95%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" title="最近面试遇到的问题">
 								最近面试遇到的问题			
 							</a>
@@ -871,7 +667,11 @@ Symbol 类型
 								三月 31日, 2020				
 							</p>
 							<p class="relate-post-content">
-								
+								箭头函数 写法附加规则
+当函数参数只有一个时，可省略小括号，但没有时，不能省略。
+123let b=Counter=&gt;&#123;		return 444&#125;
+
+函数体（中括号）中有且只有一行return语句时，中括号和...
 							</p>
 						</div>
 
@@ -1073,29 +873,6 @@ axios的作用？axios主要是用于向后台发起请求的，还有在请求�
 							<a href="/2019/12/13/js%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="js深拷贝与浅拷贝">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="js深拷贝与浅拷贝"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/12/02/zTree%E7%BB%83%E4%B9%A0%E4%BD%BF%E7%94%A8/" title="zTree练习使用">
-								zTree练习使用			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十二月 2日, 2019				
-							</p>
-							<p class="relate-post-content">
-								123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/12/02/zTree%E7%BB%83%E4%B9%A0%E4%BD%BF%E7%94%A8/" title="zTree练习使用">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="zTree练习使用"/>
 							</a>
 						</div>
 					</li>											

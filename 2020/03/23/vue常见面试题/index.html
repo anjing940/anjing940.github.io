@@ -319,7 +319,7 @@
 
 	<a href="/2020/03/23/vue%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url">
 		<time datetime="2020-03-23T02:50:33.000Z" itemprop="dateUpdated">
-	  		2020-03-25
+	  		2020-04-05
 	  </time>
 	</a> 
 
@@ -404,7 +404,26 @@
 <h2 id="7-如何获取dom"><a href="#7-如何获取dom" class="headerlink" title="7.如何获取dom?"></a>7.如何获取dom?</h2><p>答：ref=”domName” 用法：this.$refs.domName</p>
 <h2 id="8-说出几种vue当中的指令和它的用法？"><a href="#8-说出几种vue当中的指令和它的用法？" class="headerlink" title="8.说出几种vue当中的指令和它的用法？"></a>8.说出几种vue当中的指令和它的用法？</h2><p>答：v-model双向数据绑定；<br>v-for循环；<br>v-if v-show 显示与隐藏；<br>v-on事件；v-once: 只绑定一次。</p>
 <h2 id="9-vue-loader是什么？使用它的用途有哪些？"><a href="#9-vue-loader是什么？使用它的用途有哪些？" class="headerlink" title="9. vue-loader是什么？使用它的用途有哪些？"></a>9. vue-loader是什么？使用它的用途有哪些？</h2><p>答：vue文件的一个加载器，将template/js/style转换成js模块。<br>用途：js可以写es6、style样式可以scss或less、template可以加jade等</p>
-<h2 id="10-为什么使用key"><a href="#10-为什么使用key" class="headerlink" title="10.为什么使用key?"></a>10.为什么使用key?</h2><p>答：需要使用key来给每个节点做一个唯一标识，Diff算法就可以正确的识别此节点。<br>作用主要是为了高效的更新虚拟DOM。</p>
+<h2 id="10-v-for渲染列表是key是用来做什么的？"><a href="#10-v-for渲染列表是key是用来做什么的？" class="headerlink" title="10.v-for渲染列表是key是用来做什么的？?"></a>10.v-for渲染列表是key是用来做什么的？?</h2><p>答：需要使用key来给每个节点做一个唯一标识，Diff算法就可以正确的识别此节点。<br>作用主要是为了高效的更新虚拟DOM。</p>
+<p>我们知道，vue和react都实现了一套虚拟DOM，使我们可以不直接操作DOM元素，只操作数据便可以重新渲染页面。而隐藏在背后的原理便是其高效的Diff算法。</p>
+<p>vue和react的虚拟DOM的Diff算法大致相同，其核心是基于两个简单的假设：</p>
+<p><strong>1. 两个相同的组件产生类似的DOM结构，不同的组件产生不同的DOM结构。</strong></p>
+<p><strong>2. 同一层级的一组节点，他们可以通过唯一的id进行区分。</strong></p>
+<p>基于以上这两点假设，使得虚拟DOM的Diff算法的复杂度从<strong>O(n^3)</strong>降到了<strong>O(n)</strong>。</p>
+<p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191016162-1229549117.png" alt="img"></p>
+<p>当页面的数据发生变化时，Diff算法只会比较同一层级的节点：</p>
+<p><strong>如果节点类型不同，直接干掉前面的节点，再创建并插入新的节点，不会再比较这个节点以后的子节点了。</strong></p>
+<p><strong>如果节点类型相同，则会重新设置该节点的属性，从而实现节点的更新。</strong></p>
+<p>当某一层有很多相同的节点时，也就是列表节点时，Diff算法的更新过程默认情况下也是遵循以上原则。</p>
+<p>比如一下这个情况：</p>
+<p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191056146-436654927.png" alt="img"></p>
+<p>我们希望可以在B和C之间加一个F，Diff算法默认执行起来是这样的：</p>
+<p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191119318-368188268.png" alt="img"></p>
+<p>即把C更新成F，D更新成C，E更新成D，最后再插入E，是不是很没有效率？</p>
+<p>所以我们<strong>需要使用key来给每个节点做一个唯一标识，Diff算法就可以正确的识别此节点，找到正确的位置区插入新的节点。</strong></p>
+<p><img src="https://images2017.cnblogs.com/blog/1170024/201710/1170024-20171018191142334-13876328.png" alt="img"></p>
+<p>所以一句话，<strong>key的作用主要是为了高效的更新虚拟DOM</strong>。另外vue中在使用相同标签名元素的过渡切换时，也会使用到key属性，其目的也是为了让vue可以区分它们，</p>
+<p>否则vue只会替换其内部属性而不会触发过渡效果。</p>
 <h2 id="11-axios及安装"><a href="#11-axios及安装" class="headerlink" title="11.axios及安装?"></a>11.axios及安装?</h2><p>答：请求后台资源的模块。npm install axios –save装好，<br>js中使用import进来，然后.get或.post。返回在.then函数中如果成功，失败则是在.catch函数中。</p>
 <ul>
 <li>从浏览器中创建 XMLHttpRequests</li>
@@ -425,6 +444,24 @@
 
 <h2 id="13-请说出vue-cli项目中src目录每个文件夹和文件的用法？"><a href="#13-请说出vue-cli项目中src目录每个文件夹和文件的用法？" class="headerlink" title="13.请说出vue.cli项目中src目录每个文件夹和文件的用法？"></a>13.请说出vue.cli项目中src目录每个文件夹和文件的用法？</h2><p>答：assets文件夹是放静态资源；components是放组件；router是定义路由相关的配置; app.vue是一个应用主组件；main.js是入口文件。</p>
 <h2 id="14-分别简述computed和watch的使用场景"><a href="#14-分别简述computed和watch的使用场景" class="headerlink" title="14.分别简述computed和watch的使用场景"></a>14.分别简述computed和watch的使用场景</h2><p>computed:<br>　　　　当一个属性受多个属性影响的时候就需要用到computed<br>　　　　最典型的栗子： 购物车商品结算的时候<br>watch:<br>　　　　当一条数据影响多条数据的时候就需要用watch<br>　　　　栗子：搜索数据</p>
+<h6 id="计算属性缓存vs方法"><a href="#计算属性缓存vs方法" class="headerlink" title="计算属性缓存vs方法"></a>计算属性缓存vs方法</h6><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"home"</span>&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"head"</span> @click=<span class="string">"back()"</span>&gt;</span><br><span class="line">      &lt;van-icon name=<span class="string">"arrow-left"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"icon-left"</span> /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;p&gt;&#123;&#123; msg &#125;&#125;&lt;/</span>p&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123; msg.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>) &#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">        &lt;p&gt;&#123;&#123; reveredMessage &#125;&#125;&lt;/</span>p&gt;</span><br><span class="line">        &lt;p&gt; 调用methods中的方法 &#123;&#123; changeMsg() &#125;&#125; &lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default &#123;</span></span><br><span class="line"><span class="regexp">    name: 'payOrder',</span></span><br><span class="line"><span class="regexp">    components: &#123; </span></span><br><span class="line"><span class="regexp">      [Icon.name]: Icon,</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    data() &#123;</span></span><br><span class="line"><span class="regexp">      return &#123;</span></span><br><span class="line"><span class="regexp">        msg: 'hello'</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    watch: &#123;</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    computed: &#123;</span></span><br><span class="line"><span class="regexp">      /</span><span class="regexp">/ 计算属性的getter </span></span><br><span class="line"><span class="regexp">      reveredMessage: function () &#123;</span></span><br><span class="line"><span class="regexp">          /</span><span class="regexp">/ this 指向时vm的实例</span></span><br><span class="line"><span class="regexp">          return this.msg.split('').reverse().join('')</span></span><br><span class="line"><span class="regexp">          &#125;</span></span><br><span class="line"><span class="regexp">      &#125;,</span></span><br><span class="line"><span class="regexp">    methods: &#123;</span></span><br><span class="line"><span class="regexp">        changeMsg() &#123;</span></span><br><span class="line"><span class="regexp">        return this.msg.split('').reverse().join('')</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以将同一个函数定义一个方法而不是一个计算属性。两种方式的最终结果确实完全相同的，然而，不同的<strong><em>计算属性是基于他们的响应式依赖进行缓存的，只在相关响应式依赖发生改变时，他们才会重新求值。这就意味这只要msg还没发生改变</em></strong>，<strong>多次访问<code>reveredMessage</code>计算属性会立即返回之前的计算结果，而不必再次执行函数。***</strong>方法每次都会去重新计算结果***</p>
+<p>为什么需要缓存？假如我们有一个性能开销比较大的计算属性getCount, 它需要遍历一个巨大的数组并作出大量的计算。然后我们有可能有其他的计算属性依赖于getCount,如果没有缓存，我们将不可避免的多次去执行getCount的getter！。。。。当然了，如果你不希望有缓存，换一句话来说，你可以使用方法来代替。</p>
+<h6 id="计算属性vs侦听属性"><a href="#计算属性vs侦听属性" class="headerlink" title="计算属性vs侦听属性"></a>计算属性vs侦听属性</h6><p>Vue提供了一种更为通用的方式来观察和响应Vue实列上的数据变化：<code>侦听属性</code>。当然你有一些数据需要随着其他数据的变化而变动时你很容易滥用<code>wathch</code>，–。我们最好的做法时使用计算属性而不是命令式的watch回调。下面我们可以想想这个例子</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span> &#123;&#123; fullName &#125;&#125; <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>主要看js代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cosnt vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        firstName: <span class="string">''</span>,</span><br><span class="line">        lastName: <span class="string">''</span>,</span><br><span class="line">        fullName: <span class="string">''</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">        firstName: <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.fullName = newVal + <span class="keyword">this</span>.lastVal</span><br><span class="line">        &#125;,</span><br><span class="line">        lastName: <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.fullName = <span class="keyword">this</span>.firstName + newVal</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>watch</code>的话每次就只能监听到一个属性。而且命令是重复的，将它和计算属性进行对比。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span> &#123;&#123; fullName &#125;&#125; <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>看js代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cosnt vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        firstName: <span class="string">''</span>,</span><br><span class="line">        lastName: <span class="string">''</span>,</span><br><span class="line">        <span class="comment">// fullName: '',</span></span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">        fullName: &#123;</span><br><span class="line">            <span class="comment">// 只需要执行一次就OK</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="keyword">this</span>.lastName</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="侦听器"><a href="#侦听器" class="headerlink" title="侦听器"></a>侦听器</h3><p>虽然计算属性在大多数情况下更加适合，但有时候也需要一个自定义的侦听器。这就是为什么Vue通过watch选项提供了一个更加通用的方法，来响应数据的变化。当需要在数据变化时执行异步或者开销较大的操作时，这个方法时最有用的。</p>
+<p><strong>总结***</strong>watch是观察某一个属性的变化，重新计算属性值。computed是通过所依赖的属性的变化重新计算属性值。<strong>*但如果要在数据变化的同时</strong>进行异步操作或者是比较大的开销，那么watch为最佳选择**。</p>
 <h2 id="15-v-on可以监听多个方法吗？"><a href="#15-v-on可以监听多个方法吗？" class="headerlink" title="15.v-on可以监听多个方法吗？"></a>15.v-on可以监听多个方法吗？</h2><p>可以，</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> v-on=<span class="string">"&#123; input:onInput,focus:onFocus,blur:onBlur, &#125;"</span>&gt;</span><br></pre></td></tr></table></figure>
 
@@ -441,7 +478,14 @@
 <h2 id="27-delete和Vue-delete删除数组的区别"><a href="#27-delete和Vue-delete删除数组的区别" class="headerlink" title="27.delete和Vue.delete删除数组的区别"></a>27.delete和Vue.delete删除数组的区别</h2><p>答：delete只是被删除的元素变成了 empty/undefined 其他的元素的键值还是不变。Vue.delete 直接删除了数组 改变了数组的键值。</p>
 <h2 id="28-SPA首屏加载慢如何解决"><a href="#28-SPA首屏加载慢如何解决" class="headerlink" title="28.SPA首屏加载慢如何解决"></a>28.SPA首屏加载慢如何解决</h2><p>答：安装动态懒加载所需插件；使用CDN资源。</p>
 <h2 id="29-Vue-router跳转和location-href有什么区别"><a href="#29-Vue-router跳转和location-href有什么区别" class="headerlink" title="29.Vue-router跳转和location.href有什么区别"></a>29.Vue-router跳转和location.href有什么区别</h2><p>答：使用location.href=’/url’来跳转，简单方便，但是刷新了页面；<br>使用history.pushState(‘/url’)，无刷新页面，静态跳转；<br>引进router，然后使用router.push(‘/url’)来跳转，使用了diff算法，实现了按需加载，减少了dom的消耗。<br>其实使用router跳转和使用history.pushState()没什么差别的，因为vue-router就是用了history.pushState()，尤其是在history模式下。</p>
-<h2 id="30-vue-slot"><a href="#30-vue-slot" class="headerlink" title="30. vue slot"></a>30. vue slot</h2><p>答：简单来说，假如父组件需要在子组件内放一些DOM，那么这些DOM是显示、不显示、在哪个地方显示、如何显示，就是slot分发负责的活。</p>
+<h2 id="30-vue-slot插槽的作用"><a href="#30-vue-slot插槽的作用" class="headerlink" title="30. vue slot插槽的作用"></a>30. vue slot插槽的作用</h2><p>答：简单来说，假如父组件需要在子组件内放一些DOM，那么这些DOM是显示、不显示、在哪个地方显示、如何显示，就是slot分发负责的活。</p>
+<p><strong>插槽，其实就相当于占位符。</strong>它在组件中给你的HTML模板占了一个位置，让你来传入一些东西。插槽又分为匿名插槽、具名插槽以及作用域插槽。</p>
+<p>你可能不太明白，为什么我要给子组件中传入HTML，而不直接写在子组件中呢？答案是这样的。你可以想象一个场景，<strong>你有五个页面，这五个页面中只有一个区域的内容不一样，你会怎么去写这五个页面呢？复制粘贴是一种办法，但在vue中，插槽(slot)是更好的做法。</strong></p>
+<p><strong>父组件向子组件传递dom时会用到插槽</strong></p>
+<p><strong>作用域插槽：当同一个子组件想要在不同的父组件里展示不同的状态，可以使用作用域插槽。展示的状态由父组件来决定</strong></p>
+<h6 id="匿名插槽"><a href="#匿名插槽" class="headerlink" title="匿名插槽"></a>匿名插槽</h6><p>我们又可以叫它单个插槽或者默认插槽。与具名插槽相对，它不需要设置name属性。（它隐藏的name属性为default。）</p>
+<h6 id="具名插槽"><a href="#具名插槽" class="headerlink" title="具名插槽"></a>具名插槽</h6><p>插槽有一个name属性与匿名插槽相对，加了name属性的匿名插槽就是具名插槽。</p>
+<h6 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h6><p>其实就是可以传递数据的插槽。子组件中的一些数据想在父组件中使用，必须通过规定的方法来传递。</p>
 <p>父组件：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"crootbox"</span>&gt;</span><br><span class="line">		&lt;v-anchor :list=list&gt;</span><br><span class="line">			&lt;template v-slot&gt;</span><br><span class="line">				&lt;div&gt;</span><br><span class="line">					&lt;div id=<span class="string">"anchor-1"</span>&gt;</span><br><span class="line">						&lt;img src=<span class="string">"@/assets/images/details1.jpg"</span> width=<span class="string">"100%"</span> alt=<span class="string">""</span>&gt;</span><br><span class="line">						&lt;img src=<span class="string">"@/assets/images/details2.jpg"</span> width=<span class="string">"100%"</span> alt=<span class="string">""</span>&gt;</span><br><span class="line">						&lt;img src=<span class="string">"@/assets/images/details3.jpg"</span> width=<span class="string">"100%"</span> alt=<span class="string">""</span>&gt;</span><br><span class="line">					&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>div&gt;	</span><br><span class="line">			&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>v-anchor&gt;</span><br><span class="line">	&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">import</span> Vanchor <span class="keyword">from</span> <span class="string">'@/views/product/v_anchor.vue'</span></span><br><span class="line">	<span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">		name: <span class="string">"prd-details"</span>,</span><br><span class="line">		components: &#123; </span><br><span class="line">           [Vanchor.name]: Vanchor,</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -488,6 +532,37 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$router.push(&#123;<span class="attr">name</span>:<span class="string">'home'</span>,<span class="attr">params</span>: &#123;<span class="attr">id</span>:<span class="string">'1'</span>&#125;&#125;)  <span class="comment">// 只能用 name</span></span><br><span class="line"><span class="comment">// 路由配置 path: "/home/:id" 或者 path: "/home:id" ,</span></span><br><span class="line"><span class="comment">// 不配置path ,第一次可请求,刷新页面id会消失</span></span><br><span class="line"><span class="comment">// 配置path,刷新页面id会保留</span></span><br><span class="line"><span class="comment">// html 取参  $route.params.id</span></span><br><span class="line"><span class="comment">// script 取参  this.$route.params.id</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="45-route和router的区别"><a href="#45-route和router的区别" class="headerlink" title="45.route和router的区别"></a>45.route和router的区别</h2><p>答：是路由信息对象，包括，path，params，hash，query，fullPath，mathched,name等路由信息参数。而router是“路由实例”对象包括了路由的跳转方法，钩子函数等。</p>
+<h2 id="46-vueAPP适配是怎么写的，用的什么单位？"><a href="#46-vueAPP适配是怎么写的，用的什么单位？" class="headerlink" title="46.vueAPP适配是怎么写的，用的什么单位？"></a>46.vueAPP适配是怎么写的，用的什么单位？</h2><p>原理是借助px2rem 插件方便的将px单位转为了rem</p>
+<p>具体步骤：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install px2rem-loader  lib-flexible --save</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在main.js中引入lib-flexible</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import 'lib-flexible/flexible.js'</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在build下的 utils.js中，找到generateLoaders 方法，添加以下代码</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> px2remLoader = &#123;    </span><br><span class="line">loader: <span class="string">'px2rem-loader'</span>,   </span><br><span class="line">options: &#123;    </span><br><span class="line">remUnit: <span class="number">37.5</span></span><br><span class="line">&#125;&#125; </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateLoaders</span> (<span class="params">loader, loaderOptions</span>) </span></span><br><span class="line"><span class="function"></span>&#123;    <span class="keyword">const</span> loaders = [cssLoader, px2remLoader]   </span><br><span class="line"><span class="keyword">if</span> (loader) &#123;        </span><br><span class="line">loaders.push(&#123;        </span><br><span class="line">loader: loader + <span class="string">'-loader'</span>,        </span><br><span class="line">options: <span class="built_in">Object</span>.assign(&#123;&#125;, loaderOptions, &#123;        </span><br><span class="line">sourceMap: options.sourceMap        </span><br><span class="line">&#125;)    </span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>重启项目，会发现自己设置的px被转为rem 了</p>
+</li>
+<li><p>但是有一定的局限性</p>
+</li>
+<li><p>以上实现转换适用于：</p>
+<p>（1）组件中编写的<style></style>下的css</p>
+<p>（2）从index.js或者main.js中import ‘../../static/css/reset.css’引入css</p>
+<p>（3）在组件的&lt;script type=”text/ecmascript-6″&gt; import ‘../../static/css/reset.css’</script>中引入css</p>
+<p>另外的情况不适用：</p>
+<p>（1）组件<style></style>中@import “../../static/css/reset.css (可考虑上面（2）、（3）的形式引入)</p>
+<p>（2）外部样式:<link rel="stylesheet" href="static/css/reset.css"></p>
+<p>（3）元素内部样式：style=”height: 417px; width: 550px;”</p>
+<p>另外我要补充的是：在做移动端适配的时候我们不建议给字体也设置rem的单位，针对这种情况，我为字体适配的解决方案是使用媒体查询，文件以</p>
+<p>组件<style></style>中@import “../../static/css/reset.css形式引入，可完美解决移动端适配问题</p>
+</li>
+</ul>
 	
 	</div>
 	
@@ -529,6 +604,30 @@
 <div class="relate-post">
 	
 		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/04/01/vue%20$router%E5%92%8C$route%E7%9A%84%E5%8C%BA%E5%88%AB/" title="vue $router和$route的区别">
+								vue $router和$route的区别			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								四月 1日, 2020				
+							</p>
+							<p class="relate-post-content">
+								router为VueRouter的实例，相当于一个全局的路由器对象，里面含有很多属性和子对象，例如history对象。。。经常用的跳转链接就可以用this.$router.push，和router-link跳转一样。。。
+this.$...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/04/01/vue%20$router%E5%92%8C$route%E7%9A%84%E5%8C%BA%E5%88%AB/" title="vue $router和$route的区别">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue $router和$route的区别"/>
+							</a>
+						</div>
+					</li>											
+			
 			
 					<li>
 						<div class="relate-post-text">
@@ -704,31 +803,6 @@ vue...
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2020/03/20/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="vue生命周期">
-								vue生命周期			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								三月 20日, 2020				
-							</p>
-							<p class="relate-post-content">
-								Vue 实例从创建到销毁的过程，就是生命周期。也就是从开始创建、初始化数据、编译模板、挂载Dom→渲染、更新→渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。
-
-12345678910111213141516171819202...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2020/03/20/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="vue生命周期">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue生命周期"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2020/03/20/vue%E9%A1%B9%E7%9B%AE%E4%B8%ADkeepAlive%E7%9A%84%E4%BD%BF%E7%94%A8/" title="vue项目中keepAlive的使用">
 								vue项目中keepAlive的使用			
 							</a>
@@ -755,23 +829,24 @@ include: 字符串或正则表达式。只有匹配的组件会被缓...
 			
 					<li>
 						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/12/23/vue%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="vue文件上传组件">
-								vue文件上传组件			
+							<a class="relate-post-title" href="/2020/03/20/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="vue生命周期">
+								vue生命周期			
 							</a>
 							<p class="relate-post-date">
 								<i class="fa fa-calendar"></i>
-								十二月 23日, 2019				
+								三月 20日, 2020				
 							</p>
 							<p class="relate-post-content">
-								上传组件(我用的是element ui 自定义上传组件)
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484...
+								Vue 实例从创建到销毁的过程，就是生命周期。也就是从开始创建、初始化数据、编译模板、挂载Dom→渲染、更新→渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。
+
+12345678910111213141516171819202...
 							</p>
 						</div>
 
 						<div class="relate-post-cover">
-							<a href="/2019/12/23/vue%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="vue文件上传组件">				
+							<a href="/2020/03/20/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="vue生命周期">				
 								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue文件上传组件"/>
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="vue生命周期"/>
 							</a>
 						</div>
 					</li>											
