@@ -319,7 +319,7 @@
 
 	<a href="/2020/03/31/%E6%9C%80%E8%BF%91%E9%9D%A2%E8%AF%95%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="url">
 		<time datetime="2020-03-31T13:57:01.000Z" itemprop="dateUpdated">
-	  		2020-04-02
+	  		2020-04-08
 	  </time>
 	</a> 
 
@@ -344,7 +344,7 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<h2 id="箭头函数-写法"><a href="#箭头函数-写法" class="headerlink" title="箭头函数 写法"></a>箭头函数 写法</h2><p>附加规则</p>
+		<h2 id="es6"><a href="#es6" class="headerlink" title="es6"></a>es6</h2><h3 id="箭头函数-写法"><a href="#箭头函数-写法" class="headerlink" title="箭头函数 写法"></a>箭头函数 写法</h3><p>附加规则</p>
 <p>当函数参数只有一个时，可省略小括号，但没有时，不能省略。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> b=<span class="function"><span class="params">Counter</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">444</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -356,19 +356,7 @@
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">(参数<span class="number">1</span>, 参数<span class="number">2</span>, …, 参数N) =&gt; &#123; 函数声明 &#125;</span><br><span class="line"><span class="comment">//相当于：(参数1, 参数2, …, 参数N) =&gt;&#123; return 表达式; &#125;</span></span><br><span class="line">(参数<span class="number">1</span>, 参数<span class="number">2</span>, …, 参数N) =&gt; 表达式（单一）</span><br><span class="line"><span class="comment">// 当只有一个参数时，圆括号是可选的：</span></span><br><span class="line">(单一参数) =&gt; &#123;函数声明&#125;</span><br><span class="line">单一参数 =&gt; &#123;函数声明&#125;</span><br><span class="line"><span class="comment">// 没有参数的函数应该写成一对圆括号。</span></span><br><span class="line">() =&gt; &#123;函数声明&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b=<span class="function"><span class="keyword">function</span> (<span class="params">Counter</span>)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="number">444</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(b());</span><br><span class="line"><span class="comment">//箭头函数</span></span><br><span class="line"><span class="keyword">let</span> b=<span class="function"><span class="params">Counter</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">444</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(b());</span><br><span class="line"><span class="comment">//或</span></span><br><span class="line">    <span class="keyword">let</span> b=<span class="function"><span class="params">Counter</span>=&gt;</span><span class="number">444</span></span><br><span class="line">	<span class="built_in">console</span>.log(b());</span><br></pre></td></tr></table></figure>
 
-<h2 id="object的key与value"><a href="#object的key与value" class="headerlink" title="object的key与value"></a>object的key与value</h2><p>根据动态key得到某对象中相对应的value的方法</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> key=<span class="string">"name1"</span></span><br><span class="line"><span class="keyword">var</span> obj=&#123;</span><br><span class="line">	<span class="string">"name1"</span>:<span class="string">"张三"</span>,</span><br><span class="line">	<span class="string">"name2"</span>:<span class="string">"李四"</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj))<span class="comment">// ["name1", "name2"]</span></span><br><span class="line">	<span class="built_in">console</span>.log(obj.name1)	<span class="comment">//张三</span></span><br><span class="line">	<span class="built_in">console</span>.log(obj.key)<span class="comment">//undefined</span></span><br><span class="line">	<span class="built_in">console</span>.log(obj[key])<span class="comment">//张三</span></span><br><span class="line">	<span class="built_in">console</span>.log(obj[<span class="string">'name1'</span>] )<span class="comment">//张三</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> p <span class="keyword">in</span> obj)&#123;</span><br><span class="line">	  <span class="built_in">console</span>.log(p);<span class="comment">//   取得是key值</span></span><br><span class="line">	  <span class="built_in">console</span>.log(obj[p]);<span class="comment">//取得是value值</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="vue中props的默认写法"><a href="#vue中props的默认写法" class="headerlink" title="vue中props的默认写法"></a>vue中props的默认写法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">  rowClick: &#123;</span><br><span class="line">    type: <span class="built_in">Function</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  title: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">"标题"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  display: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">"table"</span> </span><br><span class="line">  &#125;,</span><br><span class="line">  columnCount: &#123;</span><br><span class="line">    type: <span class="built_in">Number</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="number">4</span></span><br><span class="line">  &#125;,</span><br><span class="line">  columns: &#123;</span><br><span class="line">    type: <span class="built_in">Array</span>,</span><br><span class="line">    <span class="keyword">default</span>() &#123;</span><br><span class="line">      <span class="keyword">return</span> [];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  showPage: &#123;</span><br><span class="line">    type: <span class="built_in">Boolean</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  api: &#123;</span><br><span class="line">    type: <span class="built_in">Object</span>,</span><br><span class="line">    <span class="keyword">default</span>() &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  parameter: &#123;</span><br><span class="line">    type: <span class="built_in">Object</span>,</span><br><span class="line">    <span class="keyword">default</span>() &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  defaultParameter: &#123;</span><br><span class="line">    type: <span class="built_in">Boolean</span>,</span><br><span class="line">    <span class="keyword">default</span>() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>// 如果是数组或对象，默认值必须是一个函数来返回*而不是直接写，否则报错</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//正确：</span></span><br><span class="line"> menu:&#123;</span><br><span class="line">     type:<span class="built_in">Array</span>,</span><br><span class="line">     <span class="keyword">default</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         <span class="keyword">return</span> []</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line">	propE: &#123;</span><br><span class="line">		type: <span class="built_in">Array</span>,</span><br><span class="line">		<span class="keyword">default</span>: <span class="function"><span class="params">()</span> =&gt;</span> []</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 自定义一个验证函数</span></span><br><span class="line">	propF: &#123;</span><br><span class="line">		validator: <span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> value &gt; <span class="number">10</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//错误</span></span><br><span class="line"> menu:&#123;</span><br><span class="line">     type:<span class="built_in">Array</span>,</span><br><span class="line">     <span class="keyword">default</span>:[]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<p>或者直接跟上面第一个代码一样，不管什么类型，都写在函数返回中。</p>
-<h2 id="VUE-create与mounted的区别"><a href="#VUE-create与mounted的区别" class="headerlink" title="VUE-create与mounted的区别"></a>VUE-create与mounted的区别</h2><p>create与mounted的区别</p>
-<pre><code>1）created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。
-
-2）mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。</code></pre><h2 id="let与const的区别"><a href="#let与const的区别" class="headerlink" title="let与const的区别"></a>let与const的区别</h2><p>let与const都是只在声明所在的块级作用域内有效。</p>
+<h3 id="let与const的区别"><a href="#let与const的区别" class="headerlink" title="let与const的区别"></a>let与const的区别</h3><p>let与const都是只在声明所在的块级作用域内有效。</p>
 <p>let声明的变量可以改变，值和类型都可以改变，没有限制。</p>
 <p>const声明的变量不得改变值，这意味着，const一旦声明变量，就必须立即初始化，不能留到以后赋值。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a ;<span class="comment">//报错,一旦声明变量，应该立即赋值！！const b = 2;b = 3//报错，因为定义常量之后不能成重新赋值！！</span></span><br></pre></td></tr></table></figure>
@@ -380,7 +368,10 @@
 <p>除了将对象本身冻结，对象的属性也应该冻结。下面是一个将对象彻底冻结的函数</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> constantize = <span class="function">(<span class="params">obj</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">Object</span>.freeze(obj);</span><br><span class="line">  <span class="built_in">Object</span>.keys(obj).forEach( <span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> ( <span class="keyword">typeof</span> obj[key] === <span class="string">'object'</span> ) &#123;</span><br><span class="line">      constantize( obj[key] );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h2 id="判断数据类型的方法"><a href="#判断数据类型的方法" class="headerlink" title="判断数据类型的方法"></a>判断数据类型的方法</h2><h6 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a><strong>typeof</strong></h6><p>如果使用typeof来判断Number，String，Boolean，Function，undefined，结果如下：</p>
+<h2 id="js"><a href="#js" class="headerlink" title="js"></a>js</h2><h3 id="object的key与value"><a href="#object的key与value" class="headerlink" title="object的key与value"></a>object的key与value</h3><p>根据动态key得到某对象中相对应的value的方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> key=<span class="string">"name1"</span></span><br><span class="line"><span class="keyword">var</span> obj=&#123;</span><br><span class="line">	<span class="string">"name1"</span>:<span class="string">"张三"</span>,</span><br><span class="line">	<span class="string">"name2"</span>:<span class="string">"李四"</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj))<span class="comment">// ["name1", "name2"]</span></span><br><span class="line">	<span class="built_in">console</span>.log(obj.name1)	<span class="comment">//张三</span></span><br><span class="line">	<span class="built_in">console</span>.log(obj.key)<span class="comment">//undefined</span></span><br><span class="line">	<span class="built_in">console</span>.log(obj[key])<span class="comment">//张三</span></span><br><span class="line">	<span class="built_in">console</span>.log(obj[<span class="string">'name1'</span>] )<span class="comment">//张三</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> p <span class="keyword">in</span> obj)&#123;</span><br><span class="line">	  <span class="built_in">console</span>.log(p);<span class="comment">//   取得是key值</span></span><br><span class="line">	  <span class="built_in">console</span>.log(obj[p]);<span class="comment">//取得是value值</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="判断数据类型的方法"><a href="#判断数据类型的方法" class="headerlink" title="判断数据类型的方法"></a>判断数据类型的方法</h3><h6 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a><strong>typeof</strong></h6><p>如果使用typeof来判断Number，String，Boolean，Function，undefined，结果如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">console.log(</span><br><span class="line">    typeof 123, //&quot;number&quot;</span><br><span class="line">    typeof &apos;dsfsf&apos;, //&quot;string&quot;</span><br><span class="line">    typeof false, //&quot;boolean&quot;</span><br><span class="line">    typeof function()&#123;console.log(&apos;aaa&apos;);&#125;, //&quot;function&quot;</span><br><span class="line">    typeof undefined, //&quot;undefined&quot;</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 <h6 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h6><p>instanceof运算符需要指定一个构造函数，或者说指定一个特定的类型，它用来判断这个构造函数的原型是否在给定对象的原型链上。Array  Object  Function Date</p>
@@ -403,6 +394,40 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var toString = Object.prototype.toString;</span><br><span class="line"></span><br><span class="line">toString.call(123); //&quot;[object Number]&quot;</span><br><span class="line">toString.call(&apos;abcdef&apos;); //&quot;[object String]&quot;</span><br><span class="line">toString.call(true); //&quot;[object Boolean]&quot;</span><br><span class="line">toString.call([1, 2, 3, 4]); //&quot;[object Array]&quot;</span><br><span class="line">toString.call(&#123;name:&apos;wenzi&apos;, age:25&#125;); //&quot;[object Object]&quot;</span><br><span class="line">toString.call(function()&#123; console.log(&apos;this is function&apos;); &#125;); //&quot;[object Function]&quot;</span><br><span class="line">toString.call(undefined); //&quot;[object Undefined]&quot;</span><br><span class="line">toString.call(null); //&quot;[object Null]&quot;</span><br><span class="line">toString.call(new Date()); //&quot;[object Date]&quot;</span><br><span class="line">toString.call(/^[a-zA-Z]&#123;5,20&#125;$/); //&quot;[object RegExp]&quot;</span><br><span class="line">toString.call(new Error()); //&quot;[object Error]&quot;</span><br></pre></td></tr></table></figure>
 
 <p>这样可以看到使用Object.prototype.toString.call()的方式来判断一个变量的类型是最准确的方法。</p>
+<h3 id="字符串自己实现翻转"><a href="#字符串自己实现翻转" class="headerlink" title="字符串自己实现翻转"></a>字符串自己实现翻转</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">var</span> a=<span class="string">'我是一个小画家'</span></span><br><span class="line"> <span class="keyword">var</span> b=a.split(<span class="string">""</span>);;</span><br><span class="line"> <span class="keyword">var</span> newStr = <span class="string">""</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = b.length<span class="number">-1</span>;i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">newStr +=b[i]</span><br><span class="line">  &#125;</span><br><span class="line"> <span class="built_in">console</span>.log(newStr);<span class="comment">//家画小个一是我</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0到100被5整除的数"><a href="#0到100被5整除的数" class="headerlink" title="0到100被5整除的数"></a>0到100被5整除的数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> str=[];</span><br><span class="line">  <span class="keyword">var</span> str2=[];</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;=<span class="number">100</span>;i++)&#123;</span><br><span class="line">  <span class="keyword">if</span>(i%<span class="number">5</span>==<span class="number">0</span>&amp;&amp;i&gt;<span class="number">80</span>)&#123;</span><br><span class="line">str2 +=i</span><br><span class="line">&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(str2)<span class="comment">//85 90 95 100</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><h3 id="vue中props的默认写法"><a href="#vue中props的默认写法" class="headerlink" title="vue中props的默认写法"></a>vue中props的默认写法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">  rowClick: &#123;</span><br><span class="line">    type: <span class="built_in">Function</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  title: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">"标题"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  display: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">"table"</span> </span><br><span class="line">  &#125;,</span><br><span class="line">  columnCount: &#123;</span><br><span class="line">    type: <span class="built_in">Number</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="number">4</span></span><br><span class="line">  &#125;,</span><br><span class="line">  columns: &#123;</span><br><span class="line">    type: <span class="built_in">Array</span>,</span><br><span class="line">    <span class="keyword">default</span>() &#123;</span><br><span class="line">      <span class="keyword">return</span> [];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  showPage: &#123;</span><br><span class="line">    type: <span class="built_in">Boolean</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  api: &#123;</span><br><span class="line">    type: <span class="built_in">Object</span>,</span><br><span class="line">    <span class="keyword">default</span>() &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  parameter: &#123;</span><br><span class="line">    type: <span class="built_in">Object</span>,</span><br><span class="line">    <span class="keyword">default</span>() &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  defaultParameter: &#123;</span><br><span class="line">    type: <span class="built_in">Boolean</span>,</span><br><span class="line">    <span class="keyword">default</span>() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>// 如果是数组或对象，默认值必须是一个函数来返回*而不是直接写，否则报错</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//正确：</span></span><br><span class="line"> menu:&#123;</span><br><span class="line">     type:<span class="built_in">Array</span>,</span><br><span class="line">     <span class="keyword">default</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         <span class="keyword">return</span> []</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line">	propE: &#123;</span><br><span class="line">		type: <span class="built_in">Array</span>,</span><br><span class="line">		<span class="keyword">default</span>: <span class="function"><span class="params">()</span> =&gt;</span> []</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 自定义一个验证函数</span></span><br><span class="line">	propF: &#123;</span><br><span class="line">		validator: <span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> value &gt; <span class="number">10</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//错误</span></span><br><span class="line"> menu:&#123;</span><br><span class="line">     type:<span class="built_in">Array</span>,</span><br><span class="line">     <span class="keyword">default</span>:[]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者直接跟上面第一个代码一样，不管什么类型，都写在函数返回中。</p>
+<h3 id="VUE-create与mounted的区别"><a href="#VUE-create与mounted的区别" class="headerlink" title="VUE-create与mounted的区别"></a>VUE-create与mounted的区别</h3><p>create与mounted的区别</p>
+<pre><code>1）created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。
+
+2）mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。</code></pre><h3 id="router-link切换路由不存入history记录的方法"><a href="#router-link切换路由不存入history记录的方法" class="headerlink" title="router-link切换路由不存入history记录的方法"></a>router-link切换路由不存入history记录的方法</h3><p>在做tab切换子路由需求的时候，点击后退键，就会返回上一个子路由，不是很符合实际需求。</p>
+<p>可以在router-link后面加上关键词repalce，就可以实现切换子路由，路径不存入history。点击后退按钮，会直接返回父路由的上一个页面。如果是编程式路由，可以把router.push()换成router.repalce() </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&quot;/attend/activityCool&quot; replace class=&quot;allBlock&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解决让浏览器兼容ES6特性"><a href="#解决让浏览器兼容ES6特性" class="headerlink" title="解决让浏览器兼容ES6特性"></a>解决让浏览器兼容ES6特性</h3><p>各浏览器兼容ES6的解决方法：</p>
+<p>把ES6转换为ES5，比较通用的工具有babel、jsx、traceur、es6-shim等</p>
+<h3 id="vue-cli搭建vue项目生成的文件夹解析"><a href="#vue-cli搭建vue项目生成的文件夹解析" class="headerlink" title="vue-cli搭建vue项目生成的文件夹解析"></a>vue-cli搭建vue项目生成的文件夹解析</h3><h4 id="1-build文件夹"><a href="#1-build文件夹" class="headerlink" title="1.build文件夹"></a>1.build文件夹</h4><p>主要进行webpack的一些配置。webpack.base.config:基本webpack配置；<br>webpack.dev.config.js:开发环境配置；<br>webpack.prod.config.js:生产环境配置。<br>这些文件里面已经有基本的配置，我们只需根据自己的需求再添加loader，</p>
+<h4 id="2-config文件夹"><a href="#2-config文件夹" class="headerlink" title="2.config文件夹"></a>2.config文件夹</h4><p>最主要的时index.js文件，进行代理服务器的配置，比如使用npm run dev启动项目后，没有加载出页面，可能8080端口被占用，这时在index.js文件里修改port为其他端口号。和后台联调时需要在这里设置一个地址，将proxyTable属性里</p>
+<h4 id="3-src文件夹"><a href="#3-src文件夹" class="headerlink" title="3.src文件夹"></a>3.src文件夹</h4><p><strong>assets：共用的样式、图片</strong><br><strong>components：业务代码存放的地方，里面分一个个组件存放，一个页面是一个组件，一个页面里面还会包含很多组件。</strong><br><strong>router：设置路由</strong><br><strong>App.vue：vue文件入口界面</strong><br>**main.js：对应App.vue创建vue实例，js入口文件</p>
+<h4 id="4-static"><a href="#4-static" class="headerlink" title="4.static"></a>4.static</h4><p>存放的文件不会经过webpack处理，可以直接引用。</p>
+<p>5.package.json<br>第一部分：在dependencies里对应的是全局下载的依赖包；devDependencies对应局部下载的依赖包。<br>第二部分：<br>在scripts里面1设置命令，比如设置了dev用于调试，npm run dev。</p>
+<h3 id="vue首屏加载过慢是为什么？"><a href="#vue首屏加载过慢是为什么？" class="headerlink" title="vue首屏加载过慢是为什么？"></a>vue首屏加载过慢是为什么？</h3><h4 id="一、vue首屏加载过慢的原因"><a href="#一、vue首屏加载过慢的原因" class="headerlink" title="一、vue首屏加载过慢的原因"></a>一、vue首屏加载过慢的原因</h4><p>vue项目作为一个单页面应用，<strong>如果不对路由进行处理，在加载首页的时候，就会将所有组件全部加载，并向服务器请求数据，这必将拖慢加载速度；</strong><br>通过查看Network，发现整个网站加载时间长达10几秒，加载时间最长的就是js、css文件和媒体文件及图片</p>
+<p>二、解决方案<br>1.Vue-router懒加载<br>什么是Vue-router懒加载？Vue-router懒加载就是按需加载组件，只有当路由被访问时才会加载对应的组件，而不是在加载首页的时候就加载，项目越大，对首屏加载的速度提升得越明显。代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 首页--------------首页 */</span></span><br><span class="line"><span class="comment">// 首页底部导航</span></span><br><span class="line"><span class="keyword">const</span> index = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([], () =&gt; r(<span class="built_in">require</span>(<span class="string">'@/pages/home/index/index'</span>)), <span class="string">'group-index'</span>)</span><br><span class="line"><span class="comment">// 首页</span></span><br><span class="line"><span class="keyword">const</span> home = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([], () =&gt; r(<span class="built_in">require</span>(<span class="string">'@/pages/home/home/home'</span>)), <span class="string">'group-index'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>接下来就可以正常使用路由了。 </p>
+<p>2.使用CDN加速<br>在做项目时，我们会用到很多库，采用cdn加载可以加快加载速度。详情可以查看Vue项目使用CDN优化首屏加载。</p>
+<p>3.按需加载三方资源，如iview,建议按需引入iview中的组件</p>
+<p>4.图片使用懒加载</p>
 	
 	</div>
 	
@@ -447,6 +472,102 @@
 			
 					<li>
 						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/04/29/js%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F/" title="js宏任务和微任务都有哪些？">
+								js宏任务和微任务都有哪些？			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								四月 29日, 2020				
+							</p>
+							<p class="relate-post-content">
+								今天进行了人生中的第一次面试。结果凉凉了。但是还是学到了很多东西。其中在面试时面试官问了我一道题
+1234567891011setTimeout(function()&#123;	    console.log('1')	&#125;...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/04/29/js%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F/" title="js宏任务和微任务都有哪些？">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="js宏任务和微任务都有哪些？"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/04/27/new%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%85%B7%E4%BD%93%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88/" title="new操作符具体做了什么">
+								new操作符具体做了什么			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								四月 27日, 2020				
+							</p>
+							<p class="relate-post-content">
+								Javascript的new关键字主要的作用是继承new一共经历4个阶段1、创建一个空对象1var obj = new Object();
+
+2、设置原型链此时便建立了obj对象的原型链
+1obj._proto_ = Object.p...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/04/27/new%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%85%B7%E4%BD%93%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88/" title="new操作符具体做了什么">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="new操作符具体做了什么"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/04/27/webpack%E6%A8%A1%E5%9D%97%E5%8C%96%E7%AE%80%E4%BB%8B/" title="webpack模块化简介">
+								webpack模块化简介			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								四月 27日, 2020				
+							</p>
+							<p class="relate-post-content">
+								1.entry入口起点(entry point)指示 webpack 应该使用哪个模块，来作为构建其内部依赖图的开始。进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的。可以通过在 webpack 配置...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/04/27/webpack%E6%A8%A1%E5%9D%97%E5%8C%96%E7%AE%80%E4%BB%8B/" title="webpack模块化简介">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="webpack模块化简介"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/04/26/promise%E8%AF%A6%E8%A7%A3/" title="promise详解">
+								promise详解			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								四月 26日, 2020				
+							</p>
+							<p class="relate-post-content">
+								一、什么是Promise？我们用Promise来解决什么问题？Promise 是异步编程的一种解决方案：从语法上讲，promise是一个对象，从它可以获取异步操作的消息；从本意上讲，它是承诺，承诺它过一段时间会给你一个结果。promi...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/04/26/promise%E8%AF%A6%E8%A7%A3/" title="promise详解">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="promise详解"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
 							<a class="relate-post-title" href="/2020/04/03/js%E5%B0%8F%E8%80%83%E9%AA%8C/" title="js小考验">
 								js小考验			
 							</a>
@@ -455,8 +576,7 @@
 								四月 3日, 2020				
 							</p>
 							<p class="relate-post-content">
-								一：字符串自己实现翻转
-1234567 var a='我是一个小画家' var b=a.split("");; var newStr = "";  for (var i = b.length-1;i&gt;=0; i--) &#123...
+								一：字符串自己实现翻转1234567var a='我是一个小画家' var b=a.split("");; var newStr = "";  for (var i = b.length-1;i&gt;=0; i--) &#123;n...
 							</p>
 						</div>
 
@@ -581,108 +701,6 @@
 							<a href="/2020/03/27/%E6%95%B4%E7%90%86%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80%E6%8A%80%E8%83%BD%E7%82%B9/" title="整理一些前端基础技能点">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="整理一些前端基础技能点"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2020/03/25/js%E4%B8%AD%E5%AF%B9%E8%B1%A1%EF%BC%8C%E6%95%B0%E7%BB%84%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" title="js中对象，数组，字符串的常用操作">
-								js中对象，数组，字符串的常用操作			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								三月 25日, 2020				
-							</p>
-							<p class="relate-post-content">
-								javaScript遍历对象总结1.for … in 循环遍历对象自身的和继承的可枚举属性12345678var obj1 = &#123;		a:'11',		b:'22',		c:'33',		d:'44'&#125;	for (...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2020/03/25/js%E4%B8%AD%E5%AF%B9%E8%B1%A1%EF%BC%8C%E6%95%B0%E7%BB%84%EF%BC%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" title="js中对象，数组，字符串的常用操作">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="js中对象，数组，字符串的常用操作"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2020/03/25/http%E8%AE%B2%E8%A7%A3/" title="http讲解">
-								http讲解			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								三月 25日, 2020				
-							</p>
-							<p class="relate-post-content">
-								Http与Https的区别：
-Http与Https的区别：
-
-
-HTTP 的URL 以http:// 开头，而HTTPS 的URL 以https:// 开头
-HTTP 是不安全的，而 HTTPS 是安全的
-HTTP 标准端口是80 ，...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2020/03/25/http%E8%AE%B2%E8%A7%A3/" title="http讲解">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="http讲解"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2020/03/24/axios,Ajax,Promise%E5%92%8Cfetch%E7%9A%84%E5%8C%BA%E5%88%AB/" title="axios,Ajax,Promise和fetch的区别？">
-								axios,Ajax,Promise和fetch的区别？			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								三月 24日, 2020				
-							</p>
-							<p class="relate-post-content">
-								axios是什么呢？是基于promise用于浏览器和node.js是http客户端。
-axios的作用？axios主要是用于向后台发起请求的，还有在请求中做更多是可控功能。
-特点：支持浏览器和node.js
-​            ...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2020/03/24/axios,Ajax,Promise%E5%92%8Cfetch%E7%9A%84%E5%8C%BA%E5%88%AB/" title="axios,Ajax,Promise和fetch的区别？">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="axios,Ajax,Promise和fetch的区别？"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/12/13/js%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="js深拷贝与浅拷贝">
-								js深拷贝与浅拷贝			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十二月 13日, 2019				
-							</p>
-							<p class="relate-post-content">
-								如何区分深拷贝与浅拷贝，简单点来说，就是假设B复制了A，当修改A时，看B是否会发生变化，如果B也跟着变了，说明这是浅拷贝，拿人手短，如果B没变，那就是深拷贝，自食其力。
-此篇文章中也会简单阐述到栈堆，基本数据类型与引用数据类型，因为这...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/12/13/js%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="js深拷贝与浅拷贝">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="js深拷贝与浅拷贝"/>
 							</a>
 						</div>
 					</li>											
